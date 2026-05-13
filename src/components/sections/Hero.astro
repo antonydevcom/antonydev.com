@@ -1,0 +1,756 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const waLink = getWhatsAppLink('hero');
+---
+
+<section class="hero" id="inicio" aria-label="Presentación principal">
+  <Container class="hero-container">
+    <div class="hero-inner">
+
+      <!-- ── Content side ─────────────────────────── -->
+      <div class="hero-content">
+
+        <div class="hero-logo-wrap" aria-hidden="true">
+          <img
+            src="/images/branding/logo.png"
+            alt="AntonyDev — Antony Valdovinos"
+            width="500"
+            height="500"
+            loading="eager"
+            decoding="async"
+            class="hero-logo"
+          />
+        </div>
+
+        <!-- Sin espacios entre hijos: en flex, nodos de texto (saltos/indent) crean ítems fantasma y corren la línea a la derecha -->
+        <p class="hero-kicker"><span class="hero-kicker-item">Desarrollo web</span><span class="hero-kicker-sep" aria-hidden="true"></span><span class="hero-kicker-item">Diseño</span><span class="hero-kicker-sep" aria-hidden="true"></span><span class="hero-kicker-item">Sistemas</span></p>
+
+        <h1 class="hero-heading">Antonio Valdovinos</h1>
+        <p class="hero-role">Fullstack web developer</p>
+
+        <p class="hero-body">
+          Creo sitios web, sistemas a medida e identidades visuales para
+          negocios que necesitan algo que funcione de verdad.
+          Trabajo en Zihuatanejo y de forma remota.
+        </p>
+
+        <div class="cta-group">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn-wa">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+            </svg>
+            Auditoría gratuita
+          </a>
+          <Button href="/#servicios" variant="secondary" size="lg" class="hero-cta">
+            Ver servicios&nbsp;→
+          </Button>
+        </div>
+
+      </div>
+
+      <!-- ── Visual side ──────────────────────────── -->
+      <figure class="hero-visual" aria-label="Desarrollando código frente al mar en Zihuatanejo">
+        <div class="hero-frame">
+
+          <!--
+            Editorial photograph: real workspace, Zihuatanejo coast.
+            The left-edge dissolve lives in the image's own alpha (mask-image)
+            so it dissolves into the ivory backdrop without any overlay layer.
+          -->
+          <img
+            src="/images/branding/hero.png"
+            alt="Antony Valdovinos escribiendo código con vista al mar en Zihuatanejo"
+            width="1080"
+            height="1440"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="hero-photo"
+          />
+
+          <!-- Light edge vignette only — no heavy frame -->
+          <div class="frame-vignette" aria-hidden="true"></div>
+
+          <!-- Editorial geographic detail — floats over darkened bottom -->
+
+        </div>
+      </figure>
+
+    </div>
+  </Container>
+</section>
+
+<style>
+  /* Wider hero stage — cinematic width; global .container unchanged elsewhere */
+  .hero :global(.hero-container.container) {
+    max-width: min(94vw, 86rem);
+  }
+
+  /*
+   * Seamless top — pulls flush under header border so the block doesn’t “float”.
+   * position: relative makes .hero the containing block for the absolute image layer.
+   * overflow: hidden clips the image at section boundaries (top, bottom, right edge).
+   */
+  .hero {
+    --hero-bg: #f9f7f2;
+    background-color: var(--hero-bg);
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    margin-top: -1px;
+    padding-top: clamp(0.35rem, 1.25vw, 0.85rem);
+    padding-bottom: clamp(3.75rem, 10vw, 6.75rem);
+    border-bottom: 1px solid rgba(45, 36, 30, 0.045);
+  }
+
+  /* ── Grid — horizontal, generous gutter, vertical calm ──────── */
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(var(--space-12), 7vw, 4.75rem);
+    align-items: center;
+  }
+
+  @media (min-width: 1200px) {
+    .hero-inner {
+      /* Text-dominant split — wide enough to fit “Construyo experiencias” at 56px */
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: clamp(3.25rem, 7vw, 6.25rem);
+      row-gap: var(--space-12);
+      min-height: min(68vh, 40rem);
+    }
+  }
+
+  /* ── Text column — controlled measure like reference mockup ─ */
+  .hero-content {
+    max-width: min(100%, 36rem);
+  }
+
+  @media (min-width: 1200px) {
+    .hero-content {
+      /* Let column width be the constraint — no cap here */
+      max-width: none;
+      padding-right: 0;
+    }
+  }
+
+  /* ── Editorial kicker — quiet luxury / cinematic label rail ─
+   * All hero copy reads on the cafe primary tone (rgba of --color-cafe
+   * 42,32,27) at hierarchical opacities, per branding direction.
+   */
+  .hero-kicker {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.62);
+    margin: 0 0 clamp(0.5rem, 1.35vw, 0.85rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
+    column-gap: 0.68em;
+    row-gap: 0.28em;
+  }
+
+  .hero-kicker-item {
+    letter-spacing: 0.27em;
+  }
+
+  .hero-kicker-sep {
+    width: 1px;
+    height: 0.52em;
+    align-self: center;
+    flex-shrink: 0;
+    margin: 0;
+    background-color: rgba(42, 32, 27, 0.22);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 2.9vw + 0.5rem, 3.5rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.038em;
+    color: var(--color-cafe);
+    /* Tighter gap to the role line; role owns the gap to body */
+    margin: 0 0 clamp(0.5rem, 1.1vw, 0.85rem);
+  }
+
+  /* Role subtitle — small editorial caps, sits under the name */
+  .hero-role {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.78);
+    margin: 0 0 clamp(1.5rem, 3.25vw, 2.35rem);
+  }
+
+  .hero-body {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.72;
+    font-weight: 400;
+    color: rgba(42, 32, 27, 0.78);
+    max-width: 44ch;
+    margin: 0 0 clamp(2.35rem, 5vw, 3.65rem);
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.75rem, 1.75vw, 1.25rem);
+    align-items: center;
+  }
+
+  /* CTA rhythm — reference proportions, calm hover.
+   * font-size + line-height matched to .btn-wa so both CTAs render at
+   * the exact same height. Padding + radius already aligned. */
+  .cta-group :global(.hero-cta) {
+    border-radius: var(--radius-button);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding-inline: 1.35rem;
+    padding-block: 0.9rem;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      color            var(--dur-base) var(--ease-out),
+      border-color     var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .cta-group :global(.hero-cta[data-variant='primary']:hover) {
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
+  .cta-group :global(.hero-cta[data-variant='secondary']) {
+    border-color: rgba(45, 36, 30, 0.28);
+    background-color: rgba(249, 247, 242, 0.55);
+  }
+
+  .cta-group :global(.hero-cta[data-variant='secondary']:hover) {
+    background-color: var(--hero-bg);
+    border-color: rgba(45, 36, 30, 0.42);
+    box-shadow: 0 2px 14px rgba(42, 32, 27, 0.06);
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-group :global(.hero-cta[data-variant='primary']:hover),
+    .cta-group :global(.hero-cta[data-variant='secondary']:hover) {
+      transform: none;
+    }
+  }
+
+  /* WhatsApp primary CTA */
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-inverse);
+    background-color: var(--color-cafe);
+    border: 1px solid var(--color-cafe);
+    border-radius: var(--radius-button);
+    padding: 0.9rem 1.35rem;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .btn-wa svg {
+    flex-shrink: 0;
+    transition: transform var(--dur-base) var(--ease-out) 40ms;
+  }
+
+  .btn-wa:hover {
+    background-color: var(--color-cafe-negro);
+    border-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
+  .btn-wa:hover svg {
+    transform: translateY(-1px) scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-wa:hover { transform: none; }
+    .btn-wa:hover svg { transform: none; }
+  }
+
+  /* ── Visual side ─────────────────────────────────── */
+  .hero-visual {
+    margin: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 1199px) {
+    .hero-visual {
+      max-width: min(100%, 28rem);
+      margin-inline: auto;
+    }
+  }
+
+  /* Image shell — 3:4 matches hero.png native ratio; minimal crop with cover */
+  .hero-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+
+    background-color: var(--hero-bg);
+
+    border: none;
+    border-radius: clamp(12px, 1.6vw, 18px);
+
+    box-shadow: 0 1.5rem 4rem -0.5rem rgba(45, 36, 30, 0.11);
+
+    overflow: hidden;
+  }
+
+  /*
+   * Desktop: image escapes the grid column and becomes a full-height atmospheric layer.
+   * left: 58% places the frame's left edge just past the text column end (~59% of
+   * hero width across common viewports). Zero image bleed into the content area.
+   * The gradient fades from there, image emerges atmospherically into the right side.
+   *
+   * .hero-content gets z-index: 1 so it stays above the absolute image layer in
+   * paint order (positioned elements paint above in-flow elements by default).
+   */
+  @media (min-width: 1200px) {
+    .hero-frame {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      /*
+       * 56% gives the image ~3% more real estate vs. the previous 58%
+       * — visible compositional tension, text column still untouched.
+       */
+      left: 56%;
+      width: auto;
+      height: auto;
+      aspect-ratio: unset;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  /* ── Editorial photograph ────────────────────────── */
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Centered framing — 18% was too high and cropped desk/notebook */
+    object-position: 50% 38%;
+    display: block;
+    /*
+     * Calibrated tone:
+     *  - saturate 0.9   → kills the cold sky, keeps the wood/leather warm
+     *  - brightness 0.99 → near-neutral, no more washed-out feel
+     *  - contrast 1.04  → restores micro-detail in the desk + screen
+     *  - sepia 0.06     → subtle warmth, blends with ivory
+     */
+    filter: saturate(0.9) brightness(0.99) contrast(1.04) sepia(0.06);
+  }
+
+  /*
+   * Compositing fade — lives in the image alpha itself, not in an overlay.
+   *
+   * Why a mask instead of a stacked white gradient:
+   * an overlay layer creates a visible vertical seam at the image's left
+   * edge because the eye reads the rate-of-change discontinuity, no matter
+   * how many gradient stops you add. A mask makes the photo *itself*
+   * dissolve — the transparent pixels reveal the ivory backdrop directly,
+   * so the boundary simply does not exist as a renderable surface.
+   *
+   * Curve: long, soft ease-out across the left ~70% of the image; only
+   * the right ~30% is fully opaque. Reaches alpha 0 at the very left
+   * edge so the leftmost pixels evaporate completely (no hard line).
+   */
+  @media (min-width: 1200px) {
+    .hero-frame {
+      /*
+       * Tighter, more confident curve: still starts at alpha 0 at the
+       * very left edge (no seam), but climbs faster so the image reaches
+       * full opacity around the 52% mark instead of 72%. Gives the photo
+       * a wider "present" zone without changing layout.
+       */
+      --frame-fade: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0)     0%,
+        rgba(0, 0, 0, 0.18) 12%,
+        rgba(0, 0, 0, 0.48) 24%,
+        rgba(0, 0, 0, 0.78) 36%,
+        rgba(0, 0, 0, 0.95) 46%,
+        #000                52%
+      );
+    }
+
+    .hero-photo,
+    .frame-vignette {
+      -webkit-mask-image: var(--frame-fade);
+      mask-image: var(--frame-fade);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+  }
+
+  /* Feathered edges — atmospheric depth, not a hard matte */
+  .frame-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(30, 23, 19, 0.04) 0%,
+        transparent 38%,
+        transparent 70%,
+        rgba(30, 23, 19, 0.16) 100%
+      );
+  }
+
+  /* ── Brand mark ───────────────────────────────────
+   * Left-aligned with the kicker / heading column. The PNG carries
+   * transparent padding on the left of the AV; a modest negative
+   * margin pulls the bitmap so the visible "A" lines up over the "D"
+   * of "Desarrollo web" without overshooting (previous -2.5rem was
+   * too strong and parked the mark left of the type).
+   */
+  .hero-logo-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-block-end: clamp(1.25rem, 2.5vw, 1.85rem);
+  }
+
+  .hero-logo {
+    display: block;
+    height: 112px;
+    width: auto;
+    /* Softer pull than before — tune with clamp max toward 0 if still left-heavy */
+    margin-inline-start: clamp(-0.85rem, -1.1vw, -0.2rem);
+    mix-blend-mode: multiply;
+    transform-origin: left center;
+    /*
+     * Two-stage motion:
+     *  1. hero-logo-reveal — one-shot entrance (blur-clear + lift + scale,
+     *     ending with a subtle overshoot so the mark "lands with weight").
+     *     Duration 1500ms, delay 200ms → finishes at 1700ms from page load.
+     *  2. hero-logo-float — continuous breathing float, starts at exactly
+     *     1700ms so it picks up where the reveal lands without a jump.
+     */
+    animation:
+      hero-logo-reveal 1500ms var(--ease-premium)    200ms both,
+      hero-logo-float  4800ms cubic-bezier(0.45, 0, 0.55, 1)   1700ms infinite;
+  }
+
+  @media (min-width: 768px) {
+    .hero-logo {
+      height: 152px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero-logo {
+      height: 176px;
+    }
+  }
+
+  /*
+   * Premium reveal — four-stage cinematographic arrival.
+   *
+   *   0%   invisible · heavily soft-focused (blur 20px) · 14% smaller ·
+   *        nudged down 28px → mark feels distant and "out of focus".
+   *   42%  opacity locks at 1 and the focus has fully cleared → the
+   *        photo comes into sharpness BEFORE the transform finishes,
+   *        so the rest of the animation reads as physical landing.
+   *   85%  micro-overshoot (scale 1.025, translateY -2px) → premium
+   *        "settle with weight" — the mark briefly passes its target
+   *        before relaxing into place. Tells the eye that this thing
+   *        has mass.
+   *   100% scale 1, translateY 0 → final rest.
+   */
+  @keyframes hero-logo-reveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.86) translateY(28px);
+      filter: blur(20px);
+    }
+    42% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    85% {
+      opacity: 1;
+      transform: scale(1.025) translateY(-2px);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /*
+   * Continuous float — the mark "breathes".
+   *
+   * Pure translateY with sinusoidal easing (cubic-bezier 0.45/0/0.55/1)
+   * over 4.8s. Amplitude 12px is large enough to be obviously alive,
+   * slow enough to feel meditative rather than nervous.
+   *
+   * `transform: scale(1)` is included in both keyframes so the value
+   * matches the final state of the reveal — prevents any momentary
+   * scale glitch at the handoff between the two animations.
+   */
+  @keyframes hero-logo-float {
+    0%, 100% { transform: translateY(0) scale(1);     }
+    50%      { transform: translateY(-12px) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-logo {
+      animation: none;
+    }
+  }
+
+  /* ── Geo label ───────────────────────────────────── */
+  .frame-geo {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 0;
+    right: 0;
+    z-index: 3;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(247, 244, 238, 0.82);
+  }
+
+  /* ════════════════════════════════════════════════════
+   * CINEMATIC ENTRANCE — orchestrated load sequence
+   * ════════════════════════════════════════════════════
+   *
+   * Every element has its OWN gesture. They share a single
+   * easing curve — var(--ease-premium) — so the
+   * sequence reads as one piece of choreography, not five
+   * independent fades.
+   *
+   * Timeline (ms from page load):
+   *
+   *     0 ━ page paints, hero bg ivory, everything invisible
+   *   100 ━ PHOTO begins develop: scale 1.045→1, opacity 0→1
+   *   200 ━ LOGO begins reveal:   blur-clear + scale + lift
+   *   520 ━ KICKER chips stagger in, one by one (45ms apart)
+   *   720 ━ HEADING reveals via vertical clip-path curtain
+   *   980 ━ ROLE arrives with letter-spacing expansion
+   *  1100 ━ BODY copy fades up
+   *  1240 ━ CTAs rise + scale-in, staggered 90ms apart
+   *
+   * Result: ~2.2s total. Reads as a developing photograph
+   * with text typeset over it, in order of editorial weight:
+   * image first, brand mark, label, name, role, copy, action.
+   *
+   * fill-mode: both — backward fill keeps elements invisible
+   * during delay; forward fill locks the final state.
+   */
+
+  /* ── Keyframe library ──────────────────────────────── */
+
+  /* Photo develops: subtle zoom-down + opacity */
+  @keyframes hero-photo-develop {
+    0%   { opacity: 0; transform: scale(1.045); }
+    100% { opacity: 1; transform: scale(1);     }
+  }
+
+  /* Kicker chip: minimal vertical rise (each chip animates separately) */
+  @keyframes hero-chip-rise {
+    0%   { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0);   }
+  }
+
+  /*
+   * Heading reveal — blur-clear + lift + micro-scale.
+   *
+   * Avoids clip-path (which can read as letters being cut in half during
+   * the first frames). Instead, the name resolves from a soft-focused,
+   * slightly smaller, lifted state — like a camera pulling into sharp
+   * focus on the brand wordmark.
+   *
+   * Opacity & blur reach final state at ~55% so the type is sharp and
+   * readable for the entire second half; only the lift continues.
+   */
+  @keyframes hero-heading-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(16px) scale(0.985);
+      filter: blur(10px);
+    }
+    55% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /*
+   * Role arrives — letter-spacing breathes open as it settles.
+   * Starting tracking is tighter (0.14em) and resolves to the design's
+   * 0.22em. The text feels like it "exhales" into position — a tiny
+   * tipo­gráfico flourish that only readers who slow down will notice.
+   */
+  @keyframes hero-role-arrive {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+      letter-spacing: 0.14em;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      letter-spacing: 0.22em;
+    }
+  }
+
+  /* Body copy — simple fade-up, kept calm to not compete */
+  @keyframes hero-body-rise {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0);   }
+  }
+
+  /* CTA: lift + slight scale, reads as button "rising into reach" */
+  @keyframes hero-cta-rise {
+    0%   { opacity: 0; transform: translateY(10px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+
+  /* Visual wrap fade — kept for the column itself (the photo handles its own develop) */
+  @keyframes hero-visual-settle {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+
+  /* ── Apply: photo first (the establishing shot) ────── */
+  .hero-visual {
+    animation: hero-visual-settle 1400ms var(--ease-premium) 100ms both;
+  }
+
+  .hero-photo {
+    animation: hero-photo-develop 1600ms var(--ease-premium) 100ms both;
+  }
+
+
+  /* ── Kicker — chips stagger 45ms apart ────────────── */
+  .hero-kicker > * {
+    opacity: 0;
+    animation: hero-chip-rise 560ms var(--ease-premium) both;
+  }
+  .hero-kicker > *:nth-child(1) { animation-delay: 520ms; }
+  .hero-kicker > *:nth-child(2) { animation-delay: 565ms; }
+  .hero-kicker > *:nth-child(3) { animation-delay: 610ms; }
+  .hero-kicker > *:nth-child(4) { animation-delay: 655ms; }
+  .hero-kicker > *:nth-child(5) { animation-delay: 700ms; }
+
+
+  /* ── Heading — clip-path curtain reveal ───────────── */
+  .hero-heading {
+    animation: hero-heading-reveal 1050ms var(--ease-premium) 720ms both;
+  }
+
+
+  /* ── Role — letter-spacing breathes open ──────────── */
+  .hero-role {
+    animation: hero-role-arrive 920ms var(--ease-premium) 980ms both;
+  }
+
+
+  /* ── Body ─────────────────────────────────────────── */
+  .hero-body {
+    animation: hero-body-rise 780ms var(--ease-premium) 1100ms both;
+  }
+
+
+  /* ── CTAs — staggered, 90ms apart ───────────────────
+   *
+   * Astro scopes child selectors by hash, which strips animations from
+   * elements rendered by other components (the <Button>'s <a class="btn">
+   * lives in Button.astro and never receives Hero's hash). So we target
+   * each CTA by its own class — .btn-wa (local) and .hero-cta (global) —
+   * instead of using `> *` + nth-child, which would silently miss the
+   * second button.
+   */
+  .cta-group > .btn-wa,
+  .cta-group :global(.hero-cta) {
+    opacity: 0;
+    animation: hero-cta-rise 700ms var(--ease-premium) both;
+  }
+  .cta-group > .btn-wa          { animation-delay: 1240ms; }
+  .cta-group :global(.hero-cta) { animation-delay: 1330ms; }
+
+
+  /* ── Reduced motion: skip the whole sequence ──────── */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual,
+    .hero-photo,
+    .hero-kicker > *,
+    .hero-heading,
+    .hero-role,
+    .hero-body,
+    .cta-group > .btn-wa,
+    .cta-group :global(.hero-cta) {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      filter: none;
+      letter-spacing: revert;
+    }
+  }
+</style>

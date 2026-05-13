@@ -1,0 +1,183 @@
+/* ============================================================
+   AntonyDev — Design Tokens
+   Warm premium minimal · Editorial · Luxury-inspired
+   ============================================================ */
+
+/* Self-hosted fonts — files go in /public/fonts/ */
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/poppins-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Brand palette ─────────────────────────────────────── */
+  --color-marfil:     #EEE8DF; /* page background              */
+  --color-hueso:      #F7F4EE; /* surfaces, cards              */
+  --color-cafe:       #2A201B; /* primary dark, buttons, text  */
+  --color-cafe-negro: #1E1713; /* dark bg, navbar              */
+  --color-taupe:      #B7A79A; /* accents, borders, muted text */
+
+  /* ── Semantic aliases ──────────────────────────────────── */
+  --bg-page:      var(--color-marfil);
+  --bg-surface:   var(--color-hueso);
+  --bg-dark:      var(--color-cafe-negro);
+  --text-primary: var(--color-cafe-negro);
+  --text-muted:   var(--color-taupe);
+  --text-inverse: var(--color-hueso);
+  --border:       rgba(42, 32, 27, 0.12);
+  --accent:       var(--color-taupe);
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-display: 'Poppins', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* ── Spacing — 4px scale ───────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Premium frosted glass — full backdrop-filter values for warm marfil stacks */
+  --glass-nav: blur(18px) saturate(1.14);
+  --glass-nav-scrolled: blur(32px) saturate(1.26);
+  --glass-section: blur(40px) saturate(1.12);
+  --glass-panel: blur(28px) saturate(1.1);
+  --glass-overlay: blur(26px) saturate(0.88);
+
+  /* ── Border radius ─────────────────────────────────────── */
+  --radius-sm:   4px;
+  /* Primary actions — same corners as hero WhatsApp ("Auditoría gratuita") */
+  --radius-button: 6px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+
+  /* Service page hero — price chip + WhatsApp CTA share one rhythm */
+  --service-cta-pad-y: 0.9rem;
+  --service-cta-pad-x: 1.5rem;
+  --service-cta-font: 0.9375rem;
+  --service-cta-line: 1.25;
+  --service-cta-radius: var(--radius-button);
+
+  /* ── Warm shadows (never gray) ─────────────────────────── */
+  --shadow-sm:     0 1px 3px rgba(42, 32, 27, 0.08);
+  --shadow-md:     0 4px 16px rgba(42, 32, 27, 0.10);
+  --shadow-lg:     0 12px 40px rgba(42, 32, 27, 0.14);
+  --shadow-button:
+    0 1px 3px  rgba(42, 32, 27, 0.10),
+    0 6px 24px rgba(42, 32, 27, 0.16),
+    0 22px 56px rgba(42, 32, 27, 0.07); /* primary CTA hover — layered warm depth */
+  --shadow-card: 0 2px 8px rgba(42, 32, 27, 0.06),
+                 0 8px 24px rgba(42, 32, 27, 0.08);
+
+  /* ── Motion ────────────────────────────────────────────── */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1); /* dominant interaction curve */
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:    150ms;
+  --dur-base:    250ms;
+  --dur-slow:    400ms;
+  --dur-enter:   600ms;
+
+  /* ── Interaction-state semantic tokens ─────────────────── */
+  --border-hover: rgba(42, 32, 27, 0.25); /* secondary button / card hover border */
+  --fill-ghost:   rgba(42, 32, 27, 0.06); /* ghost button hover fill              */
+}
+
+/* ─── Premium café button atmospheric layer ─────────────────────────────────
+ * Soft directional warm-light surface effect — editorial, non-gaming.
+ * Applied globally to all primary café buttons via class targeting.
+ * The ::before light overlay travels diagonally on hover, simulating
+ * directional light catching the button surface.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+.btn-wa,
+.wa-btn,
+.wa-cta,
+.mobile-wa-btn,
+.submit-btn,
+.sidebar-cta {
+  position: relative;
+}
+
+.btn-wa::before,
+.wa-btn::before,
+.wa-cta::before,
+.mobile-wa-btn::before,
+.submit-btn::before,
+.sidebar-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 30% 40%,
+    rgba(255, 252, 248, 0.13) 0%,
+    transparent 64%
+  );
+  opacity: 0;
+  transform: translate(-5px, 3px);
+  transition:
+    opacity   220ms var(--ease-out)     12ms,
+    transform 500ms var(--ease-premium) 12ms;
+  pointer-events: none;
+}
+
+/* Button content renders above the surface-light pseudo-element */
+.btn-wa > *,
+.wa-btn > *,
+.wa-cta > *,
+.mobile-wa-btn > *,
+.submit-btn > *,
+.sidebar-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-wa:hover::before,
+.wa-btn:hover::before,
+.wa-cta:hover::before,
+.mobile-wa-btn:hover::before,
+.submit-btn:hover::before,
+.sidebar-cta:hover::before {
+  opacity: 1;
+  transform: translate(7px, -4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-wa::before,
+  .wa-btn::before,
+  .wa-cta::before,
+  .mobile-wa-btn::before,
+  .submit-btn::before,
+  .sidebar-cta::before {
+    display: none;
+  }
+}

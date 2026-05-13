@@ -1,0 +1,316 @@
+---
+import Container from '@/components/ui/Container.astro';
+
+const projects = [
+  {
+    title: 'Suspiros de Papel',
+    category: 'Diseño Web · Identidad Digital',
+    tagline: 'Sitio web y catálogo digital para una marca de sublimación y grabado láser en Guerrero.',
+    image: '/images/projects/suspirosdepapel.webp',
+    imageAlt: 'Sitio web de Suspiros de Papel — sublimación, grabado láser y papelería creativa',
+    imageWidth: 1140,
+    imageHeight: 717,
+    imagePosition: 'center',
+    href: 'https://www.suspirosdepapel.net',
+  },
+  {
+    title: 'Blanca Ríos Estudio',
+    category: 'Diseño Web · Agenda Online',
+    tagline: 'Sitio web con agenda integrada para un estudio de barbería y estética.',
+    image: '/images/projects/blancariosestudio.webp',
+    imageAlt: 'Sitio web de Blanca Ríos Estudio — barbería y servicios de belleza con agenda integrada',
+    imageWidth: 1135,
+    imageHeight: 716,
+    imagePosition: 'center top',
+    href: 'https://www.blancariosestudio.com',
+  },
+  {
+    title: 'Marino Zihua',
+    category: 'Diseño Web · Catálogo Digital',
+    tagline: 'Catálogo digital y marca visual para un estudio de interiorismo artesanal en Zihuatanejo.',
+    image: '/images/projects/marinozihua.webp',
+    imageAlt: 'Sitio web de Marino Zihua — estudio de diseño artesanal e interiorismo',
+    imageWidth: 1137,
+    imageHeight: 716,
+    imagePosition: 'center',
+    href: 'https://www.marinozihua.net',
+  },
+];
+---
+
+<section class="projects" id="portafolio" aria-labelledby="projects-heading">
+  <Container>
+
+    <header class="section-header">
+      <p class="eyebrow">Trabajo seleccionado</p>
+      <h2 id="projects-heading">Proyectos recientes</h2>
+      <div class="section-divider" aria-hidden="true"></div>
+    </header>
+
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <a
+          href={project.href}
+          class="project-card"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Ver proyecto: ${project.title} (abre en nueva pestaña)`}
+        >
+          <div class="card-image">
+            <img
+              src={project.image}
+              alt={project.imageAlt}
+              width={project.imageWidth}
+              height={project.imageHeight}
+              loading="lazy"
+              decoding="async"
+              style={`object-position: ${project.imagePosition}`}
+            />
+            <div class="card-overlay" aria-hidden="true">
+              <p class="overlay-tagline">{project.tagline}</p>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-meta">
+              <h3 class="card-title">{project.title}</h3>
+              <p class="card-category">{project.category}</p>
+            </div>
+            <svg
+              class="card-arrow"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </Container>
+</section>
+
+<style>
+  .projects {
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-surface);
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (min-width: 768px) {
+    .projects {
+      margin-top: -2.25rem;
+      padding-top: calc(9rem + 2.25rem);
+      padding-bottom: 9rem;
+      background-color: rgba(247, 244, 238, 0.58);
+      -webkit-backdrop-filter: var(--glass-section);
+      backdrop-filter: var(--glass-section);
+      border-bottom-color: rgba(42, 32, 27, 0.1);
+    }
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    @media (min-width: 768px) {
+      .projects {
+        margin-top: 0;
+        padding-top: 9rem;
+        background-color: var(--bg-surface);
+        border-bottom-color: var(--border);
+      }
+    }
+  }
+
+  /* ── Section header ──────────────────────────────── */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.55);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-4);
+  }
+
+  .section-divider {
+    width: 44px;
+    height: 1px;
+    background-color: var(--color-taupe);
+    opacity: 0.4;
+    margin: 0 auto;
+  }
+
+  /* ── Grid ─────────────────────────────────────────── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ── Card ─────────────────────────────────────────── */
+  .project-card {
+    display: block;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(42, 32, 27, 0.18);
+  }
+
+  /* ── Card image area ─────────────────────────────── */
+  .card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+  }
+
+  .card-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .project-card:hover .card-image img {
+    transform: scale(1.04);
+  }
+
+  /*
+   * Hover overlay — heavier frost over the screenshot (token --glass-overlay).
+   * Falls back to a stronger flat tint where backdrop-filter isn't supported.
+   */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(30, 23, 19, 0.46);
+    -webkit-backdrop-filter: var(--glass-overlay);
+    backdrop-filter: var(--glass-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    opacity: 0;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      backdrop-filter var(--dur-base) var(--ease-out),
+      -webkit-backdrop-filter var(--dur-base) var(--ease-out);
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .card-overlay {
+      background-color: rgba(30, 23, 19, 0.82);
+    }
+  }
+
+  .project-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .overlay-tagline {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-hueso);
+    text-align: center;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ── Card info row ───────────────────────────────── */
+  .card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6);
+    gap: var(--space-4);
+  }
+
+  .card-meta {
+    min-width: 0;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin: 0 0 var(--space-1) 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .card-category {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-cafe);
+    margin: 0;
+  }
+
+  .card-arrow {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
+  }
+
+  .project-card:hover .card-arrow {
+    transform: translate(2px, -2px);
+    color: var(--text-primary);
+  }
+</style>

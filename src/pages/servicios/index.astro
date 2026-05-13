@@ -1,0 +1,441 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const waLink = getWhatsAppLink('servicios');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios' },
+];
+
+const phases = [
+  {
+    number: '01',
+    title: 'Auditoría Digital',
+    tagline: 'El punto de partida',
+    description: 'Diagnóstico completo de tu presencia digital. Identifico qué falta, qué funciona y cuál es el camino más directo para crecer en línea.',
+    detail: 'Gratis para nuevos clientes',
+    href: '/servicios/auditoria',
+  },
+  {
+    number: '02',
+    title: 'Creación de Sistemas',
+    tagline: 'Tu presencia digital completa',
+    description: 'Sitio web, sistema de gestión, identidad visual, WhatsApp automatizado y SEO local — todo integrado desde el primer día.',
+    detail: 'Desde $18,000 MXN',
+    href: '/servicios/creacion',
+  },
+  {
+    number: '03',
+    title: 'Mantenimiento Mensual',
+    tagline: 'Crecimiento continuo',
+    description: 'Actualizaciones, soporte técnico, nuevas secciones y respaldo. Tu negocio siempre al día y funcionando sin interrupciones.',
+    detail: 'Desde $700 MXN/mes',
+    href: '/servicios/mantenimiento',
+  },
+];
+
+const extras = [
+  {
+    title: 'Identidad Digital',
+    description: 'Paleta de colores, tipografía, tono de voz e imagen coherente para tu negocio.',
+    href: '/servicios/identidad',
+  },
+  {
+    title: 'Automatización',
+    description: 'WhatsApp Business automatizado, pagos en línea, catálogos digitales y sistemas de reservas.',
+    href: '/servicios/automatizacion',
+  },
+];
+---
+
+<BaseLayout
+  title="Servicios de Desarrollo Web en Zihuatanejo"
+  description="Desarrollo web, identidad digital, automatización y mantenimiento para negocios en Zihuatanejo e Ixtapa. Auditoría gratuita — Antony Valdovinos, AntonyDev."
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="page-container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Servicios</span>
+        </nav>
+        <h1>Desarrollo web, sistemas e identidad digital</h1>
+        <p class="page-lead">
+          Un modelo de trabajo completo — desde el diagnóstico inicial hasta el
+          crecimiento continuo de tu presencia digital.
+        </p>
+      </div>
+    </section>
+
+    <!-- Las 3 fases -->
+    <section class="phases-section">
+      <div class="page-container">
+        <p class="section-eyebrow">El ciclo completo</p>
+        <h2>Las 3 fases del trabajo</h2>
+        <ol class="phases-grid" role="list">
+          {phases.map((phase) => (
+            <li class="phase-item">
+              <span class="phase-num" aria-hidden="true">{phase.number}</span>
+              <p class="phase-tagline">{phase.tagline}</p>
+              <h3 class="phase-title">{phase.title}</h3>
+              <p class="phase-desc">{phase.description}</p>
+              <p class="phase-price">{phase.detail}</p>
+              <a href={phase.href} class="phase-link">
+                Ver detalles →
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Extras -->
+    <section class="extras-section">
+      <div class="page-container">
+        <p class="section-eyebrow">Servicios adicionales</p>
+        <ul class="extras-grid" role="list">
+          {extras.map((extra) => (
+            <li class="extra-item">
+              <h3>{extra.title}</h3>
+              <p>{extra.description}</p>
+              <a href={extra.href} class="extra-link">Ver servicio →</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="page-container cta-inner">
+        <div>
+          <h2>¿Por dónde empezamos?</h2>
+          <p>La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
+        </div>
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+          </svg>
+          Solicitar auditoría gratuita
+        </a>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 5vw, 3rem);
+  }
+
+  /* ── Page hero ───────────────────────────────────── */
+  .page-hero {
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: rgba(42, 32, 27, 0.48);
+    margin-bottom: var(--space-6);
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-cafe);
+  }
+
+  .page-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-6);
+    max-width: 18ch;
+  }
+
+  .page-lead {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.68);
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  /* ── Phases ──────────────────────────────────────── */
+  .phases-section {
+    background-color: var(--bg-page);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.48);
+    margin: 0 0 var(--space-4);
+  }
+
+  .phases-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-12);
+  }
+
+  .phases-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .phases-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .phase-item {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .phase-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-cafe);
+    opacity: 0.07;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .phase-tagline {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.46);
+    margin: 0;
+  }
+
+  .phase-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .phase-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.68);
+    flex: 1;
+    margin: 0;
+  }
+
+  .phase-price {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(42, 32, 27, 0.52);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  .phase-link {
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-cafe);
+    text-decoration: none;
+    margin-top: var(--space-2);
+    transition: letter-spacing var(--dur-fast) var(--ease-out);
+  }
+
+  .phase-link:hover {
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Extras ──────────────────────────────────────── */
+  .extras-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .extras-section .section-eyebrow {
+    margin-bottom: var(--space-8);
+  }
+
+  .extras-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .extras-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .extra-item {
+    background-color: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .extra-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .extra-item p {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.72;
+    color: rgba(42, 32, 27, 0.68);
+    flex: 1;
+    margin: 0;
+  }
+
+  .extra-link {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-cafe);
+    text-decoration: none;
+    margin-top: var(--space-2);
+  }
+
+  .extra-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ── CTA section ─────────────────────────────────── */
+  .cta-section {
+    background-color: var(--bg-dark);
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .cta-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text-inverse);
+    margin: 0 0 var(--space-3);
+  }
+
+  .cta-section p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(247, 244, 238, 0.65);
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-cafe-negro);
+    background-color: var(--color-hueso);
+    border-radius: var(--radius-button);
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .wa-btn svg { flex-shrink: 0; transition: transform var(--dur-base) var(--ease-out); }
+
+  .wa-btn:hover {
+    background-color: var(--color-marfil);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
+  .wa-btn:hover svg { transform: translateY(-1px) scale(1.06); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-btn:hover, .wa-btn:hover svg { transform: none; }
+  }
+</style>

@@ -1,0 +1,14 @@
+{
+  "name": "AntonyDev — Antony Valdovinos",
+  "short_name": "AntonyDev",
+  "description": "Desarrollo web, identidad digital y automatización para negocios en Zihuatanejo e Ixtapa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EEE8DF",
+  "theme_color": "#EEE8DF",
+  "lang": "es-MX",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

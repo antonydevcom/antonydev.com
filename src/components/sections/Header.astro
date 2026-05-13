@@ -1,0 +1,690 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const waLink = getWhatsAppLink('hero');
+
+/*
+ * Each link maps to:
+ *  - matchPath:    pathname where this link is permanently active
+ *                  (e.g. while the user is on /servicios).
+ *  - matchSection: id of the corresponding section on the home page (/).
+ *                  When the user is on /, the scroll-spy decides which link
+ *                  is active using THIS field, regardless of matchPath.
+ *
+ * Result: clicking still routes wherever `href` says, but scrolling the
+ * home page also lights up the right link as each section comes into view.
+ */
+const navLinks = [
+  { label: 'Inicio',    href: '/',             matchPath: '/',           matchSection: 'inicio'     },
+  { label: 'Servicios', href: '/servicios',    matchPath: '/servicios',  matchSection: 'servicios'  },
+  { label: 'Proyectos', href: '/#portafolio',  matchPath: '/',           matchSection: 'portafolio' },
+  { label: 'Contacto',  href: '/contacto',     matchPath: '/contacto',   matchSection: 'contacto'   },
+];
+---
+
+<header class="site-header">
+  <Container>
+    <div class="header-inner">
+
+      <a href="/" class="logo" aria-label="AntonyDev — Inicio">
+        <img
+          src="/images/branding/logo-antonydev.png"
+          alt="AntonyDev — Antonio Valdovinos, Fullstack Web Developer"
+          class="logo-img"
+          width="577"
+          height="433"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav" aria-label="Navegación principal">
+        {navLinks.map(({ label, href, matchPath, matchSection }) => (
+          <a
+            href={href}
+            class="nav-link"
+            data-match-path={matchPath}
+            data-match-section={matchSection ?? undefined}
+            data-active="false"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA — visible from md -->
+      <div class="header-cta">
+        <Button href="/contacto" variant="primary" size="sm">Hablemos</Button>
+      </div>
+
+      <button
+        class="menu-btn"
+        type="button"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="icon-menu" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-close" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3.5 3.5l11 11M14.5 3.5l-11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile navigation panel -->
+    <nav
+      id="mobile-menu"
+      class="mobile-menu"
+      aria-label="Navegación móvil"
+      aria-hidden="true"
+    >
+      <div class="mobile-nav-links">
+        {navLinks.map(({ label, href }) => (
+          <a href={href} class="mobile-nav-link">{label}</a>
+        ))}
+      </div>
+      <div class="mobile-menu-footer">
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="mobile-wa-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+          </svg>
+          Escríbeme por WhatsApp
+        </a>
+      </div>
+    </nav>
+
+  </Container>
+</header>
+
+<style>
+  /* ── Navigation surface ─────────────────────────────
+   * Strong warm glass: content scrolls through a deep defocus
+   * (tokens --glass-nav / --glass-nav-scrolled). Slightly lower
+   * fill opacity so the blur reads as premium depth, not a flat slab.
+   */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(247, 244, 238, 0.84);
+    -webkit-backdrop-filter: var(--glass-nav);
+    backdrop-filter: var(--glass-nav);
+    border-bottom: 1px solid rgba(42, 32, 27, 0.09);
+    transition:
+      background-color        350ms var(--ease-premium),
+      border-color            350ms var(--ease-premium),
+      box-shadow              350ms var(--ease-premium),
+      backdrop-filter         350ms var(--ease-premium),
+      -webkit-backdrop-filter 350ms var(--ease-premium);
+    animation: header-reveal 620ms var(--ease-premium) 0ms both;
+  }
+
+  @keyframes header-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scrolled: more opaque + refined blur — surface settles, separates from content */
+  .site-header.scrolled {
+    background-color: rgba(247, 244, 238, 0.90);
+    -webkit-backdrop-filter: var(--glass-nav-scrolled);
+    backdrop-filter: var(--glass-nav-scrolled);
+    border-bottom-color: rgba(42, 32, 27, 0.09);
+    box-shadow: 0 1px 16px rgba(42, 32, 27, 0.06), 0 6px 28px rgba(42, 32, 27, 0.03);
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .site-header {
+      background-color: var(--bg-surface);
+    }
+    .site-header.scrolled {
+      background-color: rgba(247, 244, 238, 0.97);
+    }
+    .menu-btn {
+      background-color: transparent;
+      border-color: var(--border);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      animation: none;
+    }
+  }
+
+  /* ── Layout ───────────────────────────────────────── */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    padding-top: 18px;
+    padding-bottom: 18px;
+    transition:
+      padding-top    350ms var(--ease-premium),
+      padding-bottom 350ms var(--ease-premium);
+  }
+
+  /* Subtle compression on scroll — 4px reduction, calm quality signal */
+  .site-header.scrolled .header-inner {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  /* ── Logo ─────────────────────────────────────────
+   * Hover reads as the mark "leaning forward" — micro-lift +
+   * micro-scale + warm drop-shadow. The PNG itself bumps in
+   * contrast & saturation so the wordmark feels more present
+   * without the layout shifting (transform-only).
+   */
+  .logo {
+    display: block;
+    flex-shrink: 0;
+    text-decoration: none;
+    transform-origin: left center;
+    transition:
+      transform 320ms var(--ease-premium),
+      filter    320ms var(--ease-premium);
+    will-change: transform;
+  }
+
+  .logo:hover {
+    transform: scale(1.025) translateY(-1px);
+    filter: drop-shadow(0 6px 14px rgba(42, 32, 27, 0.12));
+  }
+
+  .logo:active {
+    transform: scale(0.99) translateY(0);
+    transition-duration: 120ms;
+  }
+
+  .logo-img {
+    display: block;
+    height: 92px;
+    width: auto;
+    /*
+     * PNG has ~30% internal whitespace on all sides.
+     * Render at 92px so the wordmark + tagline read with editorial
+     * confidence, then pull the whitespace back out of the flex
+     * row with negative margins so the header height stays calm.
+     */
+    margin-top: -15px;
+    margin-bottom: -15px;
+    mix-blend-mode: multiply;
+    transition: filter 320ms var(--ease-premium);
+  }
+
+  .logo:hover .logo-img {
+    /* Subtle warming pass — Apple-style "wake up" on hover */
+    filter: contrast(1.06) saturate(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo,
+    .logo:hover,
+    .logo:active,
+    .logo-img {
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+
+  /* ── Desktop navigation ─────────────────────────────
+   * Editorial link rail. Muted resting color creates a clear
+   * hierarchy without aggression — the shift to full café on
+   * hover reads as attention arriving, not a feature activating.
+   */
+  .nav {
+    display: none;
+    align-items: center;
+    gap: clamp(1.5rem, 2.4vw, 2.25rem);
+    flex: 1;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .nav {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(42, 32, 27, 0.82);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    transition:
+      color     220ms var(--ease-premium),
+      transform 280ms var(--ease-premium);
+  }
+
+  /*
+   * Split-origin hairline underline.
+   *
+   * Enter (hover/active): origin swaps to left, line draws in from left
+   *   → reads as "focus arriving at this link".
+   * Exit: origin swaps to right, line retracts toward right
+   *   → reads as "focus leaving this link".
+   *
+   * The origin swap is state-driven (instant). Only transform animates —
+   * GPU composited, zero layout or paint cost.
+   */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--color-cafe);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 340ms var(--ease-premium);
+  }
+
+  .nav-link:hover,
+  .nav-link[data-active='true'] {
+    color: var(--color-cafe);
+  }
+
+  /* Micro-lift on hover — reads as "this link is reachable" */
+  .nav-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[data-active='true']::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /*
+   * Active-state "settle" pulse.
+   * Fires once whenever a link gains data-active='true' (route change
+   * or scroll-spy crossover). The underline briefly grows past 100% and
+   * eases back, reading as confirmation — like a typewriter return.
+   *
+   * One animation, one GPU layer, no JS. The base transform-origin and
+   * transform are still set by the rules above; this animation
+   * temporarily overrides scaleX with its own curve.
+   */
+  .nav-link[data-active='true']::after {
+    animation: nav-underline-settle 520ms var(--ease-premium) both;
+  }
+
+  @keyframes nav-underline-settle {
+    0%   { transform: scaleX(0);    opacity: 0; }
+    60%  { transform: scaleX(1.04); opacity: 1; }
+    100% { transform: scaleX(1);    opacity: 1; }
+  }
+
+  /* Hover state mirrors the active settle ONLY when not active —
+     keeps animations from stepping on each other. */
+  .nav-link:not([data-active='true']):hover::after {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .nav-link::after,
+    .nav-link[data-active='true']::after {
+      transition: none;
+      animation: none;
+    }
+    .nav-link:hover {
+      transform: none;
+    }
+  }
+
+  /* ── CTA ──────────────────────────────────────────── */
+  .header-cta {
+    display: none;
+    flex-shrink: 0;
+  }
+
+  .header-cta :global(.btn[data-size='sm']) {
+    padding: 10px 20px;
+    letter-spacing: 0.025em;
+  }
+
+  @media (min-width: 768px) {
+    .header-cta {
+      display: block;
+    }
+  }
+
+  /* ── Mobile icon swap ───────────────────────────── */
+  .menu-btn .icon-close { display: none; }
+  .menu-btn[aria-expanded='true'] .icon-menu  { display: none; }
+  .menu-btn[aria-expanded='true'] .icon-close { display: block; }
+
+  /* ── Mobile menu button ───────────────────────────── */
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: rgba(247, 244, 238, 0.55);
+    -webkit-backdrop-filter: blur(16px) saturate(1.08);
+    backdrop-filter: blur(16px) saturate(1.08);
+    cursor: pointer;
+    color: rgba(42, 32, 27, 0.72);
+    flex-shrink: 0;
+    transition:
+      background-color 220ms var(--ease-premium),
+      border-color     220ms var(--ease-premium),
+      color            220ms var(--ease-premium),
+      transform        220ms var(--ease-premium);
+  }
+
+  .menu-btn:hover {
+    background-color: rgba(42, 32, 27, 0.04);
+    border-color: rgba(42, 32, 27, 0.20);
+    color: var(--color-cafe);
+    transform: scale(1.04);
+  }
+
+  .menu-btn:active {
+    transform: scale(0.96);
+    transition-duration: 100ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-btn,
+    .menu-btn:hover,
+    .menu-btn:active {
+      transform: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .menu-btn {
+      display: none;
+    }
+  }
+
+  /* ── Mobile menu panel ──────────────────────────────────
+   * Lives inside the sticky header → follows it on scroll.
+   * max-height: 0 → 480px drives the expand animation;
+   * opacity + visibility guard keyboard focus when closed.
+   */
+  .mobile-menu {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 380ms var(--ease-out),
+      opacity    260ms var(--ease-out),
+      visibility 0s    260ms;
+  }
+
+  .mobile-menu.is-open {
+    max-height: 340px;
+    opacity: 1;
+    visibility: visible;
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-6);
+    border-top: 1px solid rgba(42, 32, 27, 0.08);
+    transition:
+      max-height 380ms var(--ease-out),
+      opacity    260ms var(--ease-out),
+      visibility 0s    0ms;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu { display: none !important; }
+  }
+
+  /* Nav links — editorial index, tight + refined */
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-5);
+  }
+
+  .mobile-nav-link {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.68);
+    text-decoration: none;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(42, 32, 27, 0.06);
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity   260ms var(--ease-premium),
+      transform 320ms var(--ease-premium),
+      color     var(--dur-fast) var(--ease-out);
+  }
+
+  .mobile-nav-link:last-child { border-bottom: none; }
+
+  .mobile-nav-link:hover { color: var(--color-cafe); }
+
+  .mobile-menu.is-open .mobile-nav-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu.is-open .mobile-nav-link:nth-child(1) { transition-delay: 50ms; }
+  .mobile-menu.is-open .mobile-nav-link:nth-child(2) { transition-delay: 85ms; }
+  .mobile-menu.is-open .mobile-nav-link:nth-child(3) { transition-delay: 120ms; }
+  .mobile-menu.is-open .mobile-nav-link:nth-child(4) { transition-delay: 155ms; }
+
+  /* Footer row — WA CTA, staggered last */
+  .mobile-menu-footer {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity   280ms var(--ease-premium),
+      transform 340ms var(--ease-premium);
+  }
+
+  .mobile-menu.is-open .mobile-menu-footer {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 190ms;
+  }
+
+  .mobile-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text-inverse);
+    background-color: var(--color-cafe);
+    border-radius: var(--radius-full);
+    padding: 0.65rem 1.125rem;
+    text-decoration: none;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .mobile-wa-btn svg {
+    flex-shrink: 0;
+    transition: transform var(--dur-base) var(--ease-out) 40ms;
+  }
+
+  .mobile-wa-btn:hover {
+    background-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
+  .mobile-wa-btn:hover svg {
+    transform: translateY(-1px) scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu,
+    .mobile-menu.is-open {
+      transition: none;
+    }
+    .mobile-nav-link,
+    .mobile-menu-footer {
+      opacity: 1;
+      transform: none;
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+    .mobile-wa-btn:hover,
+    .mobile-wa-btn:hover svg { transform: none; }
+  }
+</style>
+
+<script is:inline>
+  /*
+   * Active-state decision (per link):
+   *
+   *   On  `/`   → use scroll-spy. The link whose `data-match-section` matches
+   *               the currently scrolled-past section is the one that lights up.
+   *               Clicking still routes wherever `href` says, but the user gets
+   *               a visual cue while reading the home page.
+   *
+   *   Off `/`   → use path-match. The link whose `data-match-path` equals the
+   *               current pathname lights up (e.g. "Servicios" while on
+   *               /servicios). Section scroll-spy is irrelevant there.
+   */
+  (function () {
+    var order = ['inicio', 'servicios', 'proceso', 'portafolio', 'sobre-mi', 'contacto'];
+
+    function normalizePath(p) {
+      if (!p) return '/';
+      p = p.replace(/\/+$/, '');
+      return p === '' ? '/' : p;
+    }
+
+    function headerOffset() {
+      var header = document.querySelector('.site-header');
+      return (header && header.getBoundingClientRect().height) || 0;
+    }
+
+    function currentSection() {
+      var y = window.scrollY + headerOffset() + 24;
+      var active = 'inicio';
+      for (var i = 0; i < order.length; i++) {
+        var el = document.getElementById(order[i]);
+        if (!el) continue;
+        var top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= y) active = order[i];
+        else break;
+      }
+      return active;
+    }
+
+    function applyActive() {
+      var path = normalizePath(window.location.pathname);
+      var onHome = path === '/';
+      var section = onHome ? currentSection() : null;
+
+      document.querySelectorAll('.nav-link').forEach(function (link) {
+        var linkPath = normalizePath(link.getAttribute('data-match-path'));
+        var linkSection = link.getAttribute('data-match-section');
+
+        var on = onHome
+          ? (linkSection && linkSection === section)
+          : (linkPath === path);
+
+        link.setAttribute('data-active', on ? 'true' : 'false');
+        if (on) link.setAttribute('aria-current', onHome ? 'location' : 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    function init() {
+      applyActive();
+      window.addEventListener('scroll', applyActive, { passive: true });
+      window.addEventListener('resize', applyActive);
+      window.addEventListener('hashchange', applyActive);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<script>
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const sync = () => header.classList.toggle('scrolled', window.scrollY > 10);
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+  }
+</script>
+
+<script is:inline>
+  (function () {
+    var btn  = document.querySelector('.menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    function openMenu() {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Cerrar menú de navegación');
+      menu.classList.add('is-open');
+      menu.removeAttribute('aria-hidden');
+    }
+
+    function closeMenu() {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menú de navegación');
+      menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+
+    btn.addEventListener('click', function () {
+      btn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        btn.focus();
+      }
+    });
+
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (e) {
+      if (e.matches) closeMenu();
+    });
+  })();
+</script>

@@ -1,0 +1,191 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const waLink = getWhatsAppLink('identidad');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios' },
+  { name: 'Identidad Digital', url: '/servicios/identidad' },
+];
+
+const faqs = [
+  {
+    q: '¿La identidad digital incluye el logo?',
+    a: 'Depende del proyecto. La identidad digital completa puede incluir el rediseño o creación del logotipo, pero también puede trabajarse sobre un logo existente que el cliente ya tenga. Lo definimos en la auditoría.',
+  },
+  {
+    q: '¿Qué se entrega al final?',
+    a: 'Un manual de identidad digital: paleta de colores con códigos exactos (HEX, RGB), tipografías seleccionadas y sus usos, tono de voz con ejemplos, y los archivos en los formatos necesarios (SVG, PNG, PDF).',
+  },
+  {
+    q: '¿Se aplica en el sitio web?',
+    a: 'Sí. La identidad digital desarrollada se implementa directamente en tu sitio web. No es un documento guardado en cajón — es el sistema visual que vive en todo lo que tu negocio comunica.',
+  },
+  {
+    q: '¿Cuánto tiempo toma?',
+    a: 'Entre 1 y 2 semanas para la identidad, dependiendo de la complejidad y velocidad de retroalimentación. Si se hace junto con el desarrollo web, se trabaja en paralelo.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Identidad Digital para Negocios en Zihuatanejo"
+  description="Identidad digital para negocios en Zihuatanejo y Guerrero. Paleta de colores, tipografía, tono de voz e imagen visual coherente. Antony Valdovinos — AntonyDev."
+  schema={faqSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="page-container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Identidad Digital</span>
+        </nav>
+        <h1>Identidad digital para tu negocio</h1>
+        <p class="page-lead">
+          Tu negocio tiene una identidad única — tu presencia digital debería reflejarla.
+          Diseño el sistema visual y comunicacional para que tu marca sea reconocible desde el primer contacto.
+        </p>
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+          </svg>
+          Platicar sobre mi identidad
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="page-container content-grid">
+        <div class="content-body">
+          <h2>¿Qué es la identidad digital?</h2>
+          <p>
+            La identidad digital es el conjunto de decisiones visuales y comunicacionales
+            que hacen que tu negocio sea reconocible y coherente en todos sus puntos de contacto
+            digitales: sitio web, WhatsApp, redes sociales, documentos, materiales digitales.
+          </p>
+
+          <h2>¿Qué incluye?</h2>
+          <ul class="includes-list">
+            <li><strong>Paleta de colores</strong> — colores primarios, secundarios y de acento con códigos exactos</li>
+            <li><strong>Tipografía</strong> — fuentes seleccionadas para títulos y texto corrido</li>
+            <li><strong>Tono de voz</strong> — cómo habla tu negocio: formal, cercano, técnico, local</li>
+            <li><strong>Logotipo</strong> — rediseño o refinamiento si aplica</li>
+            <li><strong>Aplicación web</strong> — implementada directamente en tu sitio web</li>
+            <li><strong>Archivos de entrega</strong> — SVG, PNG y manual de uso</li>
+          </ul>
+
+          <h2>¿Por qué importa para negocios en Guerrero?</h2>
+          <p>
+            Los negocios en Zihuatanejo e Ixtapa compiten con destinos turísticos
+            y comercios de todo México. Una identidad digital coherente genera
+            confianza inmediata — los clientes (especialmente turistas y visitantes)
+            toman decisiones basadas en la primera impresión visual.
+          </p>
+          <p>
+            Negocios con identidad visual clara y consistente convierten mejor
+            en redes sociales, Google Maps y búsquedas orgánicas.
+          </p>
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Identidad Digital</h3>
+            <dl class="sidebar-dl">
+              <dt>Incluye</dt>
+              <dd>Paleta + tipografía + tono + logo</dd>
+              <dt>Entrega</dt>
+              <dd>1-2 semanas</dd>
+              <dt>Formato</dt>
+              <dd>Manual + archivos + aplicación web</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Consultar disponibilidad
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">Servicios relacionados</p>
+            <a href="/servicios/creacion" class="related-link">Desarrollo web →</a>
+            <a href="/servicios/automatizacion" class="related-link">Automatización →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="page-container">
+        <h2>Preguntas frecuentes</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 3rem); }
+  .page-hero { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 5rem); }
+  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.8125rem; color: rgba(42, 32, 27, 0.48); margin-bottom: var(--space-6); }
+  .breadcrumb a { text-decoration: none; color: inherit; }
+  .breadcrumb a:hover { color: var(--color-cafe); }
+  .page-hero h1 { font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-primary); margin: 0 0 var(--space-6); max-width: 22ch; }
+  .page-lead { font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.75; color: rgba(42, 32, 27, 0.68); max-width: 50ch; margin: 0 0 var(--space-8); }
+  .wa-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-inverse); background-color: var(--color-cafe); border-radius: var(--radius-button); padding: 0.9rem 1.5rem; text-decoration: none; transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  .wa-btn svg { flex-shrink: 0; transition: transform var(--dur-base) var(--ease-out); }
+  .wa-btn:hover { background-color: var(--color-cafe-negro); box-shadow: var(--shadow-button); transform: translateY(-2px); }
+  .wa-btn:hover svg { transform: translateY(-1px) scale(1.06); }
+  @media (prefers-reduced-motion: reduce) { .wa-btn:hover, .wa-btn:hover svg { transform: none; } }
+  .content-section { background-color: var(--bg-page); padding: clamp(4rem, 10vw, 7rem) 0; border-bottom: 1px solid var(--border); }
+  .content-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-16); align-items: start; }
+  @media (min-width: 1024px) { .content-grid { grid-template-columns: 1fr 320px; } }
+  .content-body h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; color: var(--text-primary); margin: var(--space-12) 0 var(--space-6); letter-spacing: -0.02em; }
+  .content-body h2:first-child { margin-top: 0; }
+  .content-body p { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.8; color: rgba(42, 32, 27, 0.78); margin: 0 0 var(--space-6); max-width: 70ch; }
+  .includes-list { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.75; color: rgba(42, 32, 27, 0.78); padding-left: var(--space-6); margin: 0 0 var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); max-width: 65ch; }
+  .includes-list strong { color: var(--text-primary); }
+  .sidebar-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-8); margin-bottom: var(--space-8); }
+  .sidebar-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-6); }
+  .sidebar-dl { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3) var(--space-4); margin: 0 0 var(--space-8); }
+  .sidebar-dl dt { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; color: rgba(42, 32, 27, 0.52); }
+  .sidebar-dl dd { font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-primary); margin: 0; }
+  .sidebar-cta { display: block; text-align: center; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-inverse); background-color: var(--color-cafe); border-radius: var(--radius-button); padding: 0.75rem 1.25rem; text-decoration: none; transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  .sidebar-cta:hover { background-color: var(--color-cafe-negro); box-shadow: var(--shadow-button); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .sidebar-cta:hover { transform: none; } }
+  .sidebar-related { display: flex; flex-direction: column; gap: var(--space-3); }
+  .related-label { font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(42, 32, 27, 0.44); margin: 0; }
+  .related-link { font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; color: var(--color-cafe); text-decoration: none; transition: opacity var(--dur-fast) var(--ease-out); }
+  .related-link:hover { opacity: 0.72; }
+  .faq-section { background-color: var(--bg-surface); padding: clamp(4rem, 10vw, 7rem) 0; }
+  .faq-section h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--text-primary); margin: 0 0 var(--space-12); letter-spacing: -0.025em; }
+  .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 800px; }
+  .faq-item { border-top: 1px solid var(--border); padding: var(--space-8) 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--border); }
+  .faq-q { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-4); }
+  .faq-a { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.75; color: rgba(42, 32, 27, 0.72); margin: 0; }
+</style>

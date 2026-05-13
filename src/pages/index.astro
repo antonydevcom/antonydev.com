@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Services from '@/components/sections/Services.astro';
+import Projects from '@/components/sections/Projects.astro';
+import Contact from '@/components/sections/Contact.astro';
+import Footer from '@/components/sections/Footer.astro';
+---
+
+<BaseLayout
+  title="Desarrollador Web en Zihuatanejo"
+  description="Antony Valdovinos, programador en Zihuatanejo. Páginas web, sistemas a medida y automatización para negocios en Ixtapa y Guerrero. ✓ Auditoría gratis."
+>
+  <Header />
+  <main>
+    <Hero />
+    <Services />
+    <Projects />
+    <div id="sobre-mi" class="nav-scroll-mark" aria-hidden="true"></div>
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

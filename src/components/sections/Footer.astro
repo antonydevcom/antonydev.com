@@ -1,0 +1,145 @@
+---
+import Container from '@/components/ui/Container.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const year = new Date().getFullYear();
+const waLink = getWhatsAppLink('footer');
+
+const footerLinks: { label: string; href: string; external?: boolean }[] = [
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Auditoría gratuita', href: '/servicios/auditoria' },
+  { label: 'WhatsApp', href: waLink, external: true },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p class="footer-copy">© {year} Antony Valdovinos — AntonyDev · Zihuatanejo, Guerrero</p>
+        <nav class="footer-nav" aria-label="Navegación de pie de página">
+          {footerLinks.map((link) => (
+            <a
+              href={link.href}
+              class="footer-link"
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  /*
+   * Bookend to the sticky header: same warm glass stack, same hairline,
+   * same shadow language — reads as one system (nav above, rail below).
+   */
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(247, 244, 238, 0.78);
+    -webkit-backdrop-filter: var(--glass-nav);
+    backdrop-filter: var(--glass-nav);
+    border-top: 1px solid rgba(42, 32, 27, 0.09);
+    box-shadow:
+      0 -1px 0 rgba(255, 252, 248, 0.35) inset,
+      0 -12px 40px rgba(42, 32, 27, 0.04);
+  }
+
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      box-shadow: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  .footer-inner {
+    padding-top: clamp(1.25rem, 3vw, 1.75rem);
+    padding-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  /* ── Single rail: legal + links (header-style rhythm) ───────── */
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-8);
+    }
+  }
+
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: rgba(42, 32, 27, 0.52);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2.2vw, 2rem);
+    flex-wrap: wrap;
+  }
+
+  /*
+   * Same editorial rail as the header nav: small refined type,
+   * hairline underline that draws in from the left on hover.
+   */
+  .footer-link {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(42, 32, 27, 0.72);
+    text-decoration: none;
+    padding-bottom: 4px;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--color-cafe);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 420ms var(--ease-premium);
+  }
+
+  .footer-link:hover {
+    color: var(--color-cafe);
+  }
+
+  .footer-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-link::after {
+      transition: none;
+    }
+  }
+</style>

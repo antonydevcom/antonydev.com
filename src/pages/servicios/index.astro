@@ -68,8 +68,8 @@ const extras = [
           <span aria-hidden="true">/</span>
           <span aria-current="page">Servicios</span>
         </nav>
-        <h1>Desarrollo web, sistemas e identidad digital</h1>
-        <p class="page-lead">
+        <h1 data-reveal data-reveal-delay="0">Desarrollo web, sistemas e identidad digital</h1>
+        <p class="page-lead" data-reveal data-reveal-delay="120">
           Un modelo de trabajo completo — desde el diagnóstico inicial hasta el
           crecimiento continuo de tu presencia digital.
         </p>
@@ -79,18 +79,19 @@ const extras = [
     <!-- Las 3 fases -->
     <section class="phases-section">
       <div class="page-container">
-        <p class="section-eyebrow">El ciclo completo</p>
-        <h2>Las 3 fases del trabajo</h2>
+        <p class="section-eyebrow" data-reveal data-reveal-delay="0">El ciclo completo</p>
+        <h2 data-reveal data-reveal-delay="80">Las 3 fases del trabajo</h2>
         <ol class="phases-grid" role="list">
-          {phases.map((phase) => (
-            <li class="phase-item">
+          {phases.map((phase, i) => (
+            <li class="phase-item" data-reveal data-reveal-delay={i * 110}>
               <span class="phase-num" aria-hidden="true">{phase.number}</span>
               <p class="phase-tagline">{phase.tagline}</p>
               <h3 class="phase-title">{phase.title}</h3>
               <p class="phase-desc">{phase.description}</p>
               <p class="phase-price">{phase.detail}</p>
               <a href={phase.href} class="phase-link">
-                Ver detalles →
+                Ver detalles
+                <span aria-hidden="true">→</span>
               </a>
             </li>
           ))}
@@ -101,13 +102,16 @@ const extras = [
     <!-- Extras -->
     <section class="extras-section">
       <div class="page-container">
-        <p class="section-eyebrow">Servicios adicionales</p>
+        <p class="section-eyebrow" data-reveal data-reveal-delay="0">Servicios adicionales</p>
         <ul class="extras-grid" role="list">
-          {extras.map((extra) => (
-            <li class="extra-item">
+          {extras.map((extra, i) => (
+            <li class="extra-item" data-reveal data-reveal-delay={i * 100}>
               <h3>{extra.title}</h3>
               <p>{extra.description}</p>
-              <a href={extra.href} class="extra-link">Ver servicio →</a>
+              <a href={extra.href} class="extra-link">
+                Ver servicio
+                <span aria-hidden="true">→</span>
+              </a>
             </li>
           ))}
         </ul>
@@ -118,8 +122,8 @@ const extras = [
     <section class="cta-section">
       <div class="page-container cta-inner">
         <div>
-          <h2>¿Por dónde empezamos?</h2>
-          <p>La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
+          <h2 data-reveal data-reveal-delay="0">¿Por dónde empezamos?</h2>
+          <p data-reveal data-reveal-delay="100">La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
         </div>
         <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -478,4 +482,45 @@ const extras = [
   @media (prefers-reduced-motion: reduce) {
     .wa-btn:hover, .wa-btn:hover svg { transform: none; }
   }
+
+  /* ── Scroll reveal ───────────────────────────────── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity   0.62s var(--ease-out),
+      transform 0.62s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = (entry.target as HTMLElement).dataset.revealDelay ?? '0';
+          (entry.target as HTMLElement).style.setProperty('--reveal-delay', delay + 'ms');
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '0px 0px -48px 0px', threshold: 0.08 }
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+</script>

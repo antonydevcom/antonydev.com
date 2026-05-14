@@ -28,15 +28,17 @@ const waLink = getWhatsAppLink('hero');
   <div class="hero-stage">
 
     <div class="hero-logo-wrap" aria-hidden="true">
-      <img
-        src="/images/branding/logo.png"
-        alt="AntonyDev — Antony Valdovinos"
-        width="500"
-        height="500"
-        loading="eager"
-        decoding="async"
-        class="hero-logo"
-      />
+      <div class="hero-logo-inner">
+        <img
+          src="/images/branding/logo.png"
+          alt="AntonyDev — Antony Valdovinos"
+          width="500"
+          height="500"
+          loading="eager"
+          decoding="async"
+          class="hero-logo"
+        />
+      </div>
     </div>
 
     <p class="hero-kicker"><span class="hero-kicker-item">Desarrollo web</span><span class="hero-kicker-sep" aria-hidden="true"></span><span class="hero-kicker-item">Diseño</span><span class="hero-kicker-sep" aria-hidden="true"></span><span class="hero-kicker-item">Sistemas</span></p>
@@ -166,18 +168,33 @@ const waLink = getWhatsAppLink('hero');
     padding-bottom: clamp(4.5rem, 12vh, 8rem);
   }
 
-  /* ── Logo mark ───────────────────────────────────── */
+  /* ── Logo mark — luxury reveal, then slow editorial float ─ */
   .hero-logo-wrap {
-    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
-    animation: hero-up 1000ms var(--ease-premium) 180ms both;
+    margin-bottom: clamp(1.35rem, 2.75vw, 2.15rem);
+    transform-origin: 50% 55%;
+    will-change: transform, filter;
+    animation:
+      hero-logo-float        5.75s cubic-bezier(0.45, 0, 0.55, 1) 2s infinite,
+      hero-logo-float-shadow 5.75s cubic-bezier(0.45, 0, 0.55, 1) 2s infinite;
+  }
+
+  .hero-logo-inner {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    transform-origin: 50% 58%;
+    backface-visibility: hidden;
+    animation: hero-logo-reveal 1.68s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
   }
 
   .hero-logo {
     display: block !important;
-    height: clamp(88px, 10vw, 140px) !important;
+    height: clamp(104px, 12.5vw, 172px) !important;
     width: auto !important;
     max-width: none !important;
     mix-blend-mode: multiply;
+    animation: hero-logo-luminate 1.72s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
   }
 
   /* ── Kicker — small label rail ───────────────────── */
@@ -354,6 +371,93 @@ const waLink = getWhatsAppLink('hero');
     }
   }
 
+  /* Logo: curtain reveal + magnetic settle — reads high-end, not flashy */
+  @keyframes hero-logo-reveal {
+    0% {
+      opacity: 0;
+      clip-path: inset(88% 8% 0% 8% round 2px);
+      transform: translateY(2.75rem) scale(0.88) rotate(-2deg);
+    }
+    28% {
+      opacity: 1;
+      clip-path: inset(0% 0% 0% 0% round 2px);
+      transform: translateY(0.85rem) scale(0.96) rotate(-0.5deg);
+    }
+    52% {
+      transform: translateY(-0.85rem) scale(1.055) rotate(0.55deg);
+    }
+    72% {
+      transform: translateY(0.35rem) scale(0.99) rotate(0deg);
+    }
+    100% {
+      opacity: 1;
+      clip-path: inset(0% 0% 0% 0%);
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+  }
+
+  /* Light sculpts the mark — three-beat then rest at natural values */
+  @keyframes hero-logo-luminate {
+    0% {
+      filter:
+        brightness(0.72)
+        contrast(1.12)
+        saturate(0.75)
+        drop-shadow(0 2rem 3rem rgba(42, 32, 27, 0));
+    }
+    22% {
+      filter:
+        brightness(1.42)
+        contrast(0.9)
+        saturate(0.88)
+        drop-shadow(0 0.5rem 1.25rem rgba(42, 32, 27, 0.1));
+    }
+    48% {
+      filter:
+        brightness(1.12)
+        contrast(1.04)
+        saturate(1.02)
+        drop-shadow(0 0.65rem 1.6rem rgba(42, 32, 27, 0.16));
+    }
+    100% {
+      filter:
+        brightness(1)
+        contrast(1)
+        saturate(1)
+        drop-shadow(0 0.45rem 1.15rem rgba(42, 32, 27, 0.08));
+    }
+  }
+
+  /* After load: slow levitation — noticeable, still editorial */
+  @keyframes hero-logo-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    22% {
+      transform: translateY(-14px) rotate(0.55deg);
+    }
+    48% {
+      transform: translateY(-5px) rotate(0.2deg);
+    }
+    74% {
+      transform: translateY(11px) rotate(-0.4deg);
+    }
+  }
+
+  @keyframes hero-logo-float-shadow {
+    0%,
+    100% {
+      filter: drop-shadow(0 14px 26px rgba(42, 32, 27, 0.1));
+    }
+    48% {
+      filter: drop-shadow(0 22px 38px rgba(42, 32, 27, 0.14));
+    }
+    74% {
+      filter: drop-shadow(0 10px 20px rgba(42, 32, 27, 0.08));
+    }
+  }
+
   @keyframes hero-up {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -390,6 +494,21 @@ const waLink = getWhatsAppLink('hero');
   /* ── Reduced motion ──────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .hero-logo-wrap,
+    .hero-logo-inner,
+    .hero-logo {
+      animation: none !important;
+      will-change: auto;
+    }
+    .hero-logo-wrap,
+    .hero-logo-inner {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+    .hero-logo {
+      opacity: 1;
+      filter: none;
+    }
     .hero-kicker,
     .hero-heading,
     .hero-role,

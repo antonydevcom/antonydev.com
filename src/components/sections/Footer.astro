@@ -18,8 +18,11 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     <div class="footer-inner">
       <div class="footer-bottom">
         <p class="footer-copy">
-          <span class="footer-copy-mobile">© {year} AntonyDev · Zihuatanejo, Gro.</span>
-          <span class="footer-copy-desktop">© {year} Antonio Valdovinos — AntonyDev · Zihuatanejo, Guerrero</span>
+          <span class="footer-copy-line">© {year} Antonio Valdovinos Fullstack web developer.</span>
+          <span class="footer-copy-line">
+            Diseñado y desarrollado por
+            <a href="https://antonydev.com/" class="footer-copy-brand">AntonyDev</a>.
+          </span>
         </p>
         <nav class="footer-nav" aria-label="Navegación de pie de página">
           {footerLinks.map((link) => (
@@ -70,69 +73,101 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     padding-bottom: clamp(1.25rem, 3vw, 1.75rem);
   }
 
-  /* ── Single rail: legal + links (header-style rhythm) ───────── */
+  @media (max-width: 1023px) {
+    .footer-inner {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  /*
+   * Below lg: stack + center (mobile / tablet).
+   * lg+: same rail as header — copy left, links right.
+   */
   .footer-bottom {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    align-items: flex-start;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .footer-bottom {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       gap: var(--space-8);
+      text-align: left;
     }
   }
 
   .footer-copy {
     font-family: var(--font-body);
-    font-size: 0.8125rem;
-    line-height: 1.55;
+    line-height: 1.45;
     color: rgba(42, 32, 27, 0.52);
     margin: 0;
-    max-width: none;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    text-wrap: balance;
+    font-size: clamp(0.71875rem, 2.35vw, 0.8125rem);
   }
 
-  /* Full legal line only from tablet up — mobile uses compact line (one row). */
-  .footer-copy-desktop {
-    display: none;
-  }
-
-  .footer-copy-mobile {
-    display: inline;
-    white-space: nowrap;
-  }
-
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .footer-copy {
-      max-width: 42ch;
+      width: auto;
+      max-width: min(44ch, 28rem);
+      text-align: left;
+      line-height: 1.5;
+      font-size: 0.8125rem;
     }
+  }
 
-    .footer-copy-mobile {
-      display: none;
-    }
+  .footer-copy-line {
+    display: block;
+  }
 
-    .footer-copy-desktop {
-      display: inline;
-    }
+  .footer-copy-line + .footer-copy-line {
+    margin-top: 0.15em;
+  }
+
+  .footer-copy-brand {
+    font-weight: 600;
+    color: rgba(42, 32, 27, 0.72);
+    text-decoration: none;
+    text-underline-offset: 2px;
+    transition: color var(--dur-fast) var(--ease-out);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .footer-copy-brand:hover {
+    color: var(--color-cafe);
+    text-decoration: underline;
   }
 
   .footer-nav {
     display: flex;
     align-items: center;
-    gap: clamp(1.25rem, 2.2vw, 2rem);
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
     flex-wrap: wrap;
+    max-width: 100%;
   }
 
-  /* One row on small phones — horizontal scroll if needed, no second line of links. */
+  @media (min-width: 1024px) {
+    .footer-nav {
+      justify-content: flex-end;
+      gap: clamp(1.25rem, 2.2vw, 2rem);
+    }
+  }
+
+  /* Phones: one link row, scroll — keeps footer short. */
   @media (max-width: 767px) {
     .footer-nav {
       flex-wrap: nowrap;
-      gap: 0.875rem;
-      max-width: 100%;
+      justify-content: flex-start;
+      gap: 0.75rem;
       overflow-x: auto;
       overflow-y: hidden;
       padding-bottom: 4px;
@@ -151,9 +186,9 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
 
     .footer-link {
       flex-shrink: 0;
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.03em;
-      padding: 8px 0;
+      padding: 6px 0;
     }
   }
 

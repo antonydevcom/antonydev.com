@@ -62,8 +62,9 @@
   --space-16: 64px;
   --space-24: 96px;
 
-  /* Home: main overlaps sticky header so hero photo reaches viewport top — sync with Header row height */
-  --site-header-underlap: 6.125rem;
+  /* Home: main overlaps sticky header so hero photo reaches viewport top — sync with Header row height.
+   * env(safe-area-inset-top) adds notch height on iPhone X+ when viewport-fit=cover is set. */
+  --site-header-underlap: calc(6.125rem + env(safe-area-inset-top, 0px));
 
   /* Premium frosted glass — full backdrop-filter values for warm marfil stacks */
   --glass-nav: blur(18px) saturate(1.14);

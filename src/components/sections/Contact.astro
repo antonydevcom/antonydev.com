@@ -77,8 +77,8 @@ const waLink = getWhatsAppLink('contacto');
     position: relative;
     z-index: 1;
     background-color: var(--bg-page);
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: clamp(4.5rem, 10vw, 7rem);
+    padding-bottom: clamp(4.5rem, 10vw, 7rem);
     border-bottom: 1px solid var(--border);
   }
 
@@ -109,7 +109,7 @@ const waLink = getWhatsAppLink('contacto');
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-16);
+    gap: clamp(var(--space-12), 5vw, var(--space-16));
     align-items: start;
   }
 
@@ -145,6 +145,13 @@ const waLink = getWhatsAppLink('contacto');
       box-shadow       var(--dur-slow) var(--ease-out),
       transform        var(--dur-fast) var(--ease-out);
     max-width: fit-content;
+  }
+
+  @media (max-width: 640px) {
+    .wa-cta {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   .wa-cta svg {

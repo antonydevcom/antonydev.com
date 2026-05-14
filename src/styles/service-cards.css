@@ -10,7 +10,7 @@
   gap: var(--space-6);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .phases-list {
     grid-template-columns: repeat(3, 1fr);
   }

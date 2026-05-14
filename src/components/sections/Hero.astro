@@ -330,7 +330,7 @@ const waLink = getWhatsAppLink('hero');
   /* ── Layer 3: Scroll indicator ───────────────────── */
   .hero-scroll {
     position: absolute;
-    bottom: clamp(1.25rem, 4vh, 2rem);
+    bottom: calc(clamp(1.25rem, 4vh, 2rem) + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translateX(-50%);
     z-index: 4;
@@ -380,12 +380,12 @@ const waLink = getWhatsAppLink('hero');
     50%       { transform: translateX(-50%) translateY(5px); }
   }
 
-  /* ── Narrow mobile: stack CTAs ───────────────────── */
-  @media (max-width: 480px) {
+  /* ── Mobile: stack CTAs ─────────────────────────── */
+  @media (max-width: 560px) {
     .cta-group {
       flex-direction: column;
       width: 100%;
-      max-width: 18rem;
+      max-width: 20rem;
     }
     .btn-wa {
       width: 100%;
@@ -395,6 +395,22 @@ const waLink = getWhatsAppLink('hero');
       width: 100%;
       justify-content: center;
       text-align: center;
+    }
+  }
+
+  /* ── Portrait mobile: adjust bg composition ───── */
+  @media (max-width: 640px) {
+    .hero-bg-img {
+      object-position: 45% 35%;
+    }
+  }
+
+  /* ── Very small phones ────────────────────────── */
+  @media (max-width: 360px) {
+    .hero-stage {
+      padding-inline: 1.25rem;
+      padding-top: 2.5rem;
+      padding-bottom: 3.5rem;
     }
   }
 

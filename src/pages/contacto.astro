@@ -101,7 +101,7 @@ const breadcrumbs = [
 
   /* ── Contact section ─────────────────────────────── */
   .contact-section { background-color: var(--bg-page); padding: clamp(4rem, 10vw, 7rem) 0; }
-  .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-16); align-items: start; }
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: clamp(var(--space-12), 5vw, var(--space-16)); align-items: start; }
   @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1.2fr; gap: var(--space-24); } }
 
   /* ── WhatsApp primary ────────────────────────────── */
@@ -120,6 +120,14 @@ const breadcrumbs = [
       box-shadow       var(--dur-slow) var(--ease-out),
       transform        var(--dur-fast) var(--ease-out);
     max-width: fit-content;
+  }
+
+  @media (max-width: 640px) {
+    .wa-primary {
+      max-width: 100%;
+      width: 100%;
+      margin-bottom: var(--space-8);
+    }
   }
 
   .wa-primary:hover {

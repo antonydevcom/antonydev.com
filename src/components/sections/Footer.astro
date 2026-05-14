@@ -49,6 +49,7 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     box-shadow:
       0 -1px 0 rgba(255, 252, 248, 0.35) inset,
       0 -12px 40px rgba(42, 32, 27, 0.04);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
@@ -111,8 +112,16 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     letter-spacing: 0.04em;
     color: rgba(42, 32, 27, 0.72);
     text-decoration: none;
-    padding-bottom: 4px;
+    padding: 6px 0 4px;
     transition: color var(--dur-fast) var(--ease-out);
+    /* Expand touch target without changing visual layout */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (max-width: 767px) {
+    .footer-link {
+      padding: 10px 0;
+    }
   }
 
   .footer-link::after {

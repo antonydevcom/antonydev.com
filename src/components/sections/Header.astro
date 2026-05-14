@@ -115,6 +115,8 @@ const navLinks = [
       backdrop-filter         350ms var(--ease-premium),
       -webkit-backdrop-filter 350ms var(--ease-premium);
     animation: header-reveal 620ms var(--ease-premium) 0ms both;
+    /* iPhone notch: extend bg into safe area, keep content below it */
+    padding-top: env(safe-area-inset-top, 0px);
   }
 
   @keyframes header-reveal {
@@ -196,7 +198,7 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-8);
+    gap: clamp(var(--space-4), 4vw, var(--space-8));
     padding-top: 18px;
     padding-bottom: 18px;
   }
@@ -472,11 +474,11 @@ const navLinks = [
   }
 
   .mobile-menu.is-open {
-    max-height: 300px;
+    max-height: 340px;
     opacity: 1;
     visibility: visible;
     padding-top: var(--space-4);
-    padding-bottom: var(--space-6);
+    padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid rgba(42, 32, 27, 0.08);
     transition:
       max-height 380ms var(--ease-out),

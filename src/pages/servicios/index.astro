@@ -141,6 +141,14 @@ const extras = [
     display: flex;
     flex-direction: column;
     gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  @media (max-width: 560px) {
+    .cta-inner .wa-btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   @media (min-width: 768px) {
@@ -207,7 +215,7 @@ const extras = [
 <style is:global>
   /* SectionHeaderReveal inside .servicios-showcase — React island, no scoped attrs */
   .servicios-showcase .section-header {
-    margin-bottom: var(--space-12);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
   }
 
   .servicios-showcase .section-header h2 {

@@ -1,77 +1,208 @@
 import type { APIRoute } from 'astro';
-
-export const prerender = false;
 import { Resend } from 'resend';
 import { z } from 'zod';
 
+export const prerender = false;
+
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 3_600_000; // 1 hour
 const rateLimitMap = new Map<string, number[]>();
 
 const ContactSchema = z.object({
-  nombre:   z.string().min(2).max(100),
-  whatsapp: z.string().min(8).max(20),
-  negocio:  z.string().min(2).max(200),
+  nombre:   z.string().min(2).max(100).trim(),
+  whatsapp: z.string().min(8).max(20).trim(),
+  negocio:  z.string().min(2).max(200).trim(),
   email:    z.string().email().optional().or(z.literal('')),
-  mensaje:  z.string().min(10).max(2000),
-  website:  z.string().max(0), // honeypot — bots fill it, humans don't
+  mensaje:  z.string().min(10).max(2000).trim(),
+  website:  z.string().max(0), // honeypot — must be empty
 });
 
+function json(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+function htmlEscape(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+function buildEmailHtml(params: {
+  nombre:    string;
+  whatsapp:  string;
+  negocio:   string;
+  email?:    string;
+  mensaje:   string;
+  timestamp: string;
+  origin:    string;
+}): string {
+  const { nombre, whatsapp, negocio, email, mensaje, timestamp, origin } = params;
+
+  const emailRow = email
+    ? `<tr>
+        <td style="padding:12px 0;border-bottom:1px solid rgba(42,32,27,0.08);">
+          <p style="margin:0;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">Correo</p>
+          <p style="margin:4px 0 0;font-size:15px;color:#2A201B;font-weight:500;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(email)}</p>
+        </td>
+      </tr>`
+    : '';
+
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Nuevo contacto — AntonyDev</title>
+</head>
+<body style="margin:0;padding:0;background-color:#EEE8DF;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#EEE8DF;padding:40px 16px;">
+  <tr>
+    <td align="center">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#2A201B;padding:32px 36px;border-radius:12px 12px 0 0;">
+            <p style="margin:0;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">AntonyDev &middot; Nuevo contacto</p>
+            <h1 style="margin:10px 0 0;font-size:22px;font-weight:600;color:#F7F4EE;line-height:1.3;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(nombre)}</h1>
+            <p style="margin:5px 0 0;font-size:14px;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(negocio)}</p>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="background:#F7F4EE;padding:32px 36px;">
+
+            <!-- Contact fields -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+              <tr>
+                <td style="padding:12px 0;border-bottom:1px solid rgba(42,32,27,0.08);">
+                  <p style="margin:0;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">WhatsApp</p>
+                  <p style="margin:4px 0 0;font-size:15px;color:#2A201B;font-weight:500;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(whatsapp)}</p>
+                </td>
+              </tr>
+              ${emailRow}
+              <tr>
+                <td style="padding:12px 0;">
+                  <p style="margin:0;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">Negocio</p>
+                  <p style="margin:4px 0 0;font-size:15px;color:#2A201B;font-weight:500;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(negocio)}</p>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Message -->
+            <p style="margin:0 0 10px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">Mensaje</p>
+            <div style="background:#EEE8DF;border-radius:8px;padding:20px 22px;border-left:3px solid #B7A79A;">
+              <p style="margin:0;font-size:15px;line-height:1.75;color:#2A201B;white-space:pre-wrap;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(mensaje)}</p>
+            </div>
+
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#EEE8DF;padding:18px 36px;border-radius:0 0 12px 12px;border-top:1px solid rgba(42,32,27,0.1);">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td>
+                  <p style="margin:0;font-size:12px;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">${htmlEscape(timestamp)}</p>
+                  <p style="margin:3px 0 0;font-size:12px;color:#B7A79A;font-family:Helvetica,Arial,sans-serif;">Origen: ${htmlEscape(origin)}</p>
+                </td>
+                <td align="right" valign="middle">
+                  <p style="margin:0;font-size:12px;color:#B7A79A;font-weight:600;font-family:Helvetica,Arial,sans-serif;letter-spacing:0.05em;">antonydev.com</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`;
+}
+
 export const POST: APIRoute = async ({ request, clientAddress }) => {
+  // Rate limit
   const now = Date.now();
   const ip = clientAddress ?? 'unknown';
-  const hits = (rateLimitMap.get(ip) ?? []).filter((t) => now - t < 3_600_000);
+  const hits = (rateLimitMap.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
 
-  if (hits.length >= 5) {
-    return new Response(JSON.stringify({ error: 'Demasiados intentos. Intenta en una hora.' }), {
-      status: 429,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (hits.length >= RATE_LIMIT_MAX) {
+    return json({ error: 'Demasiados intentos. Intenta en una hora.' }, 429);
   }
-
   rateLimitMap.set(ip, [...hits, now]);
 
+  // Parse
   const body = await request.json().catch(() => null);
-  if (!body) {
-    return new Response(JSON.stringify({ error: 'Datos inválidos.' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (!body) return json({ error: 'Solicitud inválida.' }, 400);
+
+  // Honeypot check — silent 200 to fool bots
+  if (typeof (body as Record<string, unknown>).website === 'string' &&
+      (body as Record<string, unknown>).website !== '') {
+    return json({ ok: true }, 200);
   }
 
+  // Validate
   const result = ContactSchema.safeParse(body);
   if (!result.success) {
-    return new Response(JSON.stringify({ error: 'Por favor completa todos los campos requeridos.' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'Por favor completa todos los campos requeridos.' }, 400);
   }
 
   const { nombre, whatsapp, negocio, email, mensaje } = result.data;
 
-  const resendKey = import.meta.env.RESEND_API_KEY;
-  if (resendKey) {
-    try {
-      const resend = new Resend(resendKey);
-      await resend.emails.send({
-        from: 'notificaciones@antonydev.com',
-        to:   'hola@antonydev.com',
-        subject: `Nuevo contacto: ${nombre} — ${negocio}`,
-        text: [
-          `Nombre:    ${nombre}`,
-          `WhatsApp:  ${whatsapp}`,
-          `Negocio:   ${negocio}`,
-          `Email:     ${email || 'N/A'}`,
-          ``,
-          `Mensaje:`,
-          mensaje,
-        ].join('\n'),
-      });
-    } catch {
-      // Log but don't fail the request — contact still recorded
-    }
+  const resendKey    = import.meta.env.RESEND_API_KEY;
+  const contactEmail = import.meta.env.CONTACT_EMAIL ?? 'hola@antonydev.com';
+  const referer = request.headers.get('referer') ?? '';
+  const origin  = referer ? (new URL(referer).pathname || '/') : '/';
+
+  if (!resendKey) {
+    return json({ error: 'Servicio de correo no configurado.' }, 503);
   }
 
-  return new Response(JSON.stringify({ ok: true }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
+  const timestamp = new Date().toLocaleString('es-MX', {
+    timeZone: 'America/Mexico_City',
+    dateStyle: 'long',
+    timeStyle: 'short',
   });
+
+  try {
+    const resend = new Resend(resendKey);
+
+    await resend.emails.send({
+      from:    'AntonyDev <notificaciones@antonydev.com>',
+      to:      contactEmail,
+      ...(email ? { replyTo: email } : {}),
+      subject: `Nuevo contacto: ${nombre} — ${negocio}`,
+      html:    buildEmailHtml({ nombre, whatsapp, negocio, email, mensaje, timestamp, origin }),
+      text: [
+        'NUEVO CONTACTO — AntonyDev',
+        '',
+        `Nombre:    ${nombre}`,
+        `WhatsApp:  ${whatsapp}`,
+        `Negocio:   ${negocio}`,
+        `Email:     ${email || 'N/A'}`,
+        '',
+        'Mensaje:',
+        mensaje,
+        '',
+        `Enviado: ${timestamp}`,
+        `Origen:  ${origin}`,
+      ].join('\n'),
+    });
+  } catch {
+    return json({
+      error: 'Error al enviar el mensaje. Por favor intenta de nuevo o contáctanos por WhatsApp.',
+    }, 500);
+  }
+
+  return json({ ok: true }, 200);
 };

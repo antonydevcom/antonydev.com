@@ -154,6 +154,25 @@ const waLink = getWhatsAppLink('hero');
   }
 
   /* ── Layer 2: Centered editorial stage ───────────── */
+
+  /*
+   * Radial warm halo behind the content block — barely visible (9% opacity).
+   * Creates a sensation of depth: content floats above the image rather than
+   * sitting flat on it. "Felt not noticed."
+   */
+  .hero-stage::before {
+    content: '';
+    position: absolute;
+    inset: -14% -8%;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse 75% 65% at 50% 44%,
+      rgba(247, 244, 238, 0.09) 0%,
+      transparent 68%
+    );
+    pointer-events: none;
+  }
+
   .hero-stage {
     position: relative;
     z-index: 3;

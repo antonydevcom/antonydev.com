@@ -192,19 +192,28 @@ const projects = [
     overflow: hidden;
     background-color: var(--bg-page);
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    /* Three-layer shadow: close contact, mid ambient, wide atmospheric */
+    box-shadow:
+      0 1px 3px  rgba(42, 32, 27, 0.05),
+      0 4px 16px rgba(42, 32, 27, 0.07),
+      0 12px 32px rgba(42, 32, 27, 0.04);
     text-decoration: none;
     color: inherit;
     transition:
-      transform var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out),
-      border-color var(--dur-base) var(--ease-out);
+      transform     var(--dur-base) var(--ease-out),
+      box-shadow    380ms           var(--ease-out),
+      border-color  var(--dur-base) var(--ease-out);
   }
 
   .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(42, 32, 27, 0.18);
+    transform: translateY(-4px);
+    /* Four-layer hover: contact → near → mid → far atmospheric halo */
+    box-shadow:
+      0 1px  3px  rgba(42, 32, 27, 0.04),
+      0 6px  20px rgba(42, 32, 27, 0.09),
+      0 20px 56px rgba(42, 32, 27, 0.13),
+      0 40px 72px rgba(42, 32, 27, 0.05);
+    border-color: rgba(42, 32, 27, 0.15);
   }
 
   /* ── Card image area ─────────────────────────────── */

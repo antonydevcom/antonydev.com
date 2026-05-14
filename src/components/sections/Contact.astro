@@ -2,6 +2,7 @@
 import Container from '@/components/ui/Container.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 import { SectionReveal } from '@/components/motion/SectionReveal';
+import { SectionHeaderReveal } from '@/components/motion/SectionHeaderReveal';
 
 const waLink = getWhatsAppLink('contacto');
 ---
@@ -11,10 +12,15 @@ const waLink = getWhatsAppLink('contacto');
     <div class="contact-grid">
 
       <!-- ── Left — info ─────────────────────────── -->
-      <SectionReveal client:visible delay={0}>
       <div class="contact-info">
-        <p class="eyebrow">Contacto</p>
-        <h2 id="contact-heading">Cuéntame sobre<br/>tu proyecto</h2>
+        <SectionHeaderReveal
+          eyebrow="Contacto"
+          heading={"Cuéntame sobre\ntu proyecto"}
+          headingId="contact-heading"
+          headingPer="line"
+          showDivider={false}
+          client:visible
+        />
         <p class="contact-lead">
           Usa el formulario o escríbeme por WhatsApp. No necesito un brief elaborado:
           solo cuéntame qué tiene tu negocio y qué le falta.
@@ -55,7 +61,6 @@ const waLink = getWhatsAppLink('contacto');
           </li>
         </ul>
       </div>
-      </SectionReveal>
 
       <!-- ── Right — form ────────────────────────── -->
       <SectionReveal client:visible delay={0.12}>
@@ -241,28 +246,6 @@ const waLink = getWhatsAppLink('contacto');
       grid-template-columns: 1fr 1fr;
       gap: var(--space-24);
     }
-  }
-
-  /* ── Left — info ─────────────────────────────────── */
-  .eyebrow {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.55);
-    margin-bottom: var(--space-4);
-  }
-
-  .contact-info h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.5vw, 2.875rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    color: var(--text-primary);
-    margin: 0 0 var(--space-6) 0;
   }
 
   .contact-lead {
@@ -596,5 +579,39 @@ const waLink = getWhatsAppLink('contacto');
     background-color: rgba(180, 40, 40, 0.06);
     color: rgba(140, 20, 20, 0.9);
     border: 1px solid rgba(180, 40, 40, 0.18);
+  }
+</style>
+
+<style is:global>
+  /* ── Contact section header — global scope for React island ─── */
+
+  .contact astro-island {
+    display: block;
+  }
+
+  .contact .section-header {
+    display: block;
+    margin: 0;
+  }
+
+  .contact .eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.55);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact .section-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 2.875rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-6) 0;
   }
 </style>

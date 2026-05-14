@@ -1,7 +1,7 @@
 ---
 import Container from '@/components/ui/Container.astro';
 import { ProjectCards } from '@/components/motion/ProjectCards';
-import { SectionReveal } from '@/components/motion/SectionReveal';
+import { SectionHeaderReveal } from '@/components/motion/SectionHeaderReveal';
 
 const projects = [
   {
@@ -43,13 +43,12 @@ const projects = [
 <section class="projects" id="portafolio" aria-labelledby="projects-heading">
   <Container>
 
-    <SectionReveal client:visible as="header">
-      <div class="section-header">
-        <p class="eyebrow">Trabajo seleccionado</p>
-        <h2 id="projects-heading">Proyectos recientes</h2>
-        <div class="section-divider" aria-hidden="true"></div>
-      </div>
-    </SectionReveal>
+    <SectionHeaderReveal
+      eyebrow="Trabajo seleccionado"
+      heading="Proyectos recientes"
+      headingId="projects-heading"
+      client:visible
+    />
 
     <ProjectCards projects={projects} client:visible />
 
@@ -89,14 +88,25 @@ const projects = [
     }
   }
 
-  /* ── Section header ──────────────────────────────── */
-  .section-header {
+</style>
+
+<style is:global>
+  /* ── Projects section header — global scope for React island ─── */
+
+  /* astro-island is display:inline by default — block ensures margin:auto works */
+  .projects astro-island {
+    display: block;
+  }
+
+  .projects .section-header {
+    display: block;
     text-align: center;
     margin-bottom: clamp(2rem, 5vw, 4rem);
   }
 
-  .eyebrow {
+  .projects .eyebrow {
     display: block;
+    text-align: center;
     font-family: var(--font-body);
     font-size: 0.625rem;
     font-weight: 600;
@@ -106,7 +116,8 @@ const projects = [
     margin-bottom: var(--space-3);
   }
 
-  .section-header h2 {
+  .projects .section-header h2 {
+    text-align: center;
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
@@ -116,16 +127,14 @@ const projects = [
     margin: 0 0 var(--space-4);
   }
 
-  .section-divider {
+  .projects .section-divider {
     width: 44px;
     height: 1px;
     background-color: var(--color-taupe);
     opacity: 0.4;
     margin: 0 auto;
   }
-</style>
 
-<style is:global>
   /* ── Grid ─────────────────────────────────────────── */
   .projects-grid {
     display: grid;

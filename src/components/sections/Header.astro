@@ -1,9 +1,6 @@
 ---
 import Container from '@/components/ui/Container.astro';
 import Button from '@/components/ui/Button.astro';
-import { getWhatsAppLink } from '@/lib/whatsapp';
-
-const waLink = getWhatsAppLink('hero');
 
 const pathNormalized = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isHome = pathNormalized === '/';
@@ -92,15 +89,6 @@ const navLinks = [
           <a href={href} class="mobile-nav-link">{label}</a>
         ))}
       </div>
-      <div class="mobile-menu-footer">
-        <a href={waLink} target="_blank" rel="noopener noreferrer" class="mobile-wa-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
-          </svg>
-          Escríbeme por WhatsApp
-        </a>
-      </div>
     </nav>
 
   </Container>
@@ -186,6 +174,14 @@ const navLinks = [
       border-color: var(--border);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
+    }
+    @media (max-width: 1023px) {
+      .site-header:has(.mobile-menu.is-open) {
+        background-color: rgba(247, 244, 238, 0.96);
+      }
+      .site-header--home-hero:not(.scrolled):has(.mobile-menu.is-open) {
+        background-color: rgba(247, 244, 238, 0.96);
+      }
     }
   }
 
@@ -463,7 +459,7 @@ const navLinks = [
   }
 
   .mobile-menu.is-open {
-    max-height: 340px;
+    max-height: 300px;
     opacity: 1;
     visibility: visible;
     padding-top: var(--space-4);
@@ -479,11 +475,37 @@ const navLinks = [
     .mobile-menu { display: none !important; }
   }
 
+  /*
+   * Móvil: con el panel abierto, el header deja de verse como losa beige opaca
+   * (misma línea que el hero en desktop: transparente + vidrio por blur).
+   */
+  @media (max-width: 1023px) {
+    .site-header:has(.mobile-menu.is-open) {
+      background-color: transparent;
+      -webkit-backdrop-filter: blur(48px) saturate(1.18);
+      backdrop-filter: blur(48px) saturate(1.18);
+      border-bottom-color: rgba(42, 32, 27, 0.07);
+      box-shadow: none;
+    }
+
+    .site-header.scrolled:has(.mobile-menu.is-open) {
+      box-shadow:
+        0 1px 0 rgba(42, 32, 27, 0.05),
+        0 8px 28px rgba(42, 32, 27, 0.05);
+    }
+
+    .site-header--home-hero:not(.scrolled):has(.mobile-menu.is-open) {
+      background-color: transparent;
+      -webkit-backdrop-filter: blur(48px) saturate(1.18);
+      backdrop-filter: blur(48px) saturate(1.18);
+    }
+  }
+
   /* Nav links — editorial index, tight + refined */
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--space-5);
+    margin-bottom: 0;
   }
 
   .mobile-nav-link {
@@ -519,68 +541,16 @@ const navLinks = [
   .mobile-menu.is-open .mobile-nav-link:nth-child(3) { transition-delay: 120ms; }
   .mobile-menu.is-open .mobile-nav-link:nth-child(4) { transition-delay: 155ms; }
 
-  /* Footer row — WA CTA, staggered last */
-  .mobile-menu-footer {
-    opacity: 0;
-    transform: translateY(6px);
-    transition:
-      opacity   280ms var(--ease-premium),
-      transform 340ms var(--ease-premium);
-  }
-
-  .mobile-menu.is-open .mobile-menu-footer {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 190ms;
-  }
-
-  .mobile-wa-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    color: var(--text-inverse);
-    background-color: var(--color-cafe);
-    border-radius: var(--radius-full);
-    padding: 0.65rem 1.125rem;
-    text-decoration: none;
-    transition:
-      background-color var(--dur-base) var(--ease-out),
-      box-shadow       var(--dur-slow) var(--ease-out),
-      transform        var(--dur-fast) var(--ease-out);
-  }
-
-  .mobile-wa-btn svg {
-    flex-shrink: 0;
-    transition: transform var(--dur-base) var(--ease-out) 40ms;
-  }
-
-  .mobile-wa-btn:hover {
-    background-color: var(--color-cafe-negro);
-    box-shadow: var(--shadow-button);
-    transform: translateY(-2px);
-  }
-
-  .mobile-wa-btn:hover svg {
-    transform: translateY(-1px) scale(1.06);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .mobile-menu,
     .mobile-menu.is-open {
       transition: none;
     }
-    .mobile-nav-link,
-    .mobile-menu-footer {
+    .mobile-nav-link {
       opacity: 1;
       transform: none;
       transition: color var(--dur-fast) var(--ease-out);
     }
-    .mobile-wa-btn:hover,
-    .mobile-wa-btn:hover svg { transform: none; }
   }
 </style>
 

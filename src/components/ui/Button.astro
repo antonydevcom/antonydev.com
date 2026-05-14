@@ -27,6 +27,7 @@ const externalProps = external
     href={href}
     data-variant={variant}
     data-size={size}
+    data-cursor={variant === 'primary' ? 'premium' : undefined}
     class:list={['btn', className]}
     {...externalProps}
   >
@@ -37,6 +38,7 @@ const externalProps = external
     type={type}
     data-variant={variant}
     data-size={size}
+    data-cursor={variant === 'primary' ? 'premium' : undefined}
     class:list={['btn', className]}
   >
     <slot />

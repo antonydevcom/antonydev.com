@@ -30,6 +30,7 @@ function PhaseCard({ phase }: { phase: Phase }) {
     <motion.li
       variants={cardReveal}
       className='phase-card'
+      data-cursor='premium'
       /* whileHover owns the transform — CSS hover overridden by Motion inline style */
       whileHover={{ y: -3, transition: { duration: 0.28, ease: ease.premium } }}
     >
@@ -67,6 +68,7 @@ function ExtraCard({ extra }: { extra: Extra }) {
     <motion.li
       variants={cardReveal}
       className='extra-card'
+      data-cursor='premium'
       /* lighter lift than phase cards — supporting role, not primary */
       whileHover={{ y: -2, transition: { duration: 0.25, ease: ease.premium } }}
     >

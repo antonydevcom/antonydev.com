@@ -29,6 +29,7 @@ function ProjectCard({ project }: { project: Project }) {
       aria-label={`Ver proyecto: ${project.title} (abre en nueva pestaña)`}
       variants={cardReveal}
       className='project-card'
+      data-cursor='premium'
       whileHover={{ y: -5, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
     >
       {/* Very slow, faint border trail */}

@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { PremiumCursor } from '@/components/motion/PremiumCursor';
 
 interface Props {
   title: string;
@@ -166,6 +167,8 @@ const allSchemas = [
     ></script>
   </head>
   <body class:list={[bodyClass]}>
+    <PremiumCursor client:load />
     <slot />
   </body>
 </html>
+

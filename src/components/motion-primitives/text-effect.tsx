@@ -12,7 +12,7 @@ import type {
 } from 'motion'
 import React from 'react';
 
-export type PresetType = 'blur' | 'fade-in-blur' | 'scale' | 'fade' | 'slide';
+export type PresetType = 'blur' | 'fade-in-blur' | 'scale' | 'fade' | 'slide' | 'cinematic';
 
 export type PerType = 'word' | 'char' | 'line';
 
@@ -36,6 +36,7 @@ export type TextEffectProps = {
   containerTransition?: Transition;
   segmentTransition?: Transition;
   style?: React.CSSProperties;
+  id?: string;
 };
 
 const defaultStaggerTimes: Record<PerType, number> = {
@@ -107,6 +108,14 @@ const presetVariants: Record<
       hidden: { opacity: 0, y: 20 },
       visible: { opacity: 1, y: 0 },
       exit: { opacity: 0, y: 20 },
+    },
+  },
+  cinematic: {
+    container: defaultContainerVariants,
+    item: {
+      hidden: { opacity: 0, y: 5, filter: 'blur(3px)' },
+      visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+      exit:   { opacity: 0, filter: 'blur(3px)' },
     },
   },
 };
@@ -223,6 +232,7 @@ export function TextEffect({
   containerTransition,
   segmentTransition,
   style,
+  id,
 }: TextEffectProps) {
   const segments = splitText(children, per);
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
@@ -276,6 +286,7 @@ export function TextEffect({
           onAnimationComplete={onAnimationComplete}
           onAnimationStart={onAnimationStart}
           style={style}
+          id={id}
         >
           {per !== 'line' ? <span className='sr-only'>{children}</span> : null}
           {segments.map((segment, index) => (

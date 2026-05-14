@@ -11,10 +11,10 @@ export function HeroHeading({ text, className }: HeroHeadingProps) {
     <TextEffect
       as='h1'
       per='word'
-      preset='fade-in-blur'
-      delay={0.52}
-      speedReveal={0.8}
-      speedSegment={1.1}
+      preset='cinematic'
+      delay={0.44}
+      speedReveal={0.62}
+      speedSegment={0.82}
       className={className}
     >
       {text}

@@ -21,7 +21,7 @@ const breadcrumbs = [
   <main>
 
     <section class="page-hero">
-      <div class="page-container">
+      <div class="container">
         <nav class="breadcrumb" aria-label="Navegación">
           <a href="/">Inicio</a>
           <span aria-hidden="true">/</span>
@@ -36,7 +36,7 @@ const breadcrumbs = [
     </section>
 
     <section class="contact-section">
-      <div class="page-container contact-grid">
+      <div class="container contact-grid">
 
         <!-- Left — info + WhatsApp -->
         <div class="contact-info">
@@ -183,13 +183,14 @@ const breadcrumbs = [
 </script>
 
 <style>
-  .page-container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 3rem); }
-  .page-hero { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 5rem); }
-  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.8125rem; color: rgba(42, 32, 27, 0.48); margin-bottom: var(--space-6); }
-  .breadcrumb a { text-decoration: none; color: inherit; }
-  .breadcrumb a:hover { color: var(--color-cafe); }
-  .page-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); margin: 0 0 var(--space-6); }
-  .page-lead { font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.75; color: rgba(42, 32, 27, 0.68); max-width: 50ch; margin: 0; }
+  /* contacto hero: larger h1 than service detail pages, no lead bottom margin */
+  .page-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    max-width: none;
+  }
+
+  .page-lead { margin: 0; }
 
   /* ── Contact section ─────────────────────────────── */
   .contact-section { background-color: var(--bg-page); padding: clamp(4rem, 10vw, 7rem) 0; }
@@ -207,10 +208,19 @@ const breadcrumbs = [
     padding: var(--space-4) var(--space-6);
     text-decoration: none;
     margin-bottom: var(--space-12);
-    transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
     max-width: fit-content;
   }
-  .wa-primary:hover { background-color: var(--color-cafe-negro); box-shadow: 0 4px 20px rgba(42, 32, 27, 0.18); transform: translateY(-1px); }
+
+  .wa-primary:hover {
+    background-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
   @media (prefers-reduced-motion: reduce) { .wa-primary:hover { transform: none; } }
   .wa-primary svg { flex-shrink: 0; }
   .wa-primary span { display: flex; flex-direction: column; gap: 2px; }
@@ -239,22 +249,82 @@ const breadcrumbs = [
   @media (min-width: 540px) { .form-row { grid-template-columns: 1fr 1fr; column-gap: clamp(1.125rem, 2.25vw, 1.5rem); } }
   .form-field { display: flex; flex-direction: column; gap: var(--space-2); }
   .form-label { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; color: rgba(42, 32, 27, 0.7); letter-spacing: 0.01em; }
-  .form-input, .form-textarea { font-family: var(--font-body); font-size: 0.9375rem; color: var(--text-primary); background-color: transparent; border: 1px solid rgba(42, 32, 27, 0.14); border-radius: var(--radius-sm); padding: 0.875rem 1rem; width: 100%; outline: 0; transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
-  .form-input:focus-visible, .form-textarea:focus-visible { outline: 2px solid rgba(42, 32, 27, 0.45); outline-offset: 2px; }
+
+  .form-input,
+  .form-textarea {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    background-color: rgba(247, 244, 238, 0.72);
+    border: 1px solid rgba(42, 32, 27, 0.14);
+    border-radius: var(--radius-sm);
+    padding: 0.875rem 1rem;
+    width: 100%;
+    outline: none;
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow   var(--dur-fast) var(--ease-out);
+  }
+
   .form-input::placeholder, .form-textarea::placeholder { color: rgba(42, 32, 27, 0.38); }
   .form-input:hover, .form-textarea:hover { border-color: rgba(42, 32, 27, 0.24); }
-  .form-input:focus, .form-textarea:focus { border-color: rgba(42, 32, 27, 0.42); box-shadow: 0 0 0 3px rgba(42, 32, 27, 0.05); }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: rgba(42, 32, 27, 0.42);
+    box-shadow: 0 0 0 3px rgba(42, 32, 27, 0.07);
+  }
+
   .form-textarea { resize: vertical; min-height: 9rem; padding-top: 0.875rem; }
   .form-footer { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .submit-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-inverse); background-color: var(--color-cafe); border: none; border-radius: var(--radius-button); padding: 0.9rem 1.5rem; cursor: pointer; letter-spacing: 0.01em; transition: background-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .submit-btn:hover { background-color: var(--color-cafe-negro); transform: translateY(-1px); }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-inverse);
+    background-color: var(--color-cafe);
+    border: none;
+    border-radius: var(--radius-button);
+    padding: 0.9rem 1.5rem;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .submit-btn:hover {
+    background-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
   .submit-btn:active { transform: translateY(1px); transition-duration: 100ms; }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
   @media (prefers-reduced-motion: reduce) { .submit-btn:hover, .submit-btn:active { transform: none; } }
+
   .form-note { font-family: var(--font-body); font-size: 0.8125rem; color: rgba(42, 32, 27, 0.48); margin: 0; }
-  .form-feedback { font-family: var(--font-body); font-size: 0.875rem; padding: var(--space-4) var(--space-6); border-radius: var(--radius-sm); margin-top: var(--space-2); }
+
+  .form-feedback {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-sm);
+    margin-top: var(--space-2);
+  }
+
   .form-feedback:not([hidden]) { animation: feedback-appear 320ms var(--ease-premium) both; }
-  @keyframes feedback-appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  @keyframes feedback-appear {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .form-feedback--ok { background-color: rgba(42, 32, 27, 0.06); color: rgba(42, 32, 27, 0.85); border: 1px solid rgba(42, 32, 27, 0.12); }
   .form-feedback--err { background-color: rgba(180, 40, 40, 0.06); color: rgba(140, 20, 20, 0.9); border: 1px solid rgba(180, 40, 40, 0.18); }
 </style>

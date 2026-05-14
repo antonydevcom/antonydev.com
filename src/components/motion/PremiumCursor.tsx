@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue } from 'motion/react';
+import { ease } from '@/lib/motion';
 
 // Direct motion values — no spring, no lag.
 // The warm halo sits exactly under the native pointer.
@@ -68,8 +69,8 @@ export function PremiumCursor() {
         scale: active ? 1 : 0.3,
       }}
       transition={{
-        opacity: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
-        scale:   { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 0.18, ease: ease.premium },
+        scale:   { duration: 0.22, ease: ease.premium },
       }}
     />
   );

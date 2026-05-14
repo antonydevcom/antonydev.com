@@ -396,7 +396,6 @@ const waLink = getWhatsAppLink('contacto');
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
-    tab-size: 0;
   }
 
   .form-row {
@@ -583,35 +582,19 @@ const waLink = getWhatsAppLink('contacto');
 </style>
 
 <style is:global>
-  /* ── Contact section header — global scope for React island ─── */
-
-  .contact astro-island {
-    display: block;
-  }
+  /* ── Contact section header — per-section overrides ─── */
 
   .contact .section-header {
-    display: block;
     margin: 0;
   }
 
   .contact .eyebrow {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.55);
     margin-bottom: var(--space-4);
   }
 
   .contact .section-header h2 {
-    font-family: var(--font-display);
     font-size: clamp(2rem, 3.5vw, 2.875rem);
-    font-weight: 700;
-    line-height: 1.1;
     letter-spacing: -0.025em;
-    color: var(--text-primary);
     margin: 0 0 var(--space-6) 0;
   }
 </style>

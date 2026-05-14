@@ -5,6 +5,15 @@ import { Spotlight } from '@/components/motion-primitives/spotlight';
 import { BorderTrail } from '@/components/motion-primitives/border-trail';
 import { cardStagger, cardReveal, ease } from '@/lib/motion';
 
+function ArrowRight({ size = 14 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.75' strokeLinecap='round' strokeLinejoin='round' aria-hidden='true'>
+      <line x1='5' y1='12' x2='19' y2='12' />
+      <polyline points='12 5 19 12 12 19' />
+    </svg>
+  );
+}
+
 interface Phase {
   number: string;
   label: string;
@@ -23,6 +32,10 @@ interface Extra {
 interface ServiceCardsProps {
   phases: Phase[];
   extras: Extra[];
+  /** Eyebrow above the extras grid (default: home copy) */
+  extrasLabel?: string;
+  /** CTA line on each extra card (default: "Más información") */
+  extraLinkLabel?: string;
 }
 
 function PhaseCard({ phase }: { phase: Phase }) {
@@ -53,17 +66,14 @@ function PhaseCard({ phase }: { phase: Phase }) {
         <p className='phase-detail'>{phase.detail}</p>
         <a href={phase.href} className='phase-link'>
           Ver detalles
-          <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.75' strokeLinecap='round' strokeLinejoin='round' aria-hidden='true'>
-            <line x1='5' y1='12' x2='19' y2='12' />
-            <polyline points='12 5 19 12 12 19' />
-          </svg>
+          <ArrowRight />
         </a>
       </div>
     </motion.li>
   );
 }
 
-function ExtraCard({ extra }: { extra: Extra }) {
+function ExtraCard({ extra, linkLabel }: { extra: Extra; linkLabel: string }) {
   return (
     <motion.li
       variants={cardReveal}
@@ -81,17 +91,19 @@ function ExtraCard({ extra }: { extra: Extra }) {
       <h3 className='extra-title'>{extra.title}</h3>
       <p className='extra-desc'>{extra.description}</p>
       <a href={extra.href} className='extra-link'>
-        Más información
-        <svg width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.75' strokeLinecap='round' strokeLinejoin='round' aria-hidden='true'>
-          <line x1='5' y1='12' x2='19' y2='12' />
-          <polyline points='12 5 19 12 12 19' />
-        </svg>
+        {linkLabel}
+        <ArrowRight size={13} />
       </a>
     </motion.li>
   );
 }
 
-export function ServiceCards({ phases, extras }: ServiceCardsProps) {
+export function ServiceCards({
+  phases,
+  extras,
+  extrasLabel = 'También incluyo',
+  extraLinkLabel = 'Más información',
+}: ServiceCardsProps) {
   return (
     <>
       <InView
@@ -117,7 +129,7 @@ export function ServiceCards({ phases, extras }: ServiceCardsProps) {
           as='p'
           className='extras-label'
         >
-          También incluyo
+          {extrasLabel}
         </InView>
 
         <InView
@@ -130,7 +142,7 @@ export function ServiceCards({ phases, extras }: ServiceCardsProps) {
           role='list'
         >
           {extras.map((extra) => (
-            <ExtraCard key={extra.title} extra={extra} />
+            <ExtraCard key={extra.title} extra={extra} linkLabel={extraLinkLabel} />
           ))}
         </InView>
       </div>

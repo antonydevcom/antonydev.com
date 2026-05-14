@@ -1,7 +1,9 @@
 ---
+import '@/styles/service-cards.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
+import { ServiceCards } from '@/components/motion/ServiceCards';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 
 const waLink = getWhatsAppLink('servicios');
@@ -14,24 +16,24 @@ const breadcrumbs = [
 const phases = [
   {
     number: '01',
+    label: 'El punto de partida',
     title: 'Auditoría Digital',
-    tagline: 'El punto de partida',
     description: 'Diagnóstico completo de tu presencia digital. Identifico qué falta, qué funciona y cuál es el camino más directo para crecer en línea.',
     detail: 'Gratis para nuevos clientes',
     href: '/servicios/auditoria',
   },
   {
     number: '02',
+    label: 'Tu presencia digital completa',
     title: 'Creación de Sistemas',
-    tagline: 'Tu presencia digital completa',
     description: 'Sitio web, sistema de gestión, identidad visual, WhatsApp automatizado y SEO local — todo integrado desde el primer día.',
     detail: 'Desde $18,000 MXN',
     href: '/servicios/creacion',
   },
   {
     number: '03',
+    label: 'Crecimiento continuo',
     title: 'Mantenimiento Mensual',
-    tagline: 'Crecimiento continuo',
     description: 'Actualizaciones, soporte técnico, nuevas secciones y respaldo. Tu negocio siempre al día y funcionando sin interrupciones.',
     detail: 'Desde $700 MXN/mes',
     href: '/servicios/mantenimiento',
@@ -62,7 +64,7 @@ const extras = [
 
     <!-- Hero -->
     <section class="page-hero">
-      <div class="page-container">
+      <div class="container">
         <nav class="breadcrumb" aria-label="Navegación">
           <a href="/">Inicio</a>
           <span aria-hidden="true">/</span>
@@ -76,51 +78,24 @@ const extras = [
       </div>
     </section>
 
-    <!-- Las 3 fases -->
-    <section class="phases-section">
-      <div class="page-container">
-        <p class="section-eyebrow" data-reveal data-reveal-delay="0">El ciclo completo</p>
+    <!-- Fases + adicionales — mismo island que el home (Motion, spotlight, borde) -->
+    <section class="servicios-showcase">
+      <div class="container">
+        <p class="eyebrow" data-reveal data-reveal-delay="0">El ciclo completo</p>
         <h2 data-reveal data-reveal-delay="80">Las 3 fases del trabajo</h2>
-        <ol class="phases-grid" role="list">
-          {phases.map((phase, i) => (
-            <li class="phase-item" data-reveal data-reveal-delay={i * 110}>
-              <span class="phase-num" aria-hidden="true">{phase.number}</span>
-              <p class="phase-tagline">{phase.tagline}</p>
-              <h3 class="phase-title">{phase.title}</h3>
-              <p class="phase-desc">{phase.description}</p>
-              <p class="phase-price">{phase.detail}</p>
-              <a href={phase.href} class="phase-link">
-                Ver detalles
-                <span aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-
-    <!-- Extras -->
-    <section class="extras-section">
-      <div class="page-container">
-        <p class="section-eyebrow" data-reveal data-reveal-delay="0">Servicios adicionales</p>
-        <ul class="extras-grid" role="list">
-          {extras.map((extra, i) => (
-            <li class="extra-item" data-reveal data-reveal-delay={i * 100}>
-              <h3>{extra.title}</h3>
-              <p>{extra.description}</p>
-              <a href={extra.href} class="extra-link">
-                Ver servicio
-                <span aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <ServiceCards
+          client:visible
+          phases={phases}
+          extras={extras}
+          extrasLabel="Servicios adicionales"
+          extraLinkLabel="Ver servicio"
+        />
       </div>
     </section>
 
     <!-- CTA -->
     <section class="cta-section">
-      <div class="page-container cta-inner">
+      <div class="container cta-inner">
         <div>
           <h2 data-reveal data-reveal-delay="0">¿Por dónde empezamos?</h2>
           <p data-reveal data-reveal-delay="100">La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
@@ -140,277 +115,32 @@ const extras = [
 </BaseLayout>
 
 <style>
-  .page-container {
-    width: 100%;
-    max-width: 1200px;
-    margin-inline: auto;
-    padding-inline: clamp(1rem, 5vw, 3rem);
-  }
-
-  /* ── Page hero ───────────────────────────────────── */
-  .page-hero {
-    background-color: var(--bg-surface);
-    border-bottom: 1px solid var(--border);
-    padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 5rem);
-  }
-
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    color: rgba(42, 32, 27, 0.48);
-    margin-bottom: var(--space-6);
-  }
-
-  .breadcrumb a {
-    text-decoration: none;
-    color: inherit;
-    transition: color var(--dur-fast) var(--ease-out);
-  }
-
-  .breadcrumb a:hover {
-    color: var(--color-cafe);
-  }
-
+  /* servicios/index: larger hero h1 than service detail pages, no lead margin */
   .page-hero h1 {
-    font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
     line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
-    margin: 0 0 var(--space-6);
     max-width: 18ch;
   }
 
-  .page-lead {
-    font-family: var(--font-body);
-    font-size: 1.0625rem;
-    line-height: 1.75;
-    color: rgba(42, 32, 27, 0.68);
-    max-width: 50ch;
-    margin: 0;
-  }
+  .page-lead { margin: 0; }
 
-  /* ── Phases ──────────────────────────────────────── */
-  .phases-section {
+  .servicios-showcase {
     background-color: var(--bg-page);
     padding: clamp(4rem, 10vw, 7rem) 0;
     border-bottom: 1px solid var(--border);
   }
 
-  .section-eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.48);
-    margin: 0 0 var(--space-4);
+  .servicios-showcase .eyebrow {
+    margin-bottom: var(--space-4);
   }
 
-  .phases-section h2 {
+  .servicios-showcase h2 {
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 700;
     letter-spacing: -0.025em;
     color: var(--text-primary);
     margin: 0 0 var(--space-12);
-  }
-
-  .phases-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .phases-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .phase-item {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    transition:
-      transform     var(--dur-base) var(--ease-out),
-      box-shadow    350ms           var(--ease-out),
-      border-color  var(--dur-base) var(--ease-out);
-  }
-
-  .phase-item:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card), 0 1px 0 rgba(255, 252, 248, 0.5) inset;
-    border-color: rgba(42, 32, 27, 0.14);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .phase-item:hover { transform: none; }
-  }
-
-  .phase-num {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-cafe);
-    opacity: 0.07;
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  .phase-tagline {
-    font-family: var(--font-body);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.46);
-    margin: 0;
-  }
-
-  .phase-title {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0;
-  }
-
-  .phase-desc {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.75;
-    color: rgba(42, 32, 27, 0.68);
-    flex: 1;
-    margin: 0;
-  }
-
-  .phase-price {
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: rgba(42, 32, 27, 0.52);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  .phase-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-cafe);
-    text-decoration: none;
-    margin-top: var(--space-2);
-    transition:
-      gap   var(--dur-fast)   var(--ease-out),
-      color var(--dur-fast)   var(--ease-out);
-  }
-
-  .phase-link:hover {
-    gap: 0.5em;
-    color: var(--color-cafe-negro);
-  }
-
-  /* ── Extras ──────────────────────────────────────── */
-  .extras-section {
-    background-color: var(--bg-surface);
-    padding: clamp(4rem, 10vw, 7rem) 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .extras-section .section-eyebrow {
-    margin-bottom: var(--space-8);
-  }
-
-  .extras-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 640px) {
-    .extras-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .extra-item {
-    background-color: var(--bg-page);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    transition:
-      transform     var(--dur-base) var(--ease-out),
-      box-shadow    350ms           var(--ease-out),
-      border-color  var(--dur-base) var(--ease-out);
-  }
-
-  .extra-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-    border-color: rgba(42, 32, 27, 0.14);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .extra-item:hover { transform: none; }
-  }
-
-  .extra-item h3 {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-  }
-
-  .extra-item p {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.72;
-    color: rgba(42, 32, 27, 0.68);
-    flex: 1;
-    margin: 0;
-  }
-
-  .extra-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-cafe);
-    text-decoration: none;
-    margin-top: var(--space-2);
-    transition:
-      gap   var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
-  }
-
-  .extra-link:hover {
-    gap: 0.5em;
-    color: var(--color-cafe-negro);
   }
 
   /* ── CTA section ─────────────────────────────────── */
@@ -449,6 +179,7 @@ const extras = [
     max-width: 44ch;
   }
 
+  /* inverted wa-btn — light on dark CTA section */
   .wa-btn {
     display: inline-flex;
     align-items: center;

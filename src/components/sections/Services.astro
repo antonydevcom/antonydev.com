@@ -1,4 +1,5 @@
 ---
+import '@/styles/service-cards.css';
 import Container from '@/components/ui/Container.astro';
 import { ServiceCards } from '@/components/motion/ServiceCards';
 import { SectionHeaderReveal } from '@/components/motion/SectionHeaderReveal';
@@ -95,59 +96,32 @@ const extras = [
   }
 
 
-  /* ── Nav scroll anchor ───────────────────────────── */
-  .nav-scroll-mark {
-    height: 0;
-    width: 100%;
-    pointer-events: none;
-    visibility: hidden;
-  }
+
 </style>
 
 <style is:global>
-  /* ── Services section header — global scope for React island ─── */
-
-  /* astro-island is display:inline by default — block ensures margin:auto works */
-  .services astro-island {
-    display: block;
-  }
+  /* ── Services section header — per-section overrides ─── */
 
   .services .section-header {
-    display: block;
     text-align: center;
     max-width: 540px;
     margin: 0 auto var(--space-16);
   }
 
   .services .eyebrow {
-    display: block;
     text-align: center;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.55);
-    margin: 0 0 var(--space-3);
+    margin-bottom: var(--space-3);
   }
 
   .services .section-header h2 {
     text-align: center;
-    font-family: var(--font-display);
     font-size: clamp(1.875rem, 3.5vw, 2.75rem);
-    font-weight: 700;
-    line-height: 1.1;
     letter-spacing: -0.025em;
-    color: var(--text-primary);
     margin: 0 0 var(--space-4);
   }
 
   .services .section-divider {
-    width: 44px;
-    height: 1px;
-    background-color: var(--color-taupe);
-    opacity: 0.4;
-    margin: 0 auto var(--space-4);
+    margin-bottom: var(--space-4);
   }
 
   .services .section-subtitle {
@@ -158,242 +132,5 @@ const extras = [
     color: rgba(42, 32, 27, 0.65);
     margin: 0 auto;
     max-width: 44ch;
-  }
-</style>
-
-<style is:global>
-  /* ── Phases list ──────────────────────────────────── */
-  .phases-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 var(--space-16);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .phases-list {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  /* ── Phase card ───────────────────────────────────── */
-  .phase-card {
-    background-color: rgba(247, 244, 238, 0.82);
-    -webkit-backdrop-filter: var(--glass-panel);
-    backdrop-filter: var(--glass-panel);
-    border: 1px solid rgba(42, 32, 27, 0.1);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    box-shadow: var(--shadow-card), 0 1px 0 rgba(255, 252, 248, 0.45) inset;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    position: relative;
-    overflow: hidden;
-    /* transform owned by Motion whileHover — only shadow/border here */
-    transition:
-      box-shadow   var(--dur-base) var(--ease-out),
-      border-color var(--dur-base) var(--ease-out);
-  }
-
-  .phase-card:hover {
-    box-shadow: var(--shadow-lg), 0 1px 0 rgba(255, 252, 248, 0.55) inset;
-    border-color: rgba(42, 32, 27, 0.14);
-  }
-
-  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .phase-card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .phase-card:hover {
-      box-shadow: var(--shadow-card);
-    }
-  }
-
-  .phase-number {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--color-cafe);
-    opacity: 0.07;
-    letter-spacing: -0.04em;
-    margin-bottom: var(--space-2);
-  }
-
-  .phase-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .phase-label {
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.48);
-    margin: 0 0 var(--space-2);
-  }
-
-  .phase-title {
-    font-family: var(--font-display);
-    font-size: 1.375rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    margin: 0 0 var(--space-4);
-  }
-
-  .phase-desc {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.75;
-    color: rgba(42, 32, 27, 0.68);
-    margin: 0 0 var(--space-4);
-    flex: 1;
-  }
-
-  .phase-detail {
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: rgba(42, 32, 27, 0.55);
-    margin: 0 0 var(--space-6);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--border);
-  }
-
-  .phase-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-cafe);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    margin-top: auto;
-    transition:
-      gap   var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
-  }
-
-  .phase-link:hover {
-    gap: 0.6em;
-    color: var(--color-cafe-negro);
-  }
-
-  /* ── Extras section ───────────────────────────────── */
-  .extras-section {
-    border-top: 1px solid var(--border);
-    padding-top: var(--space-12);
-  }
-
-  .extras-label {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.44);
-    margin: 0 0 var(--space-6);
-    text-align: center;
-  }
-
-  .extras-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 640px) {
-    .extras-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* ── Extra card ───────────────────────────────────── */
-  .extra-card {
-    background-color: rgba(247, 244, 238, 0.78);
-    -webkit-backdrop-filter: var(--glass-panel);
-    backdrop-filter: var(--glass-panel);
-    border: 1px solid rgba(42, 32, 27, 0.1);
-    border-radius: var(--radius-lg);
-    padding: var(--space-8);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    position: relative;
-    overflow: hidden;
-    /* transform owned by Motion whileHover */
-    transition:
-      box-shadow   var(--dur-base) var(--ease-out),
-      border-color var(--dur-base) var(--ease-out);
-  }
-
-  .extra-card:hover {
-    box-shadow: var(--shadow-card), 0 1px 0 rgba(255, 252, 248, 0.5) inset;
-    border-color: rgba(42, 32, 27, 0.14);
-  }
-
-  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .extra-card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .extra-card:hover {
-      box-shadow: var(--shadow-card);
-    }
-  }
-
-  .extra-title {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-  }
-
-  .extra-desc {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: rgba(42, 32, 27, 0.68);
-    margin: 0;
-    flex: 1;
-  }
-
-  .extra-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-cafe);
-    text-decoration: none;
-    margin-top: var(--space-2);
-    transition:
-      gap   var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
-  }
-
-  .extra-link:hover {
-    gap: 0.6em;
-    color: var(--color-cafe-negro);
   }
 </style>

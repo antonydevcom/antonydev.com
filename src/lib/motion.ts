@@ -18,34 +18,6 @@ export const sectionRevealTransition: Transition = {
   ease: ease.premium,
 };
 
-/* ── Stagger container for child lists ───────────────────── */
-export const staggerContainer: Variants = {
-  hidden:  {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-};
-
-export const staggerItem: Variants = {
-  hidden:  { opacity: 0, y: 14 },
-  visible: { opacity: 1, y: 0,  transition: { duration: 0.55, ease: ease.premium } },
-};
-
-/* ── Section header reveal (eyebrow + h2 + divider) ─────── */
-export const headerReveal: Variants = {
-  hidden:  { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0,  transition: { duration: 0.7, ease: ease.premium } },
-};
-
-/* ── Blur-reveal for body text / subtitles ───────────────── */
-export const blurReveal: Variants = {
-  hidden:  { opacity: 0, filter: 'blur(4px)', y: 8  },
-  visible: { opacity: 1, filter: 'blur(0px)', y: 0  },
-};
-
-export const blurRevealTransition: Transition = {
-  duration: 0.75,
-  ease: ease.premium,
-};
-
 /* ── Hero logo — value-specific transitions (motion.dev / react-transitions) ─
  * Springs with visualDuration + bounce on transform; tweens on opacity + blur
  * so the mark reads “hero” vs lighter section reveals.

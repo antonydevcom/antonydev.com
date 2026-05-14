@@ -123,6 +123,7 @@
 .btn-wa,
 .wa-btn,
 .wa-cta,
+.wa-primary,
 .mobile-wa-btn,
 .submit-btn,
 .sidebar-cta {
@@ -132,6 +133,7 @@
 .btn-wa::before,
 .wa-btn::before,
 .wa-cta::before,
+.wa-primary::before,
 .mobile-wa-btn::before,
 .submit-btn::before,
 .sidebar-cta::before {
@@ -157,6 +159,7 @@
 .btn-wa > *,
 .wa-btn > *,
 .wa-cta > *,
+.wa-primary > *,
 .mobile-wa-btn > *,
 .submit-btn > *,
 .sidebar-cta > * {
@@ -167,6 +170,7 @@
 .btn-wa:hover::before,
 .wa-btn:hover::before,
 .wa-cta:hover::before,
+.wa-primary:hover::before,
 .mobile-wa-btn:hover::before,
 .submit-btn:hover::before,
 .sidebar-cta:hover::before {
@@ -178,6 +182,7 @@
   .btn-wa::before,
   .wa-btn::before,
   .wa-cta::before,
+  .wa-primary::before,
   .mobile-wa-btn::before,
   .submit-btn::before,
   .sidebar-cta::before {

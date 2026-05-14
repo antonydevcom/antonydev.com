@@ -2,7 +2,7 @@
 import { motion } from 'motion/react';
 import { InView } from '@/components/motion-primitives/in-view';
 import { BorderTrail } from '@/components/motion-primitives/border-trail';
-import { cardStagger, cardReveal } from '@/lib/motion';
+import { cardStagger, cardReveal, ease } from '@/lib/motion';
 
 interface Project {
   title: string;
@@ -30,7 +30,7 @@ function ProjectCard({ project }: { project: Project }) {
       variants={cardReveal}
       className='project-card'
       data-cursor='premium'
-      whileHover={{ y: -5, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+      whileHover={{ y: -5, transition: { duration: 0.28, ease: ease.premium } }}
     >
       {/* Very slow, faint border trail */}
       <BorderTrail

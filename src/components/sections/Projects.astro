@@ -91,48 +91,24 @@ const projects = [
 </style>
 
 <style is:global>
-  /* ── Projects section header — global scope for React island ─── */
-
-  /* astro-island is display:inline by default — block ensures margin:auto works */
-  .projects astro-island {
-    display: block;
-  }
+  /* ── Projects section header — per-section overrides ─── */
 
   .projects .section-header {
-    display: block;
     text-align: center;
     margin-bottom: clamp(2rem, 5vw, 4rem);
   }
 
   .projects .eyebrow {
-    display: block;
     text-align: center;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.55);
     margin-bottom: var(--space-3);
   }
 
   .projects .section-header h2 {
     text-align: center;
-    font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: var(--text-primary);
     margin: 0 0 var(--space-4);
-  }
-
-  .projects .section-divider {
-    width: 44px;
-    height: 1px;
-    background-color: var(--color-taupe);
-    opacity: 0.4;
-    margin: 0 auto;
   }
 
   /* ── Grid ─────────────────────────────────────────── */

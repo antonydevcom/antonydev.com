@@ -52,7 +52,7 @@ const faqSchema = {
   <main>
 
     <section class="page-hero">
-      <div class="page-container">
+      <div class="container">
         <nav class="breadcrumb" aria-label="Navegación">
           <a href="/">Inicio</a><span aria-hidden="true">/</span>
           <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
@@ -74,7 +74,7 @@ const faqSchema = {
     </section>
 
     <section class="content-section">
-      <div class="page-container content-grid">
+      <div class="container content-grid">
         <div class="content-body">
           <h2>WhatsApp automatizado para negocios locales</h2>
           <p>
@@ -141,7 +141,7 @@ const faqSchema = {
     </section>
 
     <section class="faq-section">
-      <div class="page-container">
+      <div class="container">
         <h2>Preguntas frecuentes sobre automatización</h2>
         <dl class="faq-list">
           {faqs.map(({ q, a }) => (
@@ -159,42 +159,7 @@ const faqSchema = {
 </BaseLayout>
 
 <style>
-  .page-container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(1rem, 5vw, 3rem); }
-  .page-hero { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 5rem); }
-  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.8125rem; color: rgba(42, 32, 27, 0.48); margin-bottom: var(--space-6); }
-  .breadcrumb a { text-decoration: none; color: inherit; }
-  .breadcrumb a:hover { color: var(--color-cafe); }
-  .page-hero h1 { font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-primary); margin: 0 0 var(--space-6); max-width: 24ch; }
-  .page-lead { font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.75; color: rgba(42, 32, 27, 0.68); max-width: 52ch; margin: 0 0 var(--space-8); }
-  .wa-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-inverse); background-color: var(--color-cafe); border-radius: var(--radius-button); padding: 0.9rem 1.5rem; text-decoration: none; transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .wa-btn svg { flex-shrink: 0; transition: transform var(--dur-base) var(--ease-out); }
-  .wa-btn:hover { background-color: var(--color-cafe-negro); box-shadow: var(--shadow-button); transform: translateY(-2px); }
-  .wa-btn:hover svg { transform: translateY(-1px) scale(1.06); }
-  @media (prefers-reduced-motion: reduce) { .wa-btn:hover, .wa-btn:hover svg { transform: none; } }
-  .content-section { background-color: var(--bg-page); padding: clamp(4rem, 10vw, 7rem) 0; border-bottom: 1px solid var(--border); }
-  .content-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-16); align-items: start; }
-  @media (min-width: 1024px) { .content-grid { grid-template-columns: 1fr 320px; } }
-  .content-body h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; color: var(--text-primary); margin: var(--space-12) 0 var(--space-6); letter-spacing: -0.02em; }
-  .content-body h2:first-child { margin-top: 0; }
-  .content-body p { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.8; color: rgba(42, 32, 27, 0.78); margin: 0 0 var(--space-6); max-width: 70ch; }
-  .includes-list { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.75; color: rgba(42, 32, 27, 0.78); padding-left: var(--space-6); margin: 0 0 var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); max-width: 65ch; }
-  .sidebar-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-8); margin-bottom: var(--space-8); }
-  .sidebar-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-6); }
-  .sidebar-dl { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3) var(--space-4); margin: 0 0 var(--space-8); }
-  .sidebar-dl dt { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; color: rgba(42, 32, 27, 0.52); }
-  .sidebar-dl dd { font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-primary); margin: 0; }
-  .sidebar-cta { display: block; text-align: center; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-inverse); background-color: var(--color-cafe); border-radius: var(--radius-button); padding: 0.75rem 1.25rem; text-decoration: none; transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .sidebar-cta:hover { background-color: var(--color-cafe-negro); box-shadow: var(--shadow-button); transform: translateY(-2px); }
-  @media (prefers-reduced-motion: reduce) { .sidebar-cta:hover { transform: none; } }
-  .sidebar-related { display: flex; flex-direction: column; gap: var(--space-3); }
-  .related-label { font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(42, 32, 27, 0.44); margin: 0; }
-  .related-link { font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; color: var(--color-cafe); text-decoration: none; transition: opacity var(--dur-fast) var(--ease-out); }
-  .related-link:hover { opacity: 0.72; }
-  .faq-section { background-color: var(--bg-surface); padding: clamp(4rem, 10vw, 7rem) 0; }
-  .faq-section h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--text-primary); margin: 0 0 var(--space-12); letter-spacing: -0.025em; }
-  .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 800px; }
-  .faq-item { border-top: 1px solid var(--border); padding: var(--space-8) 0; }
-  .faq-item:last-child { border-bottom: 1px solid var(--border); }
-  .faq-q { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 var(--space-4); }
-  .faq-a { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.75; color: rgba(42, 32, 27, 0.72); margin: 0; }
+  /* automatizacion: longer h1 and wider lead than other service pages */
+  .page-hero h1 { max-width: 24ch; }
+  .page-lead { max-width: 52ch; margin-bottom: var(--space-8); }
 </style>

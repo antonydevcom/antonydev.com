@@ -24,10 +24,7 @@ const waLink = getWhatsAppLink('hero');
   <!-- z:1 — Warm ivory wash over the image -->
   <div class="hero-overlay" aria-hidden="true"></div>
 
-  <!-- z:2 — Bottom blend into page marfil (above dark wash, no blur) -->
-  <div class="hero-edge-fade" aria-hidden="true"></div>
-
-  <!-- z:3 — Centered editorial content -->
+  <!-- z:2 — Centered editorial content -->
   <div class="hero-stage">
 
     <div class="hero-logo-wrap" aria-hidden="true">
@@ -152,27 +149,6 @@ const waLink = getWhatsAppLink('hero');
     /* Dark warm instead of ivory fog — preserves image colors and depth */
     background: rgba(30, 23, 19, 0.14);
     pointer-events: none;
-  }
-
-  /*
-   * Cinematic hand-off to Servicios: warm marfil/hueso ramp above the dark wash.
-   * z-index above .hero-overlay so the lightening actually reads on screen.
-   */
-  .hero-edge-fade {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    height: clamp(3rem, 8vh, 5.25rem);
-    pointer-events: none;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(238, 232, 223, 0.07) 35%,
-      rgba(247, 244, 238, 0.16) 65%,
-      rgba(247, 244, 238, 0.32) 100%
-    );
   }
 
   /* ── Layer 2: Centered editorial stage ───────────── */

@@ -323,28 +323,43 @@ const navLinks = [
     color: var(--color-cafe);
   }
 
-  /* Micro-lift on hover — reads as "this link is reachable" */
-  .nav-link:hover {
-    transform: translateY(-1px);
-  }
-
-  .nav-link:hover::after,
-  .nav-link[data-active='true']::after {
-    transform: scaleX(1);
-    transform-origin: left center;
+  .nav-link[data-active='true'] {
+    font-weight: 600;
   }
 
   /*
-   * Active-state "settle" pulse.
-   * Fires once whenever a link gains data-active='true' (route change
-   * or scroll-spy crossover). The underline briefly grows past 100% and
-   * eases back, reading as confirmation — like a typewriter return.
-   *
-   * One animation, one GPU layer, no JS. The base transform-origin and
-   * transform are still set by the rules above; this animation
-   * temporarily overrides scaleX with its own curve.
+   * Dock-style zoom solo con el cursor sobre el rail (desktop).
+   * El remarcado fijo (subrayado) va solo en data-active — ver reglas ::after abajo.
    */
+  @media (min-width: 1024px) {
+    .nav-link {
+      transform-origin: 50% 90%;
+      transition:
+        color       220ms var(--ease-premium),
+        transform   400ms var(--ease-spring),
+        font-weight 220ms var(--ease-premium);
+    }
+
+    .nav-link:hover {
+      transform: translateY(-2px) scale(1.18);
+      z-index: 2;
+    }
+
+    .nav:has(.nav-link:hover) .nav-link:hover + .nav-link,
+    .nav:has(.nav-link:hover) .nav-link:has(+ .nav-link:hover) {
+      transform: scale(1.09);
+    }
+
+    .nav:has(.nav-link:hover) .nav-link:hover + .nav-link + .nav-link,
+    .nav:has(.nav-link:hover) .nav-link:has(+ .nav-link + .nav-link:hover) {
+      transform: scale(1.045);
+    }
+  }
+
+  /* Subrayado permanente solo en la sección/ruta elegida (un solo data-active) */
   .nav-link[data-active='true']::after {
+    transform: scaleX(1);
+    transform-origin: left center;
     animation: nav-underline-settle 520ms var(--ease-premium) both;
   }
 
@@ -354,12 +369,6 @@ const navLinks = [
     100% { transform: scaleX(1);    opacity: 1; }
   }
 
-  /* Hover state mirrors the active settle ONLY when not active —
-     keeps animations from stepping on each other. */
-  .nav-link:not([data-active='true']):hover::after {
-    animation: none;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .nav-link,
     .nav-link::after,
@@ -367,7 +376,11 @@ const navLinks = [
       transition: none;
       animation: none;
     }
-    .nav-link:hover {
+    .nav-link:hover,
+    .nav:has(.nav-link:hover) .nav-link:hover + .nav-link,
+    .nav:has(.nav-link:hover) .nav-link:has(+ .nav-link:hover),
+    .nav:has(.nav-link:hover) .nav-link:hover + .nav-link + .nav-link,
+    .nav:has(.nav-link:hover) .nav-link:has(+ .nav-link + .nav-link:hover) {
       transform: none;
     }
   }

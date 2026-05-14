@@ -50,6 +50,11 @@
     text-decoration: none;
   }
 
+  /* Index only: hero sits under transparent nav — no band of page bg above the hero */
+  body.page-home main {
+    margin-top: calc(-1 * var(--site-header-underlap));
+  }
+
   img, video {
     max-width: 100%;
     height: auto;
@@ -61,6 +66,19 @@
     outline: 2px solid var(--color-cafe);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
+  }
+}
+
+/* Home: anchor jumps clear the sticky header (matches --site-header-underlap) */
+html:has(body.page-home) {
+  scroll-padding-top: var(--site-header-underlap);
+}
+
+/* Home (tablet+): Servicios no sube bajo el hero — evita la franja difuminada en el primer pantallazo */
+@media (min-width: 768px) {
+  body.page-home #servicios.services {
+    margin-top: 0;
+    padding-top: 9rem;
   }
 }
 

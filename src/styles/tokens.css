@@ -62,6 +62,9 @@
   --space-16: 64px;
   --space-24: 96px;
 
+  /* Home: main overlaps sticky header so hero photo reaches viewport top — sync with Header row height */
+  --site-header-underlap: 6.125rem;
+
   /* Premium frosted glass — full backdrop-filter values for warm marfil stacks */
   --glass-nav: blur(18px) saturate(1.14);
   --glass-nav-scrolled: blur(32px) saturate(1.26);

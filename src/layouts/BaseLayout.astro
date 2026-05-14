@@ -9,6 +9,8 @@ interface Props {
   publishedDate?: string;
   schema?: object | object[];
   breadcrumbs?: Array<{ name: string; url: string }>;
+  /** e.g. `page-home` — transparent nav over hero on index */
+  bodyClass?: string;
 }
 
 const {
@@ -19,6 +21,7 @@ const {
   publishedDate,
   schema,
   breadcrumbs,
+  bodyClass,
 } = Astro.props;
 
 const SITE_URL = 'https://antonydev.com';
@@ -162,7 +165,7 @@ const allSchemas = [
       data-cf-beacon='{"token":"TU_TOKEN"}'
     ></script>
   </head>
-  <body>
+  <body class:list={[bodyClass]}>
     <slot />
   </body>
 </html>

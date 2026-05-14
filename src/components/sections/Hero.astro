@@ -24,7 +24,10 @@ const waLink = getWhatsAppLink('hero');
   <!-- z:1 — Warm ivory wash over the image -->
   <div class="hero-overlay" aria-hidden="true"></div>
 
-  <!-- z:2 — Centered editorial content -->
+  <!-- z:2 — Bottom blend into page marfil (above dark wash, no blur) -->
+  <div class="hero-edge-fade" aria-hidden="true"></div>
+
+  <!-- z:3 — Centered editorial content -->
   <div class="hero-stage">
 
     <div class="hero-logo-wrap" aria-hidden="true">
@@ -67,7 +70,7 @@ const waLink = getWhatsAppLink('hero');
 
   </div>
 
-  <!-- z:3 — Scroll indicator -->
+  <!-- z:4 — Scroll indicator -->
   <a href="#servicios" class="hero-scroll" aria-label="Ver servicios">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M12 5v14M5 12l7 7 7-7"/>
@@ -94,6 +97,13 @@ const waLink = getWhatsAppLink('hero');
     background-color: var(--color-marfil);
     margin-top: -1px;
     border-bottom: 1px solid rgba(42, 32, 27, 0.045);
+  }
+
+  :global(body.page-home) .hero {
+    margin-top: 0;
+    /* Fill dynamic viewport (mobile URL bar) so no marfil strip under the photo */
+    min-height: 100svh;
+    min-height: 100dvh;
   }
 
   /* ── Layer 0: Background image ──────────────────────
@@ -144,10 +154,31 @@ const waLink = getWhatsAppLink('hero');
     pointer-events: none;
   }
 
+  /*
+   * Cinematic hand-off to Servicios: warm marfil/hueso ramp above the dark wash.
+   * z-index above .hero-overlay so the lightening actually reads on screen.
+   */
+  .hero-edge-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    height: clamp(3rem, 8vh, 5.25rem);
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(238, 232, 223, 0.07) 35%,
+      rgba(247, 244, 238, 0.16) 65%,
+      rgba(247, 244, 238, 0.32) 100%
+    );
+  }
+
   /* ── Layer 2: Centered editorial stage ───────────── */
   .hero-stage {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -315,7 +346,7 @@ const waLink = getWhatsAppLink('hero');
     bottom: clamp(1.25rem, 4vh, 2rem);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
+    z-index: 4;
     color: rgba(42, 32, 27, 0.32);
     display: flex;
     align-items: center;

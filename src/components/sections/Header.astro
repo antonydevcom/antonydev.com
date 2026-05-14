@@ -5,6 +5,9 @@ import { getWhatsAppLink } from '@/lib/whatsapp';
 
 const waLink = getWhatsAppLink('hero');
 
+const pathNormalized = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isHome = pathNormalized === '/';
+
 /*
  * Each link maps to:
  *  - matchPath:    pathname where this link is permanently active
@@ -24,7 +27,7 @@ const navLinks = [
 ];
 ---
 
-<header class="site-header">
+<header class:list={['site-header', isHome && 'site-header--home-hero']}>
   <Container>
     <div class="header-inner">
 
@@ -105,17 +108,17 @@ const navLinks = [
 
 <style>
   /* ── Navigation surface ─────────────────────────────
-   * Strong warm glass: content scrolls through a deep defocus
-   * (tokens --glass-nav / --glass-nav-scrolled). Slightly lower
-   * fill opacity so the blur reads as premium depth, not a flat slab.
+   * Full frosted glass: heavy defocus + light tint so the hero reads through.
+   * Blur values live here only (footer keeps global tokens). Height is fixed:
+   * no padding compression on scroll — same bar size at rest and scrolled.
    */
   .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: rgba(247, 244, 238, 0.84);
-    -webkit-backdrop-filter: var(--glass-nav);
-    backdrop-filter: var(--glass-nav);
+    background-color: rgba(247, 244, 238, 0.42);
+    -webkit-backdrop-filter: blur(56px) saturate(1.22);
+    backdrop-filter: blur(56px) saturate(1.22);
     border-bottom: 1px solid rgba(42, 32, 27, 0.09);
     transition:
       background-color        350ms var(--ease-premium),
@@ -137,18 +140,40 @@ const navLinks = [
     }
   }
 
-  /* Scrolled: more opaque + refined blur — surface settles, separates from content */
+  /* Scrolled: same bar height + same heavy blur; tint lifts slightly for contrast */
   .site-header.scrolled {
-    background-color: rgba(247, 244, 238, 0.90);
-    -webkit-backdrop-filter: var(--glass-nav-scrolled);
-    backdrop-filter: var(--glass-nav-scrolled);
+    background-color: rgba(247, 244, 238, 0.5);
+    -webkit-backdrop-filter: blur(56px) saturate(1.28);
+    backdrop-filter: blur(56px) saturate(1.28);
     border-bottom-color: rgba(42, 32, 27, 0.09);
     box-shadow: 0 1px 16px rgba(42, 32, 27, 0.06), 0 6px 28px rgba(42, 32, 27, 0.03);
+  }
+
+  /* Home (/): at scroll top the bar sits on the hero with no slab, hairline, or blur */
+  .site-header--home-hero:not(.scrolled) {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .site-header--home-hero:not(.scrolled) .logo-img {
+    mix-blend-mode: normal;
+  }
+
+  .site-header--home-hero:not(.scrolled) .nav-link {
+    text-shadow:
+      0 0 0.85rem rgba(249, 247, 242, 0.9),
+      0 1px 2px rgba(249, 247, 242, 0.65);
   }
 
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .site-header {
       background-color: var(--bg-surface);
+    }
+    .site-header--home-hero:not(.scrolled) {
+      background-color: transparent;
     }
     .site-header.scrolled {
       background-color: rgba(247, 244, 238, 0.97);
@@ -175,15 +200,6 @@ const navLinks = [
     gap: var(--space-8);
     padding-top: 18px;
     padding-bottom: 18px;
-    transition:
-      padding-top    350ms var(--ease-premium),
-      padding-bottom 350ms var(--ease-premium);
-  }
-
-  /* Subtle compression on scroll — 4px reduction, calm quality signal */
-  .site-header.scrolled .header-inner {
-    padding-top: 14px;
-    padding-bottom: 14px;
   }
 
   /* ── Logo ─────────────────────────────────────────

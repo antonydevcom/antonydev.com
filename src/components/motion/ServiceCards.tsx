@@ -27,7 +27,12 @@ interface ServiceCardsProps {
 
 function PhaseCard({ phase }: { phase: Phase }) {
   return (
-    <motion.li variants={cardReveal} className='phase-card'>
+    <motion.li
+      variants={cardReveal}
+      className='phase-card'
+      /* whileHover owns the transform — CSS hover overridden by Motion inline style */
+      whileHover={{ y: -3, transition: { duration: 0.28, ease: ease.premium } }}
+    >
       <Spotlight
         size={240}
         springOptions={{ bounce: 0, damping: 30 }}
@@ -59,7 +64,12 @@ function PhaseCard({ phase }: { phase: Phase }) {
 
 function ExtraCard({ extra }: { extra: Extra }) {
   return (
-    <motion.li variants={cardReveal} className='extra-card'>
+    <motion.li
+      variants={cardReveal}
+      className='extra-card'
+      /* lighter lift than phase cards — supporting role, not primary */
+      whileHover={{ y: -2, transition: { duration: 0.25, ease: ease.premium } }}
+    >
       <Spotlight
         size={180}
         springOptions={{ bounce: 0, damping: 30 }}

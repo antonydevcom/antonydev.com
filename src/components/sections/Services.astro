@@ -183,14 +183,13 @@ const extras = [
     gap: var(--space-4);
     position: relative;
     overflow: hidden;
+    /* transform owned by Motion whileHover — only shadow/border here */
     transition:
-      transform var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out),
+      box-shadow   var(--dur-base) var(--ease-out),
       border-color var(--dur-base) var(--ease-out);
   }
 
   .phase-card:hover {
-    transform: translateY(-3px);
     box-shadow: var(--shadow-lg), 0 1px 0 rgba(255, 252, 248, 0.55) inset;
     border-color: rgba(42, 32, 27, 0.14);
   }
@@ -330,14 +329,13 @@ const extras = [
     gap: var(--space-3);
     position: relative;
     overflow: hidden;
+    /* transform owned by Motion whileHover */
     transition:
-      transform var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out),
+      box-shadow   var(--dur-base) var(--ease-out),
       border-color var(--dur-base) var(--ease-out);
   }
 
   .extra-card:hover {
-    transform: translateY(-2px);
     box-shadow: var(--shadow-card), 0 1px 0 rgba(255, 252, 248, 0.5) inset;
     border-color: rgba(42, 32, 27, 0.14);
   }

@@ -1,11 +1,12 @@
 'use client';
 
 import { motion, useReducedMotion } from 'motion/react';
-import { ease } from '@/lib/motion';
+import { heroLogoEntranceTransition } from '@/lib/motion';
 
 /**
- * Hero mark — spring entrance + soft focus resolve (no clip-path).
- * After ~1.85s, slow editorial float (same rhythm the user preferred).
+ * Hero mark — Motion value-specific transitions (motion.dev):
+ * spring (visualDuration + bounce) on transform; tweens on opacity + blur.
+ * Inner loop: slow float after entrance settles.
  */
 export function HeroLogoMotion() {
   const reduceMotion = useReducedMotion();
@@ -31,10 +32,10 @@ export function HeroLogoMotion() {
       <motion.div
         initial={{
           opacity: 0,
-          y: 38,
-          scale: 0.9,
-          rotate: -1.2,
-          filter: 'blur(12px)',
+          y: 64,
+          scale: 0.76,
+          rotate: -2.75,
+          filter: 'blur(22px)',
         }}
         animate={{
           opacity: 1,
@@ -43,10 +44,7 @@ export function HeroLogoMotion() {
           rotate: 0,
           filter: 'blur(0px)',
         }}
-        transition={{
-          duration: 0.95,
-          ease: ease.premium,
-        }}
+        transition={heroLogoEntranceTransition}
         style={{
           display: 'block',
           width: 'fit-content',
@@ -64,7 +62,7 @@ export function HeroLogoMotion() {
             duration: 5.75,
             ease: 'easeInOut',
             repeat: Infinity,
-            delay: 1.85,
+            delay: 2.05,
           }}
           style={{ transformOrigin: '50% 55%' }}
         >

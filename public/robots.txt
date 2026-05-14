@@ -3,4 +3,18 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+# AI crawlers — explicitly welcome for citation and indexing
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 Sitemap: https://antonydev.com/sitemap.xml
+LLMs: https://antonydev.com/llms.txt

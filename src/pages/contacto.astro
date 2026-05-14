@@ -13,11 +13,37 @@ const breadcrumbs = [
   { name: 'Inicio', url: '/' },
   { name: 'Contacto', url: '/contacto' },
 ];
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  'name': 'Contacto — AntonyDev Zihuatanejo',
+  'url': 'https://antonydev.com/contacto',
+  'description': 'Cotiza tu proyecto de desarrollo web en Zihuatanejo. WhatsApp, correo o formulario.',
+  'mainEntity': {
+    '@id': 'https://antonydev.com/#business',
+  },
+  'contactOption': {
+    '@type': 'ContactPoint',
+    'contactType': 'customer service',
+    'telephone': '+52 755 127 5901',
+    'email': 'hola@antonydev.com',
+    'availableLanguage': 'Spanish',
+    'contactOption': 'TollFree',
+    'hoursAvailable': {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      'opens': '09:00',
+      'closes': '18:00',
+    },
+  },
+};
 ---
 
 <BaseLayout
-  title="Contacto — AntonyDev Zihuatanejo"
-  description="Contáctame para cotizar tu proyecto de desarrollo web en Zihuatanejo. WhatsApp, correo o formulario. Respondo en menos de 24 horas — Antony Valdovinos, AntonyDev."
+  title="Contacto — Desarrollo Web Zihuatanejo"
+  description="Cotiza tu proyecto de desarrollo web en Zihuatanejo. WhatsApp directo, correo o formulario. Respuesta en menos de 24 horas — Antony Valdovinos."
+  schema={contactSchema}
   breadcrumbs={breadcrumbs}
 >
   <Header />

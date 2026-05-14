@@ -46,12 +46,30 @@ const faqSchema = {
     'acceptedAnswer': { '@type': 'Answer', 'text': a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/servicios/mantenimiento#service',
+  'name': 'Mantenimiento de Páginas Web',
+  'description': 'Mantenimiento mensual de sitios web para negocios en Zihuatanejo e Ixtapa. Actualizaciones de contenido, corrección de errores, respaldo semanal, monitoreo y revisión de SEO. Desde $700 MXN/mes.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+  'url': 'https://antonydev.com/servicios/mantenimiento',
+  'serviceType': 'Website Maintenance',
+  'offers': {
+    '@type': 'Offer',
+    'price': '700',
+    'priceCurrency': 'MXN',
+    'description': 'Plan mensual de mantenimiento web desde $700 MXN/mes. Sin contratos de largo plazo.',
+  },
+};
 ---
 
 <BaseLayout
-  title="Mantenimiento de Páginas Web en Zihuatanejo e Ixtapa"
-  description="Mantenimiento mensual de sitios web para negocios en Zihuatanejo. Actualizaciones, soporte técnico, respaldo y monitoreo. Desde $700 MXN/mes — AntonyDev."
-  schema={faqSchema}
+  title="Mantenimiento Web en Zihuatanejo e Ixtapa"
+  description="Mantenimiento mensual de sitios web en Zihuatanejo. Actualizaciones, soporte técnico, respaldo semanal y SEO continuo. Desde $700 MXN/mes — AntonyDev."
+  schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -65,7 +83,7 @@ const faqSchema = {
           <span aria-current="page">Mantenimiento</span>
         </nav>
         <p class="phase-badge">Fase 3</p>
-        <PageHeading text="Mantenimiento de páginas web" client:load />
+        <PageHeading text="Mantenimiento de páginas web en Zihuatanejo e Ixtapa" client:load />
         <p class="page-lead">
           Tu sitio web necesita atención mensual para seguir siendo efectivo.
           Me encargo de que todo funcione, se mantenga actualizado y siga posicionando en Google.

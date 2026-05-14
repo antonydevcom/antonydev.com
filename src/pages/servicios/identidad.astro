@@ -42,12 +42,24 @@ const faqSchema = {
     'acceptedAnswer': { '@type': 'Answer', 'text': a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/servicios/identidad#service',
+  'name': 'Identidad Digital para Negocios',
+  'description': 'Desarrollo de identidad digital para negocios en Zihuatanejo y Guerrero. Paleta de colores, tipografía, tono de voz, logotipo y manual de marca. Implementación directa en sitio web.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+  'url': 'https://antonydev.com/servicios/identidad',
+  'serviceType': 'Brand Identity Design',
+};
 ---
 
 <BaseLayout
   title="Identidad Digital para Negocios en Zihuatanejo"
-  description="Identidad digital para negocios en Zihuatanejo y Guerrero. Paleta de colores, tipografía, tono de voz e imagen visual coherente. Antony Valdovinos — AntonyDev."
-  schema={faqSchema}
+  description="Identidad digital para negocios en Zihuatanejo y Guerrero. Paleta, tipografía, tono de voz e imagen visual coherente. Antony Valdovinos — AntonyDev."
+  schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -60,7 +72,7 @@ const faqSchema = {
           <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
           <span aria-current="page">Identidad Digital</span>
         </nav>
-        <PageHeading text="Identidad digital para tu negocio" client:load />
+        <PageHeading text="Identidad digital para negocios en Zihuatanejo" client:load />
         <p class="page-lead">
           Tu negocio tiene una identidad única — tu presencia digital debería reflejarla.
           Diseño el sistema visual y comunicacional para que tu marca sea reconocible desde el primer contacto.

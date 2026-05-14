@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import { PremiumCursor } from '@/components/motion/PremiumCursor';
+import { LOCATION, BRAND } from '@/lib/location';
 
 interface Props {
   title: string;
@@ -12,6 +13,7 @@ interface Props {
   breadcrumbs?: Array<{ name: string; url: string }>;
   /** e.g. `page-home` — transparent nav over hero on index */
   bodyClass?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -23,13 +25,14 @@ const {
   schema,
   breadcrumbs,
   bodyClass,
+  noindex = false,
 } = Astro.props;
 
-const SITE_URL = 'https://antonydev.com';
+const SITE_URL = BRAND.siteUrl;
 
 const canonical  = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImage    = image ?? `${SITE_URL}/og-default.jpg`;
-const fullTitle  = `${title} | Antony Valdovinos — AntonyDev Zihuatanejo`;
+const fullTitle  = `${title} | Antony Valdovinos — AntonyDev`;
 
 // Injected on every page — establishes brand identity in Google's knowledge graph
 const baseSchema = {
@@ -38,46 +41,80 @@ const baseSchema = {
     {
       '@type': 'ProfessionalService',
       '@id': `${SITE_URL}/#business`,
-      'name': 'AntonyDev',
+      'name': BRAND.name,
+      'legalName': BRAND.legalName,
       'url': SITE_URL,
-      'description': 'Soluciones digitales llave en mano para negocios en Zihuatanejo e Ixtapa.',
-      'telephone': '+52-XXX-XXX-XXXX',
-      'email': 'hola@antonydev.com',
+      'description': BRAND.description,
+      'telephone': LOCATION.phone,
+      'email': LOCATION.email,
+      'priceRange': '$$',
+      'currenciesAccepted': 'MXN',
+      'paymentAccepted': 'Cash, Credit Card, Bank Transfer, MercadoPago',
       'address': {
         '@type': 'PostalAddress',
-        'addressLocality': 'Zihuatanejo',
-        'addressRegion': 'Guerrero',
-        'postalCode': '40880',
-        'addressCountry': 'MX',
+        'addressLocality': LOCATION.city,
+        'addressRegion': LOCATION.state,
+        'postalCode': LOCATION.postalCode,
+        'addressCountry': LOCATION.countryCode,
       },
       'geo': {
         '@type': 'GeoCoordinates',
-        'latitude': 17.6414,
-        'longitude': -101.5497,
+        'latitude': LOCATION.lat,
+        'longitude': LOCATION.lng,
       },
-      'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+      'areaServed': LOCATION.areaServed.map((area) => ({
+        '@type': 'City',
+        'name': area,
+      })),
+      'openingHoursSpecification': [
+        {
+          '@type': 'OpeningHoursSpecification',
+          'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          'opens': '09:00',
+          'closes': '18:00',
+        },
+      ],
       'founder': { '@id': `${SITE_URL}/#person` },
+      'employee': { '@id': `${SITE_URL}/#person` },
+      'sameAs': BRAND.sameAs,
+      'hasOfferCatalog': {
+        '@type': 'OfferCatalog',
+        'name': 'Servicios Digitales',
+        'itemListElement': [
+          { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Auditoría Digital', 'url': `${SITE_URL}/servicios/auditoria` } },
+          { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Desarrollo Web', 'url': `${SITE_URL}/servicios/creacion` } },
+          { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Mantenimiento Web', 'url': `${SITE_URL}/servicios/mantenimiento` } },
+          { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Identidad Digital', 'url': `${SITE_URL}/servicios/identidad` } },
+          { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Automatización', 'url': `${SITE_URL}/servicios/automatizacion` } },
+        ],
+      },
     },
     {
       '@type': 'Person',
       '@id': `${SITE_URL}/#person`,
-      'name': 'Antony Valdovinos',
-      'alternateName': 'Antonio Valdovinos',
-      'jobTitle': 'Fullstack Web Developer',
+      'name': BRAND.legalName,
+      'alternateName': BRAND.alternateName,
+      'jobTitle': BRAND.jobTitle,
       'url': SITE_URL,
+      'email': LOCATION.email,
+      'telephone': LOCATION.phone,
       'address': {
         '@type': 'PostalAddress',
-        'addressLocality': 'Zihuatanejo',
-        'addressRegion': 'Guerrero',
-        'addressCountry': 'MX',
+        'addressLocality': LOCATION.city,
+        'addressRegion': LOCATION.state,
+        'addressCountry': LOCATION.countryCode,
       },
-      'knowsAbout': ['Desarrollo Web', 'SEO Local', 'Automatización', 'Astro', 'Supabase'],
+      'worksFor': { '@id': `${SITE_URL}/#business` },
+      'knowsAbout': BRAND.knowsAbout,
+      'sameAs': BRAND.sameAs,
     },
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       'url': SITE_URL,
-      'name': 'AntonyDev — Antony Valdovinos',
+      'name': `${BRAND.name} — ${BRAND.legalName}`,
+      'description': BRAND.description,
+      'publisher': { '@id': `${SITE_URL}/#business` },
       'potentialAction': {
         '@type': 'SearchAction',
         'target': `${SITE_URL}/blog?q={search_term_string}`,
@@ -118,7 +155,7 @@ const allSchemas = [
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Antony Valdovinos" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="canonical" href={canonical} />
@@ -158,13 +195,15 @@ const allSchemas = [
     ))}
 
     <!-- Cloudflare Web Analytics — zero cookies, zero CWV impact -->
-    <!-- TODO: replace TU_TOKEN with real Cloudflare beacon token before deploy -->
-    <script
-      is:inline
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token":"TU_TOKEN"}'
-    ></script>
+    <!-- Set PUBLIC_CF_BEACON_TOKEN env var to activate before deploy -->
+    {import.meta.env.PUBLIC_CF_BEACON_TOKEN && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token":"${import.meta.env.PUBLIC_CF_BEACON_TOKEN}"}`}
+      />
+    )}
   </head>
   <body class:list={[bodyClass]}>
     <PremiumCursor client:load />

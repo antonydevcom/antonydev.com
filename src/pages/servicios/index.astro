@@ -17,6 +17,22 @@ const breadcrumbs = [
   { name: 'Servicios', url: '/servicios' },
 ];
 
+const serviceListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'name': 'Servicios de Desarrollo Web — AntonyDev Zihuatanejo',
+  'description': 'Desarrollo web, identidad digital, automatización y mantenimiento para negocios en Zihuatanejo e Ixtapa.',
+  'url': 'https://antonydev.com/servicios',
+  'numberOfItems': 5,
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'url': 'https://antonydev.com/servicios/auditoria', 'name': 'Auditoría Digital' },
+    { '@type': 'ListItem', 'position': 2, 'url': 'https://antonydev.com/servicios/creacion', 'name': 'Desarrollo Web' },
+    { '@type': 'ListItem', 'position': 3, 'url': 'https://antonydev.com/servicios/mantenimiento', 'name': 'Mantenimiento Web' },
+    { '@type': 'ListItem', 'position': 4, 'url': 'https://antonydev.com/servicios/identidad', 'name': 'Identidad Digital' },
+    { '@type': 'ListItem', 'position': 5, 'url': 'https://antonydev.com/servicios/automatizacion', 'name': 'Automatización y Pagos' },
+  ],
+};
+
 const phases = [
   {
     number: '01',
@@ -31,7 +47,7 @@ const phases = [
     label: 'Tu presencia digital completa',
     title: 'Creación de Sistemas',
     description: 'Sitio web, sistema de gestión, identidad visual, WhatsApp automatizado y SEO local — todo integrado desde el primer día.',
-    detail: 'Desde $18,000 MXN',
+    detail: 'Desde $6,000 MXN',
     href: '/servicios/creacion',
   },
   {
@@ -59,8 +75,9 @@ const extras = [
 ---
 
 <BaseLayout
-  title="Servicios de Desarrollo Web en Zihuatanejo"
+  title="Servicios Web en Zihuatanejo"
   description="Desarrollo web, identidad digital, automatización y mantenimiento para negocios en Zihuatanejo e Ixtapa. Auditoría gratuita — Antony Valdovinos, AntonyDev."
+  schema={serviceListSchema}
   breadcrumbs={breadcrumbs}
 >
   <Header />

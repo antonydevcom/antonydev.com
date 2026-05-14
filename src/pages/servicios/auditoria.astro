@@ -46,12 +46,31 @@ const faqSchema = {
     'acceptedAnswer': { '@type': 'Answer', 'text': a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/servicios/auditoria#service',
+  'name': 'Auditoría Digital para Negocios',
+  'description': 'Diagnóstico completo de presencia digital para negocios en Zihuatanejo e Ixtapa. Incluye análisis de SEO local, sitio web, Google Business Profile y competencia. Gratis para nuevos clientes.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+  'url': 'https://antonydev.com/servicios/auditoria',
+  'serviceType': 'Digital Audit',
+  'offers': {
+    '@type': 'Offer',
+    'price': '0',
+    'priceCurrency': 'MXN',
+    'description': 'Auditoría digital gratuita para nuevos clientes. Sin compromiso.',
+    'eligibleCustomerType': 'http://purl.org/goodrelations/v1#NewCustomer',
+  },
+};
 ---
 
 <BaseLayout
-  title="Auditoría Digital para Negocios en Zihuatanejo e Ixtapa"
-  description="Diagnóstico digital gratuito para tu negocio en Zihuatanejo. Revisión de presencia online, SEO local y competencia. Entrega en 3-5 días — Antony Valdovinos, AntonyDev."
-  schema={faqSchema}
+  title="Auditoría Digital en Zihuatanejo e Ixtapa"
+  description="Diagnóstico digital gratuito para negocios en Zihuatanejo. SEO local, presencia online y competencia. Entrega en 3-5 días. Antony Valdovinos — AntonyDev."
+  schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -68,7 +87,7 @@ const faqSchema = {
           <span aria-current="page">Auditoría</span>
         </nav>
         <p class="phase-badge">Fase 1</p>
-        <PageHeading text="Auditoría digital para tu negocio" client:load />
+        <PageHeading text="Auditoría digital para negocios en Zihuatanejo e Ixtapa" client:load />
         <p class="page-lead">
           El punto de partida para cualquier negocio que quiere crecer en línea.
           Identifico exactamente qué necesitas y por qué, sin rodeos.

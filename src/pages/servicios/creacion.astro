@@ -57,12 +57,30 @@ const faqSchema = {
     'acceptedAnswer': { '@type': 'Answer', 'text': a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/servicios/creacion#service',
+  'name': 'Desarrollo de Sitios Web y Sistemas Digitales',
+  'description': 'Diseño y desarrollo de sitios web y sistemas a medida para negocios en Zihuatanejo e Ixtapa. Incluye SEO local, identidad visual, WhatsApp automatizado y formularios. Desde $6,000 MXN.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+  'url': 'https://antonydev.com/servicios/creacion',
+  'serviceType': 'Web Development',
+  'offers': {
+    '@type': 'Offer',
+    'price': '6000',
+    'priceCurrency': 'MXN',
+    'description': 'Sitio web o sistema a medida desde $6,000 MXN. Incluye SEO, diseño y WhatsApp.',
+  },
+};
 ---
 
 <BaseLayout
-  title="Desarrollo de Sistemas y Sitios Web en Zihuatanejo"
-  description="Creación de sitios web y sistemas digitales para negocios en Zihuatanejo e Ixtapa. SEO local, WhatsApp automatizado, identidad visual. Desde $18,000 MXN — AntonyDev."
-  schema={faqSchema}
+  title="Desarrollo Web en Zihuatanejo e Ixtapa"
+  description="Sitios web y sistemas digitales para negocios en Zihuatanejo. SEO local, WhatsApp automatizado e identidad visual. Desde $6,000 MXN — AntonyDev."
+  schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -76,13 +94,13 @@ const faqSchema = {
           <span aria-current="page">Creación</span>
         </nav>
         <p class="phase-badge">Fase 2</p>
-        <PageHeading text="Desarrollo de sistemas y sitios web" client:load />
+        <PageHeading text="Desarrollo de sitios web en Zihuatanejo e Ixtapa" client:load />
         <p class="page-lead">
           Tu presencia digital completa — sitio web, identidad visual, WhatsApp
           automatizado y SEO local, todo integrado y funcionando desde el primer día.
         </p>
         <div class="hero-cta-row">
-          <p class="price-badge">Desde $18,000 MXN</p>
+          <p class="price-badge">Desde $6,000 MXN</p>
           <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
             <WhatsAppIcon />
             Cotizar mi proyecto
@@ -134,7 +152,7 @@ const faqSchema = {
             <h3>Inversión</h3>
             <dl class="sidebar-dl">
               <dt>Precio base</dt>
-              <dd>Desde $18,000 MXN</dd>
+              <dd>Desde $6,000 MXN</dd>
               <dt>Tiempo entrega</dt>
               <dd>2-4 semanas</dd>
               <dt>Incluye</dt>

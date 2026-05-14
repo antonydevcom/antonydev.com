@@ -42,12 +42,24 @@ const faqSchema = {
     'acceptedAnswer': { '@type': 'Answer', 'text': a },
   })),
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/servicios/automatizacion#service',
+  'name': 'Automatización y Pagos en Línea para Negocios',
+  'description': 'WhatsApp automatizado, pagos con MercadoPago, catálogos digitales y sistemas de reservas para negocios en Ixtapa, Zihuatanejo y Guerrero.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
+  'url': 'https://antonydev.com/servicios/automatizacion',
+  'serviceType': 'Business Automation',
+};
 ---
 
 <BaseLayout
-  title="Automatización y Pagos en Línea para Negocios en Ixtapa y Zihuatanejo"
-  description="WhatsApp automatizado, pagos en línea con MercadoPago y sistemas de reservas para negocios en Ixtapa, Zihuatanejo y Guerrero. Antony Valdovinos — AntonyDev."
-  schema={faqSchema}
+  title="Automatización para Negocios en Ixtapa y Zihuatanejo"
+  description="WhatsApp automatizado, MercadoPago y sistemas de reservas para negocios en Ixtapa y Zihuatanejo. Antony Valdovinos — AntonyDev."
+  schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -60,7 +72,7 @@ const faqSchema = {
           <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
           <span aria-current="page">Automatización</span>
         </nav>
-        <PageHeading text="Automatización y pagos en línea" style={{ maxWidth: '24ch' }} client:load />
+        <PageHeading text="Automatización y pagos en línea en Ixtapa y Zihuatanejo" client:load />
         <p class="page-lead">
           WhatsApp automatizado, pagos con MercadoPago, catálogos digitales y sistemas
           de reservas — para que tu negocio trabaje aunque tú no estés en la pantalla.

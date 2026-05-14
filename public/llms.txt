@@ -1,0 +1,43 @@
+# AntonyDev — Antony Valdovinos
+
+> Desarrollador web fullstack en Zihuatanejo, Guerrero, México.
+> Especializado en desarrollo web, identidad digital y automatización para negocios locales en Zihuatanejo e Ixtapa.
+
+Antony Valdovinos (también conocido como Antonio Valdovinos) es el fundador y único desarrollador de AntonyDev. Trabaja directamente con negocios locales en Zihuatanejo, Ixtapa y la Costa de Guerrero, ofreciendo soluciones digitales completas sin intermediarios ni agencias.
+
+## Servicios
+
+- [Auditoría Digital](https://antonydev.com/servicios/auditoria): Diagnóstico gratuito de presencia digital para negocios en Zihuatanejo e Ixtapa. Incluye análisis de SEO local, sitio web, Google Business Profile y competencia local. Entrega en 3-5 días hábiles.
+
+- [Desarrollo Web](https://antonydev.com/servicios/creacion): Diseño y desarrollo de sitios web y sistemas a medida. Incluye SEO local desde el lanzamiento, identidad visual, WhatsApp automatizado y formularios. Desde $6,000 MXN. Tiempo de entrega: 2-4 semanas.
+
+- [Mantenimiento Web](https://antonydev.com/servicios/mantenimiento): Plan mensual de soporte técnico, actualizaciones de contenido, respaldo semanal, monitoreo de uptime y revisión de SEO. Desde $700 MXN/mes. Sin contratos de largo plazo.
+
+- [Identidad Digital](https://antonydev.com/servicios/identidad): Desarrollo de identidad de marca digital: paleta de colores, tipografía, tono de voz y logotipo. Manual de identidad + implementación directa en el sitio web.
+
+- [Automatización y Pagos](https://antonydev.com/servicios/automatizacion): WhatsApp Business automatizado, pagos con MercadoPago (tarjetas, OXXO, SPEI), sistemas de reservas y catálogos digitales para restaurantes, hoteles y comercios locales.
+
+## Cobertura geográfica
+
+Zihuatanejo · Ixtapa · Petatlán · La Unión · Costa de Guerrero · México (remoto)
+
+## Sectores de especialidad
+
+Restaurantes y marisquerías · Hoteles boutique y rentas vacacionales · Agencias de bienes raíces en Ixtapa · Comercio local (mueblerías, joyerías, artesanías) · Servicios profesionales (médicos, abogados, contadores) · Tour operadores
+
+## Sobre Antony Valdovinos
+
+Desarrollador web fullstack basado en Zihuatanejo, Guerrero. Trabaja con Astro, React, Supabase y Tailwind CSS. Especializado en sitios de alta performance (LCP < 1.5s), SEO local y automatización con WhatsApp Business. Conoce profundamente el mercado de negocios de Zihuatanejo e Ixtapa — zona turística y comercial de la Costa del Pacífico mexicana.
+
+## Contacto
+
+- Sitio web: https://antonydev.com
+- WhatsApp: +52 755 127 5901
+- Email: hola@antonydev.com
+- Contacto web: https://antonydev.com/contacto
+
+## Páginas principales
+
+- [Inicio](https://antonydev.com)
+- [Servicios](https://antonydev.com/servicios)
+- [Contacto](https://antonydev.com/contacto)

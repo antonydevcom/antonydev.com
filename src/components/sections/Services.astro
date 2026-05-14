@@ -1,5 +1,7 @@
 ---
 import Container from '@/components/ui/Container.astro';
+import { ServiceCards } from '@/components/motion/ServiceCards';
+import { SectionReveal } from '@/components/motion/SectionReveal';
 
 const phases = [
   {
@@ -45,57 +47,19 @@ const extras = [
 <section class="services" id="servicios" aria-labelledby="services-heading">
   <Container>
 
-    <header class="section-header">
-      <p class="eyebrow">Servicios</p>
-      <h2 id="services-heading">El ciclo completo para tu negocio</h2>
-      <div class="section-divider" aria-hidden="true"></div>
-      <p class="section-subtitle">
-        Trabajo con negocios en todo el proceso: diagnóstico, construcción y soporte continuo.
-        Sin agencias, sin intermediarios.
-      </p>
-    </header>
+    <SectionReveal client:visible as="header">
+      <div class="section-header">
+        <p class="eyebrow">Servicios</p>
+        <h2 id="services-heading">El ciclo completo para tu negocio</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-subtitle">
+          Trabajo con negocios en todo el proceso: diagnóstico, construcción y soporte continuo.
+          Sin agencias, sin intermediarios.
+        </p>
+      </div>
+    </SectionReveal>
 
-    <!-- Las 3 fases -->
-    <ol class="phases-list" role="list">
-      {phases.map((phase) => (
-        <li class="phase-card">
-          <div class="phase-number" aria-hidden="true">{phase.number}</div>
-          <div class="phase-content">
-            <p class="phase-label">{phase.label}</p>
-            <h3 class="phase-title">{phase.title}</h3>
-            <p class="phase-desc">{phase.description}</p>
-            <p class="phase-detail">{phase.detail}</p>
-            <a href={phase.href} class="phase-link">
-              Ver detalles
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-          </div>
-        </li>
-      ))}
-    </ol>
-
-    <!-- Extras -->
-    <div class="extras-section">
-      <p class="extras-label">También incluyo</p>
-      <ul class="extras-grid" role="list">
-        {extras.map((extra) => (
-          <li class="extra-card">
-            <h3 class="extra-title">{extra.title}</h3>
-            <p class="extra-desc">{extra.description}</p>
-            <a href={extra.href} class="extra-link">
-              Más información
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ServiceCards phases={phases} extras={extras} client:visible />
 
   </Container>
   <div id="proceso" class="nav-scroll-mark" aria-hidden="true"></div>
@@ -111,7 +75,6 @@ const extras = [
     border-bottom: 1px solid var(--border);
   }
 
-  /* Tablet+: slight overlap under hero + deep section frost so scroll reads luxury */
   @media (min-width: 768px) {
     .services {
       margin-top: -2.75rem;
@@ -180,6 +143,16 @@ const extras = [
     max-width: 44ch;
   }
 
+  /* ── Nav scroll anchor ───────────────────────────── */
+  .nav-scroll-mark {
+    height: 0;
+    width: 100%;
+    pointer-events: none;
+    visibility: hidden;
+  }
+</style>
+
+<style is:global>
   /* ── Phases list ──────────────────────────────────── */
   .phases-list {
     list-style: none;
@@ -208,6 +181,8 @@ const extras = [
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    position: relative;
+    overflow: hidden;
     transition:
       transform var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out),
@@ -315,6 +290,7 @@ const extras = [
   }
 
   .extras-label {
+    display: block;
     font-family: var(--font-body);
     font-size: 0.625rem;
     font-weight: 600;
@@ -352,6 +328,8 @@ const extras = [
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    position: relative;
+    overflow: hidden;
     transition:
       transform var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out),
@@ -410,13 +388,5 @@ const extras = [
   .extra-link:hover {
     gap: 0.6em;
     color: var(--color-cafe-negro);
-  }
-
-  /* ── Nav scroll anchor ───────────────────────────── */
-  .nav-scroll-mark {
-    height: 0;
-    width: 100%;
-    pointer-events: none;
-    visibility: hidden;
   }
 </style>

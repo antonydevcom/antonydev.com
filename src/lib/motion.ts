@@ -1,0 +1,58 @@
+import type { Transition, Variants } from 'motion/react';
+
+/* ── Premium easing curves (mirrors tokens.css) ─────────── */
+export const ease = {
+  premium: [0.22, 1, 0.36, 1] as [number, number, number, number],
+  out:     [0.16, 1, 0.3,  1] as [number, number, number, number],
+  spring:  [0.34, 1.56, 0.64, 1] as [number, number, number, number],
+};
+
+/* ── Section scroll-reveal ───────────────────────────────── */
+export const sectionReveal: Variants = {
+  hidden:  { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0  },
+};
+
+export const sectionRevealTransition: Transition = {
+  duration: 0.65,
+  ease: ease.premium,
+};
+
+/* ── Stagger container for child lists ───────────────────── */
+export const staggerContainer: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+export const staggerItem: Variants = {
+  hidden:  { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0,  transition: { duration: 0.55, ease: ease.premium } },
+};
+
+/* ── Section header reveal (eyebrow + h2 + divider) ─────── */
+export const headerReveal: Variants = {
+  hidden:  { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0,  transition: { duration: 0.7, ease: ease.premium } },
+};
+
+/* ── Blur-reveal for body text / subtitles ───────────────── */
+export const blurReveal: Variants = {
+  hidden:  { opacity: 0, filter: 'blur(4px)', y: 8  },
+  visible: { opacity: 1, filter: 'blur(0px)', y: 0  },
+};
+
+export const blurRevealTransition: Transition = {
+  duration: 0.75,
+  ease: ease.premium,
+};
+
+/* ── Card InView stagger ─────────────────────────────────── */
+export const cardStagger: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+export const cardReveal: Variants = {
+  hidden:  { opacity: 0, y: 22, scale: 0.98 },
+  visible: { opacity: 1, y: 0,  scale: 1,   transition: { duration: 0.6, ease: ease.premium } },
+};

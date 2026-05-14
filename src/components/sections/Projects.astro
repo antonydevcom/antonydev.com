@@ -1,5 +1,7 @@
 ---
 import Container from '@/components/ui/Container.astro';
+import { ProjectCards } from '@/components/motion/ProjectCards';
+import { SectionReveal } from '@/components/motion/SectionReveal';
 
 const projects = [
   {
@@ -41,59 +43,15 @@ const projects = [
 <section class="projects" id="portafolio" aria-labelledby="projects-heading">
   <Container>
 
-    <header class="section-header">
-      <p class="eyebrow">Trabajo seleccionado</p>
-      <h2 id="projects-heading">Proyectos recientes</h2>
-      <div class="section-divider" aria-hidden="true"></div>
-    </header>
+    <SectionReveal client:visible as="header">
+      <div class="section-header">
+        <p class="eyebrow">Trabajo seleccionado</p>
+        <h2 id="projects-heading">Proyectos recientes</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+      </div>
+    </SectionReveal>
 
-    <div class="projects-grid">
-      {projects.map((project) => (
-        <a
-          href={project.href}
-          class="project-card"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Ver proyecto: ${project.title} (abre en nueva pestaña)`}
-        >
-          <div class="card-image">
-            <img
-              src={project.image}
-              alt={project.imageAlt}
-              width={project.imageWidth}
-              height={project.imageHeight}
-              loading="lazy"
-              decoding="async"
-              style={`object-position: ${project.imagePosition}`}
-            />
-            <div class="card-overlay" aria-hidden="true">
-              <p class="overlay-tagline">{project.tagline}</p>
-            </div>
-          </div>
-          <div class="card-info">
-            <div class="card-meta">
-              <h3 class="card-title">{project.title}</h3>
-              <p class="card-category">{project.category}</p>
-            </div>
-            <svg
-              class="card-arrow"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
-          </div>
-        </a>
-      ))}
-    </div>
+    <ProjectCards projects={projects} client:visible />
 
   </Container>
 </section>
@@ -165,7 +123,9 @@ const projects = [
     opacity: 0.4;
     margin: 0 auto;
   }
+</style>
 
+<style is:global>
   /* ── Grid ─────────────────────────────────────────── */
   .projects-grid {
     display: grid;
@@ -179,7 +139,7 @@ const projects = [
       gap: var(--space-8);
     }
     .card-image {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 3 / 2;  /* slightly taller than 16/9 — more cinematic presence */
     }
     .card-info {
       padding: var(--space-6);
@@ -199,34 +159,34 @@ const projects = [
     overflow: hidden;
     background-color: var(--bg-page);
     border: 1px solid var(--border);
-    /* Three-layer shadow: close contact, mid ambient, wide atmospheric */
+    /* Resting shadow — three warm layers for depth at rest */
     box-shadow:
-      0 1px 3px  rgba(42, 32, 27, 0.05),
-      0 4px 16px rgba(42, 32, 27, 0.07),
-      0 12px 32px rgba(42, 32, 27, 0.04);
+      0 2px  6px  rgba(42, 32, 27, 0.06),
+      0 6px  20px rgba(42, 32, 27, 0.08),
+      0 16px 40px rgba(42, 32, 27, 0.05);
     text-decoration: none;
     color: inherit;
+    position: relative;
     transition:
-      transform     var(--dur-base) var(--ease-out),
-      box-shadow    380ms           var(--ease-out),
+      box-shadow    420ms           var(--ease-out),
       border-color  var(--dur-base) var(--ease-out);
+    /* transform handled by Motion whileHover — no CSS transform here */
   }
 
   .project-card:hover {
-    transform: translateY(-4px);
-    /* Four-layer hover: contact → near → mid → far atmospheric halo */
+    /* Four-layer hover: near → mid → far → atmospheric halo */
     box-shadow:
-      0 1px  3px  rgba(42, 32, 27, 0.04),
-      0 6px  20px rgba(42, 32, 27, 0.09),
-      0 20px 56px rgba(42, 32, 27, 0.13),
-      0 40px 72px rgba(42, 32, 27, 0.05);
-    border-color: rgba(42, 32, 27, 0.15);
+      0 2px   6px  rgba(42, 32, 27, 0.05),
+      0 8px  24px  rgba(42, 32, 27, 0.11),
+      0 24px 64px  rgba(42, 32, 27, 0.15),
+      0 48px 80px  rgba(42, 32, 27, 0.07);
+    border-color: rgba(42, 32, 27, 0.18);
   }
 
   /* ── Card image area ─────────────────────────────── */
   .card-image {
     position: relative;
-    aspect-ratio: 16 / 7;
+    aspect-ratio: 4 / 3;   /* taller on mobile — more visual weight */
     overflow: hidden;
     background-color: var(--bg-surface);
   }
@@ -238,17 +198,13 @@ const projects = [
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform var(--dur-slow) var(--ease-out);
+    transition: transform 480ms var(--ease-out);
   }
 
   .project-card:hover .card-image img {
-    transform: scale(1.04);
+    transform: scale(1.06);
   }
 
-  /*
-   * Hover overlay — heavier frost over the screenshot (token --glass-overlay).
-   * Falls back to a stronger flat tint where backdrop-filter isn't supported.
-   */
   .card-overlay {
     position: absolute;
     inset: 0;

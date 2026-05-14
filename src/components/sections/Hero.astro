@@ -127,7 +127,7 @@ const waLink = getWhatsAppLink('hero');
     object-fit: cover;
     object-position: 60% 38%;
     transform: scale(1.04);
-    filter: blur(1.4px) saturate(0.82) brightness(1.04) contrast(0.96) sepia(0.06);
+    filter: blur(0.4px) saturate(0.92) brightness(1.0) contrast(0.98) sepia(0);
     animation: hero-bg-in 2200ms var(--ease-premium) 0ms both;
   }
 
@@ -139,7 +139,8 @@ const waLink = getWhatsAppLink('hero');
     bottom: 0;
     left: 0;
     z-index: 1;
-    background: rgba(247, 244, 238, 0.42);
+    /* Dark warm instead of ivory fog — preserves image colors and depth */
+    background: rgba(30, 23, 19, 0.14);
     pointer-events: none;
   }
 
@@ -401,6 +402,7 @@ const waLink = getWhatsAppLink('hero');
       animation: none;
       opacity: 1;
       transform: scale(1.04);
+      filter: blur(0.4px) saturate(0.92) brightness(1.0) contrast(0.98) sepia(0);
     }
     .btn-wa:hover { transform: none; }
     .cta-group :global(.hero-cta:hover) { transform: none; }

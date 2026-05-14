@@ -397,10 +397,10 @@ const waLink = getWhatsAppLink('hero');
     }
   }
 
-  /* ── Portrait mobile: adjust bg composition ───── */
-  @media (max-width: 640px) {
+  /* Mobile only: pan crop toward right so laptop stays in frame (narrow viewports). */
+  @media (max-width: 767px) {
     .hero-bg-img {
-      object-position: 45% 35%;
+      object-position: 84% 38%;
     }
   }
 

@@ -16,7 +16,7 @@ export function HeroLogoMotion() {
       <div className="hero-logo-motion-root" aria-hidden="true">
         <img
           src="/images/branding/logo.png"
-          alt="AntonyDev — Antony Valdovinos"
+          alt="AntonyDev — Antonio Valdovinos"
           width={500}
           height={500}
           loading="eager"
@@ -68,7 +68,7 @@ export function HeroLogoMotion() {
         >
           <img
             src="/images/branding/logo.png"
-            alt="AntonyDev — Antony Valdovinos"
+            alt="AntonyDev — Antonio Valdovinos"
             width={500}
             height={500}
             loading="eager"

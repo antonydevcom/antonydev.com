@@ -1,0 +1,140 @@
+---
+/* Shared contact form used by the home Contact section and /contacto page.
+ * Form styles (.form-*, .submit-btn, .hp-field) live in global.css. */
+---
+
+<form id="contact-form" action="/api/contact" method="POST" class="contact-form" novalidate>
+
+  <div class="hp-field" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="contact-nombre" class="form-label">Nombre *</label>
+      <input
+        id="contact-nombre"
+        type="text"
+        name="nombre"
+        placeholder="Tu nombre"
+        class="form-input"
+        required
+        autocomplete="name"
+      />
+    </div>
+    <div class="form-field">
+      <label for="contact-whatsapp" class="form-label">WhatsApp *</label>
+      <input
+        id="contact-whatsapp"
+        type="tel"
+        name="whatsapp"
+        placeholder="755 000 0000"
+        class="form-input"
+        required
+        autocomplete="tel"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="contact-negocio" class="form-label">Nombre de tu negocio *</label>
+      <input
+        id="contact-negocio"
+        type="text"
+        name="negocio"
+        placeholder="Tu restaurante, tienda, etc."
+        class="form-input"
+        required
+      />
+    </div>
+    <div class="form-field">
+      <label for="contact-email" class="form-label">Correo (opcional)</label>
+      <input
+        id="contact-email"
+        type="email"
+        name="email"
+        placeholder="tu@correo.com"
+        class="form-input"
+        autocomplete="email"
+      />
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="contact-mensaje" class="form-label">¿Cómo puedo ayudarte? *</label>
+    <textarea
+      id="contact-mensaje"
+      name="mensaje"
+      placeholder="Cuéntame sobre tu negocio y lo que necesitas..."
+      rows={5}
+      class="form-textarea"
+      required
+    ></textarea>
+  </div>
+
+  <div class="form-footer">
+    <button type="submit" class="submit-btn">
+      <span class="submit-label">Enviar mensaje</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </button>
+    <p class="form-note">Respondo en menos de 24 horas.</p>
+  </div>
+
+  <div id="form-feedback" class="form-feedback" aria-live="polite" hidden></div>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const feedback = document.getElementById('form-feedback') as HTMLElement | null;
+  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement | null;
+  const submitLabel = form?.querySelector('.submit-label') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!submitBtn || !submitLabel || !feedback) return;
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Enviando...';
+    feedback.hidden = true;
+
+    const data: Record<string, string> = {};
+    new FormData(form).forEach((v, k) => { data[k] = v.toString(); });
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        form.reset();
+        feedback.textContent = '¡Mensaje enviado! Te contactaré pronto.';
+        feedback.className = 'form-feedback form-feedback--ok';
+      } else {
+        const json = await res.json().catch(() => ({}));
+        feedback.textContent = (json as any).error ?? 'Algo salió mal. Intenta de nuevo.';
+        feedback.className = 'form-feedback form-feedback--err';
+      }
+    } catch {
+      feedback.textContent = 'Sin conexión. Por favor intenta más tarde.';
+      feedback.className = 'form-feedback form-feedback--err';
+    }
+
+    feedback.hidden = false;
+    submitBtn.disabled = false;
+    submitLabel.textContent = 'Enviar mensaje';
+  });
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+</style>

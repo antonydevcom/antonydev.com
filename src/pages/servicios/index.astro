@@ -3,7 +3,10 @@ import '@/styles/service-cards.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
 import { ServiceCards } from '@/components/motion/ServiceCards';
+import { SectionHeaderReveal } from '@/components/motion/SectionHeaderReveal';
+import { SectionReveal } from '@/components/motion/SectionReveal';
 import { PageHeading } from '@/components/motion/PageHeading';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 
@@ -82,8 +85,12 @@ const extras = [
     <!-- Fases + adicionales — mismo island que el home (Motion, spotlight, borde) -->
     <section class="servicios-showcase">
       <div class="container">
-        <p class="eyebrow" data-reveal data-reveal-delay="0">El ciclo completo</p>
-        <h2 data-reveal data-reveal-delay="80">Las 3 fases del trabajo</h2>
+        <SectionHeaderReveal
+          eyebrow="El ciclo completo"
+          heading="Las 3 fases del trabajo"
+          showDivider={false}
+          client:visible
+        />
         <ServiceCards
           client:visible
           phases={phases}
@@ -97,15 +104,14 @@ const extras = [
     <!-- CTA -->
     <section class="cta-section">
       <div class="container cta-inner">
-        <div>
-          <h2 data-reveal data-reveal-delay="0">¿Por dónde empezamos?</h2>
-          <p data-reveal data-reveal-delay="100">La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
-        </div>
+        <SectionReveal client:visible>
+          <div>
+            <h2>¿Por dónde empezamos?</h2>
+            <p>La auditoría es gratuita y sin compromiso. Platiquemos sobre tu negocio.</p>
+          </div>
+        </SectionReveal>
         <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn" data-cursor="premium">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.847L.057 23.882l6.196-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.816 9.816 0 01-5.015-1.374l-.36-.214-3.727.874.93-3.615-.234-.371A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
-          </svg>
+          <WhatsAppIcon size={20} />
           Solicitar auditoría gratuita
         </a>
       </div>
@@ -124,18 +130,6 @@ const extras = [
     border-bottom: 1px solid var(--border);
   }
 
-  .servicios-showcase .eyebrow {
-    margin-bottom: var(--space-4);
-  }
-
-  .servicios-showcase h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    color: var(--text-primary);
-    margin: 0 0 var(--space-12);
-  }
 
   /* ── CTA section ─────────────────────────────────── */
   .cta-section {
@@ -208,44 +202,15 @@ const extras = [
     .wa-btn:hover, .wa-btn:hover svg { transform: none; }
   }
 
-  /* ── Scroll reveal ───────────────────────────────── */
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-      opacity   0.62s var(--ease-out),
-      transform 0.62s var(--ease-out);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-
-  [data-reveal].is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal] {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
 </style>
 
-<script>
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const delay = (entry.target as HTMLElement).dataset.revealDelay ?? '0';
-          (entry.target as HTMLElement).style.setProperty('--reveal-delay', delay + 'ms');
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: '0px 0px -48px 0px', threshold: 0.08 }
-  );
+<style is:global>
+  /* SectionHeaderReveal inside .servicios-showcase — React island, no scoped attrs */
+  .servicios-showcase .section-header {
+    margin-bottom: var(--space-12);
+  }
 
-  document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
-</script>
+  .servicios-showcase .section-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+</style>

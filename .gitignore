@@ -42,6 +42,9 @@ pnpm-debug.log*
 ._*
 Thumbs.db
 
+# ── Cursor — skills, rules, local agent config ────────────
+.cursor/
+
 # ── IDE ──────────────────────────────────────────────────
 .idea/
 .vscode/

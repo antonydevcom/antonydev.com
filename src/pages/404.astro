@@ -1,0 +1,157 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import Button from '@/components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Página no encontrada"
+  description="La página que buscas no existe. Regresa al inicio o contáctame directo."
+  noindex={true}
+>
+  <Header />
+  <main class="not-found-main">
+    <div class="container not-found-container">
+
+      <div class="not-found-code" aria-hidden="true">404</div>
+
+      <h1 class="not-found-heading">Página no encontrada</h1>
+
+      <p class="not-found-lead">
+        La URL que visitaste no existe o fue movida.<br />
+        Puedo ayudarte a encontrar lo que buscas.
+      </p>
+
+      <div class="not-found-actions">
+        <Button href="/" variant="primary" size="lg">
+          Volver al inicio
+        </Button>
+        <Button href="/contacto" variant="secondary" size="lg">
+          Contactar a Antonio
+        </Button>
+      </div>
+
+      <div class="not-found-links">
+        <p class="not-found-links-label">O visita directamente</p>
+        <nav aria-label="Páginas principales">
+          <ul>
+            <li><a href="/servicios">Servicios</a></li>
+            <li><a href="/servicios/auditoria">Auditoría digital</a></li>
+            <li><a href="/servicios/creacion">Desarrollo web</a></li>
+            <li><a href="/servicios/mantenimiento">Mantenimiento</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .not-found-main {
+    background-color: var(--bg-page);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: clamp(5rem, 12vw, 9rem) 0;
+  }
+
+  .not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .not-found-code {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 20vw, 14rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--color-taupe);
+    opacity: 0.22;
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    user-select: none;
+  }
+
+  .not-found-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-6);
+    max-width: 20ch;
+  }
+
+  .not-found-lead {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.62);
+    max-width: 40ch;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-bottom: clamp(3rem, 7vw, 5rem);
+  }
+
+  @media (max-width: 480px) {
+    .not-found-actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  .not-found-links {
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-8);
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .not-found-links-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.4);
+    margin: 0 0 var(--space-4);
+  }
+
+  .not-found-links nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3) var(--space-6);
+  }
+
+  .not-found-links a {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .not-found-links a:hover {
+    opacity: 0.65;
+  }
+</style>

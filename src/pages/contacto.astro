@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('contacto');
 
@@ -27,7 +28,7 @@ const breadcrumbs = [
           <span aria-hidden="true">/</span>
           <span aria-current="page">Contacto</span>
         </nav>
-        <h1>Hablemos sobre tu negocio</h1>
+        <PageHeading text="Hablemos sobre tu negocio" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', maxWidth: 'none' }} client:load />
         <p class="page-lead">
           Cuéntame qué necesitas. Respondo en menos de 24 horas —
           o escríbeme directo por WhatsApp para respuesta inmediata.
@@ -183,13 +184,6 @@ const breadcrumbs = [
 </script>
 
 <style>
-  /* contacto hero: larger h1 than service detail pages, no lead bottom margin */
-  .page-hero h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    max-width: none;
-  }
-
   .page-lead { margin: 0; }
 
   /* ── Contact section ─────────────────────────────── */

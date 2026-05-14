@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('creacion');
 
@@ -74,7 +75,7 @@ const faqSchema = {
           <span aria-current="page">Creación</span>
         </nav>
         <p class="phase-badge">Fase 2</p>
-        <h1>Desarrollo de sistemas y sitios web</h1>
+        <PageHeading text="Desarrollo de sistemas y sitios web" client:load />
         <p class="page-lead">
           Tu presencia digital completa — sitio web, identidad visual, WhatsApp
           automatizado y SEO local, todo integrado y funcionando desde el primer día.

@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('automatizacion');
 
@@ -58,7 +59,7 @@ const faqSchema = {
           <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
           <span aria-current="page">Automatización</span>
         </nav>
-        <h1>Automatización y pagos en línea</h1>
+        <PageHeading text="Automatización y pagos en línea" style={{ maxWidth: '24ch' }} client:load />
         <p class="page-lead">
           WhatsApp automatizado, pagos con MercadoPago, catálogos digitales y sistemas
           de reservas — para que tu negocio trabaje aunque tú no estés en la pantalla.
@@ -159,7 +160,5 @@ const faqSchema = {
 </BaseLayout>
 
 <style>
-  /* automatizacion: longer h1 and wider lead than other service pages */
-  .page-hero h1 { max-width: 24ch; }
   .page-lead { max-width: 52ch; margin-bottom: var(--space-8); }
 </style>

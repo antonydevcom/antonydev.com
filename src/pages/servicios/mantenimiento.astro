@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('mantenimiento');
 
@@ -63,7 +64,7 @@ const faqSchema = {
           <span aria-current="page">Mantenimiento</span>
         </nav>
         <p class="phase-badge">Fase 3</p>
-        <h1>Mantenimiento de páginas web</h1>
+        <PageHeading text="Mantenimiento de páginas web" client:load />
         <p class="page-lead">
           Tu sitio web necesita atención mensual para seguir siendo efectivo.
           Me encargo de que todo funcione, se mantenga actualizado y siga posicionando en Google.

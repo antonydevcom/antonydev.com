@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { ServiceCards } from '@/components/motion/ServiceCards';
+import { PageHeading } from '@/components/motion/PageHeading';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 
 const waLink = getWhatsAppLink('servicios');
@@ -70,7 +71,7 @@ const extras = [
           <span aria-hidden="true">/</span>
           <span aria-current="page">Servicios</span>
         </nav>
-        <h1 data-reveal data-reveal-delay="0">Desarrollo web, sistemas e identidad digital</h1>
+        <PageHeading text="Desarrollo web, sistemas e identidad digital" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', maxWidth: '18ch' }} client:load />
         <p class="page-lead" data-reveal data-reveal-delay="120">
           Un modelo de trabajo completo — desde el diagnóstico inicial hasta el
           crecimiento continuo de tu presencia digital.
@@ -115,13 +116,6 @@ const extras = [
 </BaseLayout>
 
 <style>
-  /* servicios/index: larger hero h1 than service detail pages, no lead margin */
-  .page-hero h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    max-width: 18ch;
-  }
-
   .page-lead { margin: 0; }
 
   .servicios-showcase {

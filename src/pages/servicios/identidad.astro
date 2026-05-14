@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('identidad');
 
@@ -58,7 +59,7 @@ const faqSchema = {
           <a href="/servicios">Servicios</a><span aria-hidden="true">/</span>
           <span aria-current="page">Identidad Digital</span>
         </nav>
-        <h1>Identidad digital para tu negocio</h1>
+        <PageHeading text="Identidad digital para tu negocio" client:load />
         <p class="page-lead">
           Tu negocio tiene una identidad única — tu presencia digital debería reflejarla.
           Diseño el sistema visual y comunicacional para que tu marca sea reconocible desde el primer contacto.

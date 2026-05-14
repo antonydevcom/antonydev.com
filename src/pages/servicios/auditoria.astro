@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
 
 const waLink = getWhatsAppLink('auditoria');
 
@@ -66,7 +67,7 @@ const faqSchema = {
           <span aria-current="page">Auditoría</span>
         </nav>
         <p class="phase-badge">Fase 1</p>
-        <h1>Auditoría digital para tu negocio</h1>
+        <PageHeading text="Auditoría digital para tu negocio" client:load />
         <p class="page-lead">
           El punto de partida para cualquier negocio que quiere crecer en línea.
           Identifico exactamente qué necesitas y por qué, sin rodeos.

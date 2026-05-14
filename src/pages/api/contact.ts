@@ -9,13 +9,31 @@ const RATE_LIMIT_WINDOW_MS = 3_600_000; // 1 hour
 const rateLimitMap = new Map<string, number[]>();
 
 const ContactSchema = z.object({
-  nombre:   z.string().min(2).max(100).trim(),
-  whatsapp: z.string().min(8).max(20).trim(),
-  negocio:  z.string().min(2).max(200).trim(),
-  email:    z.string().email().optional().or(z.literal('')),
-  mensaje:  z.string().min(10).max(2000).trim(),
-  website:  z.string().max(0), // honeypot — must be empty
+  nombre:   z.string()
+    .min(1, 'Tu nombre es requerido.')
+    .min(2, 'Tu nombre es demasiado corto.')
+    .max(100, 'El nombre es demasiado largo.'),
+  whatsapp: z.string()
+    .min(1, 'Tu WhatsApp es requerido.')
+    .min(8, 'Ingresa un WhatsApp válido.')
+    .max(20, 'Número demasiado largo.'),
+  negocio:  z.string()
+    .min(1, 'El nombre de tu negocio es requerido.')
+    .min(2, 'El nombre del negocio es demasiado corto.')
+    .max(200, 'El nombre del negocio es demasiado largo.'),
+  email:    z.string().email('Ingresa un correo válido.').optional().or(z.literal('')),
+  mensaje:  z.string()
+    .min(1, 'Por favor escribe tu mensaje.')
+    .min(10, 'El mensaje debe tener al menos 10 caracteres.')
+    .max(2000, 'El mensaje es demasiado largo (máx. 2000 caracteres).'),
+  website:  z.string().max(0),
 });
+
+function trimStrings(data: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(data).map(([k, v]) => [k, typeof v === 'string' ? v.trim() : v])
+  );
+}
 
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {
@@ -152,9 +170,14 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   }
 
   // Validate
-  const result = ContactSchema.safeParse(body);
+  const result = ContactSchema.safeParse(trimStrings(body as Record<string, unknown>));
   if (!result.success) {
-    return json({ error: 'Por favor completa todos los campos requeridos.' }, 400);
+    const flat = result.error.flatten().fieldErrors;
+    const fields: Record<string, string> = {};
+    for (const [key, msgs] of Object.entries(flat)) {
+      if (msgs && msgs.length > 0) fields[key] = msgs[0];
+    }
+    return json({ error: 'validation', fields }, 400);
   }
 
   const { nombre, whatsapp, negocio, email, mensaje } = result.data;

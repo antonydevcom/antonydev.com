@@ -20,7 +20,9 @@
         class="form-input"
         required
         autocomplete="name"
+        aria-describedby="err-nombre"
       />
+      <p id="err-nombre" class="field-error" role="alert"></p>
     </div>
     <div class="form-field">
       <label for="contact-whatsapp" class="form-label">WhatsApp *</label>
@@ -32,7 +34,9 @@
         class="form-input"
         required
         autocomplete="tel"
+        aria-describedby="err-whatsapp"
       />
+      <p id="err-whatsapp" class="field-error" role="alert"></p>
     </div>
   </div>
 
@@ -46,7 +50,9 @@
         placeholder="Tu restaurante, tienda, etc."
         class="form-input"
         required
+        aria-describedby="err-negocio"
       />
+      <p id="err-negocio" class="field-error" role="alert"></p>
     </div>
     <div class="form-field">
       <label for="contact-email" class="form-label">Correo (opcional)</label>
@@ -57,7 +63,9 @@
         placeholder="tu@correo.com"
         class="form-input"
         autocomplete="email"
+        aria-describedby="err-email"
       />
+      <p id="err-email" class="field-error" role="alert"></p>
     </div>
   </div>
 
@@ -70,7 +78,9 @@
       rows={5}
       class="form-textarea"
       required
+      aria-describedby="err-mensaje"
     ></textarea>
+    <p id="err-mensaje" class="field-error" role="alert"></p>
   </div>
 
   <div class="form-footer">
@@ -88,18 +98,103 @@
 </form>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const feedback = document.getElementById('form-feedback') as HTMLElement | null;
-  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement | null;
+  type FieldName = 'nombre' | 'whatsapp' | 'negocio' | 'email' | 'mensaje';
+
+  const FIELDS: FieldName[] = ['nombre', 'whatsapp', 'negocio', 'email', 'mensaje'];
+
+  // Mirror server-side Zod rules — source of truth is contact.ts
+  const RULES: Record<FieldName, (v: string) => string | null> = {
+    nombre:   (v) => !v ? 'Tu nombre es requerido.'
+                    : v.length < 2  ? 'Tu nombre es demasiado corto.'
+                    : v.length > 100 ? 'El nombre es demasiado largo.'
+                    : null,
+    whatsapp: (v) => !v ? 'Tu WhatsApp es requerido.'
+                    : v.length < 8  ? 'Ingresa un WhatsApp válido.'
+                    : v.length > 20 ? 'Número demasiado largo.'
+                    : null,
+    negocio:  (v) => !v ? 'El nombre de tu negocio es requerido.'
+                    : v.length < 2  ? 'El nombre del negocio es demasiado corto.'
+                    : v.length > 200 ? 'El nombre del negocio es demasiado largo.'
+                    : null,
+    email:    (v) => v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+                    ? 'Ingresa un correo válido.'
+                    : null,
+    mensaje:  (v) => !v ? 'Por favor escribe tu mensaje.'
+                    : v.length < 10   ? 'El mensaje debe tener al menos 10 caracteres.'
+                    : v.length > 2000 ? 'El mensaje es demasiado largo (máx. 2000 caracteres).'
+                    : null,
+  };
+
+  const form        = document.getElementById('contact-form') as HTMLFormElement | null;
+  const feedback    = document.getElementById('form-feedback') as HTMLElement | null;
+  const submitBtn   = form?.querySelector('.submit-btn') as HTMLButtonElement | null;
   const submitLabel = form?.querySelector('.submit-label') as HTMLElement | null;
+
+  let hasAttempted = false;
+
+  function getInput(name: FieldName): HTMLInputElement | HTMLTextAreaElement | null {
+    return form?.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`) ?? null;
+  }
+
+  function setFieldError(name: FieldName, message: string | null) {
+    const input = getInput(name);
+    const errEl = document.getElementById(`err-${name}`);
+    if (!input || !errEl) return;
+
+    if (message) {
+      errEl.textContent = message;
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      errEl.textContent = '';
+      input.removeAttribute('aria-invalid');
+    }
+  }
+
+  function validateField(name: FieldName): boolean {
+    const input = getInput(name);
+    if (!input) return true;
+    const value = input.value.trim();
+    const error = RULES[name](value);
+    setFieldError(name, error);
+    return error === null;
+  }
+
+  function validateAll(): boolean {
+    let firstInvalid: HTMLElement | null = null;
+    let allValid = true;
+
+    for (const name of FIELDS) {
+      const valid = validateField(name);
+      if (!valid && !firstInvalid) firstInvalid = getInput(name);
+      if (!valid) allValid = false;
+    }
+
+    if (firstInvalid) firstInvalid.focus();
+    return allValid;
+  }
+
+  function clearAllErrors() {
+    for (const name of FIELDS) setFieldError(name, null);
+  }
+
+  // Live validation after first submit attempt
+  for (const name of FIELDS) {
+    const input = getInput(name);
+    input?.addEventListener('input', () => { if (hasAttempted) validateField(name); });
+    input?.addEventListener('blur',  () => { if (hasAttempted) validateField(name); });
+  }
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!submitBtn || !submitLabel || !feedback) return;
 
+    hasAttempted = true;
+    if (!validateAll()) return;
+
     submitBtn.disabled = true;
     submitLabel.textContent = 'Enviando...';
     feedback.hidden = true;
+    feedback.className = 'form-feedback';
 
     const data: Record<string, string> = {};
     new FormData(form).forEach((v, k) => { data[k] = v.toString(); });
@@ -113,19 +208,37 @@
 
       if (res.ok) {
         form.reset();
+        clearAllErrors();
+        hasAttempted = false;
         feedback.textContent = '¡Mensaje enviado! Te contactaré pronto.';
         feedback.className = 'form-feedback form-feedback--ok';
+        feedback.hidden = false;
       } else {
-        const json = await res.json().catch(() => ({}));
-        feedback.textContent = (json as any).error ?? 'Algo salió mal. Intenta de nuevo.';
-        feedback.className = 'form-feedback form-feedback--err';
+        const json = await res.json().catch(() => ({})) as Record<string, unknown>;
+
+        if (json.error === 'validation' && json.fields && typeof json.fields === 'object') {
+          // Per-field errors from server
+          const serverFields = json.fields as Record<string, string>;
+          let firstInvalid: HTMLElement | null = null;
+          for (const name of FIELDS) {
+            if (serverFields[name]) {
+              setFieldError(name, serverFields[name]);
+              if (!firstInvalid) firstInvalid = getInput(name);
+            }
+          }
+          firstInvalid?.focus();
+        } else {
+          feedback.textContent = (json.error as string) ?? 'Algo salió mal. Intenta de nuevo.';
+          feedback.className = 'form-feedback form-feedback--err';
+          feedback.hidden = false;
+        }
       }
     } catch {
       feedback.textContent = 'Sin conexión. Por favor intenta más tarde.';
       feedback.className = 'form-feedback form-feedback--err';
+      feedback.hidden = false;
     }
 
-    feedback.hidden = false;
     submitBtn.disabled = false;
     submitLabel.textContent = 'Enviar mensaje';
   });

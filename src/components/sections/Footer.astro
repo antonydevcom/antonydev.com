@@ -17,7 +17,10 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
   <Container>
     <div class="footer-inner">
       <div class="footer-bottom">
-        <p class="footer-copy">© {year} Antonio Valdovinos — AntonyDev · Zihuatanejo, Guerrero</p>
+        <p class="footer-copy">
+          <span class="footer-copy-mobile">© {year} AntonyDev · Zihuatanejo, Gro.</span>
+          <span class="footer-copy-desktop">© {year} Antonio Valdovinos — AntonyDev · Zihuatanejo, Guerrero</span>
+        </p>
         <nav class="footer-nav" aria-label="Navegación de pie de página">
           {footerLinks.map((link) => (
             <a
@@ -71,7 +74,7 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
   .footer-bottom {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
+    gap: var(--space-4);
     align-items: flex-start;
   }
 
@@ -90,7 +93,31 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     line-height: 1.55;
     color: rgba(42, 32, 27, 0.52);
     margin: 0;
-    max-width: 42ch;
+    max-width: none;
+  }
+
+  /* Full legal line only from tablet up — mobile uses compact line (one row). */
+  .footer-copy-desktop {
+    display: none;
+  }
+
+  .footer-copy-mobile {
+    display: inline;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .footer-copy {
+      max-width: 42ch;
+    }
+
+    .footer-copy-mobile {
+      display: none;
+    }
+
+    .footer-copy-desktop {
+      display: inline;
+    }
   }
 
   .footer-nav {
@@ -98,6 +125,36 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     align-items: center;
     gap: clamp(1.25rem, 2.2vw, 2rem);
     flex-wrap: wrap;
+  }
+
+  /* One row on small phones — horizontal scroll if needed, no second line of links. */
+  @media (max-width: 767px) {
+    .footer-nav {
+      flex-wrap: nowrap;
+      gap: 0.875rem;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .footer-nav::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .footer-nav::-webkit-scrollbar-thumb {
+      background: rgba(42, 32, 27, 0.2);
+      border-radius: 999px;
+    }
+
+    .footer-link {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+      padding: 8px 0;
+    }
   }
 
   /*
@@ -116,12 +173,6 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     transition: color var(--dur-fast) var(--ease-out);
     /* Expand touch target without changing visual layout */
     -webkit-tap-highlight-color: transparent;
-  }
-
-  @media (max-width: 767px) {
-    .footer-link {
-      padding: 10px 0;
-    }
   }
 
   .footer-link::after {

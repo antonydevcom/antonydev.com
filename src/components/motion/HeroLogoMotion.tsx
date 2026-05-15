@@ -15,10 +15,10 @@ export function HeroLogoMotion() {
     return (
       <div className="hero-logo-motion-root" aria-hidden="true">
         <img
-          src="/images/branding/logo.png"
+          src="/images/branding/hero-logo.png"
           alt="AntonyDev — Antonio Valdovinos"
-          width={500}
-          height={500}
+          width={1448}
+          height={1086}
           loading="eager"
           decoding="async"
           className="hero-logo"
@@ -67,10 +67,10 @@ export function HeroLogoMotion() {
           style={{ transformOrigin: '50% 55%' }}
         >
           <img
-            src="/images/branding/logo.png"
+            src="/images/branding/hero-logo.png"
             alt="AntonyDev — Antonio Valdovinos"
-            width={500}
-            height={500}
+            width={1448}
+            height={1086}
             loading="eager"
             decoding="async"
             className="hero-logo"

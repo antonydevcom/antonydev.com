@@ -174,7 +174,10 @@ const waLink = getWhatsAppLink('hero');
     padding-bottom: clamp(4.5rem, 12vh, 8rem);
   }
 
-  /* ── Hero logo (Motion island) — size + blend; motion handles entrance + float ─ */
+  /* ── Hero logo (Motion island) — size + blend; motion handles entrance + float ─
+   * Layout height unchanged (flow gap to kicker stays put). Visual scale grows
+   * upward from bottom anchor so nothing below shifts.
+   */
   :global(.hero-logo-motion-root) {
     margin-bottom: clamp(1.35rem, 2.75vw, 2.15rem);
     display: flex;
@@ -188,9 +191,22 @@ const waLink = getWhatsAppLink('hero');
     width: auto !important;
     max-width: none !important;
     mix-blend-mode: multiply;
+    transform: scale(1.52);
+    transform-origin: 50% 100%;
   }
 
-  /* ── Kicker — small label rail ───────────────────── */
+  @media (min-width: 768px) {
+    :global(.hero-logo-motion-root .hero-logo) {
+      transform: scale(1.68);
+    }
+  }
+
+  /* Desktop: mark reads too high vs navbar — nudge down without touching layout flow. */
+  @media (min-width: 1024px) {
+    :global(.hero-logo-motion-root) {
+      transform: translateY(clamp(2.5rem, 5.5vh, 5rem));
+    }
+  }
   .hero-kicker {
     font-family: var(--font-body);
     font-size: 0.6rem;

@@ -199,6 +199,17 @@ const allSchemas = [
         data-cf-beacon={`{"token":"${import.meta.env.PUBLIC_CF_BEACON_TOKEN}"}`}
       />
     )}
+
+    <!-- In-app browser detection: Facebook, Instagram, TikTok, WhatsApp webviews
+         handle viewport height differently — adds class for targeted CSS offset. -->
+    <script is:inline>
+      (function () {
+        var ua = navigator.userAgent || '';
+        if (/FBAN|FBAV|Instagram|TikTok|WhatsApp/.test(ua)) {
+          document.documentElement.classList.add('inapp-webview');
+        }
+      })();
+    </script>
   </head>
   <body class:list={[bodyClass]}>
     <PremiumCursor client:load />

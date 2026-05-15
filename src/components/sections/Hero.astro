@@ -450,6 +450,19 @@ const waLink = getWhatsAppLink('hero');
     }
   }
 
+  /* ── In-app browser webview fix (mobile only) ───────
+   * Facebook / Instagram / TikTok / WhatsApp webviews report
+   * viewport height differently, pushing hero content up into
+   * the navbar. Extra padding-top restores the visual clearance
+   * that native browsers provide automatically.
+   * Desktop and native mobile browsers are not affected.
+   */
+  @media (max-width: 767px) {
+    html.inapp-webview .hero-stage {
+      padding-top: clamp(5.5rem, 16vh, 9rem);
+    }
+  }
+
   /* ── Reduced motion ──────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .hero-kicker,

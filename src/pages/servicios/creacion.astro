@@ -63,23 +63,17 @@ const serviceSchema = {
   '@type': 'Service',
   '@id': 'https://antonydev.com/servicios/creacion#service',
   'name': 'Desarrollo de Sitios Web y Sistemas Digitales',
-  'description': 'Diseño y desarrollo de sitios web y sistemas a medida para negocios en Zihuatanejo e Ixtapa. Incluye SEO local, identidad visual, WhatsApp automatizado y formularios. Desde $6,000 MXN.',
+  'description': 'Diseño y desarrollo de sitios web y sistemas a medida para negocios en Zihuatanejo e Ixtapa. Incluye SEO local, identidad visual, WhatsApp automatizado y formularios. Cotización personalizada.',
   'provider': { '@id': 'https://antonydev.com/#business' },
   'areaServed': ['Zihuatanejo', 'Ixtapa', 'Guerrero', 'México'],
   'url': 'https://antonydev.com/servicios/creacion',
   'serviceType': 'Web Development',
-  'offers': {
-    '@type': 'Offer',
-    'price': '6000',
-    'priceCurrency': 'MXN',
-    'description': 'Sitio web o sistema a medida desde $6,000 MXN. Incluye SEO, diseño y WhatsApp.',
-  },
 };
 ---
 
 <BaseLayout
   title="Desarrollo Web en Zihuatanejo e Ixtapa"
-  description="Sitios web y sistemas digitales para negocios en Zihuatanejo. SEO local, WhatsApp automatizado e identidad visual. Desde $6,000 MXN — AntonyDev."
+  description="Sitios web y sistemas digitales para negocios en Zihuatanejo. SEO local, WhatsApp automatizado e identidad visual integrada. Cotización personalizada — AntonyDev."
   schema={[faqSchema, serviceSchema]}
   breadcrumbs={breadcrumbs}
 >
@@ -100,7 +94,7 @@ const serviceSchema = {
           automatizado y SEO local, todo integrado y funcionando desde el primer día.
         </p>
         <div class="hero-cta-row">
-          <p class="price-badge">Desde $6,000 MXN</p>
+          <p class="price-badge">Cotización personalizada</p>
           <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
             <WhatsAppIcon />
             Cotizar mi proyecto
@@ -151,8 +145,8 @@ const serviceSchema = {
           <div class="sidebar-card">
             <h3>Inversión</h3>
             <dl class="sidebar-dl">
-              <dt>Precio base</dt>
-              <dd>Desde $6,000 MXN</dd>
+              <dt>Inversión</dt>
+              <dd>Cotización a medida</dd>
               <dt>Tiempo entrega</dt>
               <dd>2-4 semanas</dd>
               <dt>Incluye</dt>

@@ -1,12 +1,24 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { Redis } from '@upstash/redis';
+import { Ratelimit } from '@upstash/ratelimit';
 
 export const prerender = false;
 
-const RATE_LIMIT_MAX = 5;
-const RATE_LIMIT_WINDOW_MS = 3_600_000; // 1 hour
-const rateLimitMap = new Map<string, number[]>();
+// Serverless-safe rate limiting via Upstash Redis.
+// Falls back gracefully (no rate limit) if env vars are absent — safe for local dev.
+// 5 submissions per IP per 30-minute sliding window.
+const ratelimit = (() => {
+  const url   = import.meta.env.UPSTASH_REDIS_REST_URL;
+  const token = import.meta.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  return new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(5, '30 m'),
+    analytics: false,
+  });
+})();
 
 const ContactSchema = z.object({
   nombre:   z.string()
@@ -149,15 +161,19 @@ function buildEmailHtml(params: {
 }
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
-  // Rate limit
-  const now = Date.now();
-  const ip = clientAddress ?? 'unknown';
-  const hits = (rateLimitMap.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
-
-  if (hits.length >= RATE_LIMIT_MAX) {
-    return json({ error: 'Demasiados intentos. Intenta en una hora.' }, 429);
+  // Rate limit — enforced via Upstash Redis (serverless-safe, sliding window)
+  // Skipped in local dev when env vars are absent; fails open on Redis errors.
+  const ip = clientAddress ?? '127.0.0.1';
+  if (ratelimit) {
+    try {
+      const { success } = await ratelimit.limit(ip);
+      if (!success) {
+        return json({ error: 'Demasiados intentos. Intenta más tarde.' }, 429);
+      }
+    } catch {
+      // Redis unavailable — fail open, let request through
+    }
   }
-  rateLimitMap.set(ip, [...hits, now]);
 
   // Parse
   const body = await request.json().catch(() => null);
@@ -184,8 +200,12 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
   const resendKey    = import.meta.env.RESEND_API_KEY;
   const contactEmail = import.meta.env.CONTACT_EMAIL ?? 'hola@antonydev.com';
+
   const referer = request.headers.get('referer') ?? '';
-  const origin  = referer ? (new URL(referer).pathname || '/') : '/';
+  let origin = '/';
+  if (referer) {
+    try { origin = new URL(referer).pathname || '/'; } catch { /* ignore malformed referer */ }
+  }
 
   if (!resendKey) {
     return json({ error: 'Servicio de correo no configurado.' }, 503);

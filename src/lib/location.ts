@@ -21,7 +21,7 @@ export const LOCATION = {
 export const BRAND = {
   name: 'AntonyDev',
   legalName: 'Antonio Valdovinos',
-  alternateName: 'Antony Valdovinos',
+  alternateName: 'AntonyDev',
   jobTitle: 'Desarrollador Web Fullstack',
   siteUrl: 'https://antonydev.com',
   description: `Desarrollo web, identidad digital y automatización para negocios en ${LOCATION.city} e ${LOCATION.city2}. Fundado por Antonio Valdovinos.`,

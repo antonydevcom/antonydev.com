@@ -191,22 +191,43 @@ const waLink = getWhatsAppLink('hero');
     width: auto !important;
     max-width: none !important;
     mix-blend-mode: multiply;
-    transform: scale(1.52);
+    /* Mobile: scale up vs desktop so mark width tracks headline proportionally. */
+    transform: scale(2.08);
     transform-origin: 50% 100%;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :global(.hero-logo-motion-root .hero-logo) {
+      transform: scale(2.22);
+    }
+  }
+
+  @media (min-width: 1024px) {
     :global(.hero-logo-motion-root .hero-logo) {
       transform: scale(1.68);
     }
   }
 
-  /* Desktop: mark reads too high vs navbar — nudge down without touching layout flow. */
+  /* Mobile / tablet: base lower so float clears navbar (flow unchanged). */
+  @media (max-width: 767px) {
+    :global(.hero-logo-motion-root) {
+      transform: translateY(clamp(1.35rem, 3.5vh, 2.75rem));
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :global(.hero-logo-motion-root) {
+      transform: translateY(clamp(1.5rem, 3.2vh, 3rem));
+    }
+  }
+
+  /* Desktop: size + vertical balance (leave as-is). */
   @media (min-width: 1024px) {
     :global(.hero-logo-motion-root) {
       transform: translateY(clamp(2.5rem, 5.5vh, 5rem));
     }
   }
+
   .hero-kicker {
     font-family: var(--font-body);
     font-size: 0.6rem;

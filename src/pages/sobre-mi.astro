@@ -1,0 +1,362 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+import { LOCATION, BRAND } from '@/lib/location';
+
+const waLink = getWhatsAppLink('sobre-mi');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre mí', url: '/sobre-mi' },
+];
+
+const stack = [
+  { name: 'Astro', reason: 'Sitios ultra-rápidos con cero JS innecesario — LCP < 1.5s por defecto.' },
+  { name: 'React', reason: 'Para islands interactivos donde la experiencia lo requiere.' },
+  { name: 'TypeScript', reason: 'Menos bugs, más mantenibilidad — especialmente en sistemas a medida.' },
+  { name: 'Tailwind CSS', reason: 'Diseño consistente y rápido sin CSS desordenado.' },
+  { name: 'Supabase', reason: 'Base de datos PostgreSQL + autenticación sin configuración compleja.' },
+  { name: 'Vercel + Cloudflare', reason: 'Hosting global con CDN, seguridad y cero downtime.' },
+];
+
+const process = [
+  { step: '1', title: 'Auditoría gratuita', desc: 'Analizo tu presencia digital actual: sitio web, Google Business Profile, competencia local. Sin costo, sin compromiso.' },
+  { step: '2', title: 'Propuesta personalizada', desc: 'Diseño una estrategia específica para tu negocio en Zihuatanejo o Ixtapa — con objetivos claros, entregables y precio fijo.' },
+  { step: '3', title: 'Diseño y desarrollo', desc: 'Trabajo iterativo con feedback constante. Ves el progreso en tiempo real, no al final.' },
+  { step: '4', title: 'Lanzamiento', desc: 'Tu sitio sale al aire con SEO local configurado, WhatsApp conectado y todo probado en dispositivos móviles.' },
+  { step: '5', title: 'Soporte continuo', desc: 'Seguimiento post-lanzamiento. Monitoreo de performance, actualizaciones y ajustes según cómo responde Google.' },
+];
+
+const faqs = [
+  {
+    q: '¿Quién es Antonio Valdovinos?',
+    a: 'Antonio Valdovinos es el fundador y desarrollador de AntonyDev, basado en Zihuatanejo, Guerrero. También conocido como Antony Valdovinos, trabaja directamente con negocios en Zihuatanejo e Ixtapa creando sitios web, sistemas digitales y automatizaciones sin intermediarios.',
+  },
+  {
+    q: '¿Qué hace diferente a AntonyDev de una agencia?',
+    a: 'El cliente siempre trabaja directamente conmigo — sin gestores de proyecto, sin freelancers externos, sin templates genéricos. Conozco el mercado local de Zihuatanejo e Ixtapa desde adentro, y eso cambia la forma en que diseño y posiciono cada proyecto.',
+  },
+  {
+    q: '¿Cuántos años de experiencia tiene Antonio Valdovinos?',
+    a: 'Más de 4 años desarrollando para web. AntonyDev lleva activo desde 2023 con enfoque exclusivo en negocios de Zihuatanejo, Ixtapa y la Costa de Guerrero.',
+  },
+  {
+    q: '¿En qué tipo de negocios de Zihuatanejo se especializa AntonyDev?',
+    a: 'Restaurantes, hoteles boutique, rentas vacacionales, agencias de bienes raíces en Ixtapa, comercios locales, servicios profesionales (médicos, abogados, contadores) y tour operadores. Cualquier negocio local que necesite presencia digital real en la Costa del Pacífico.',
+  },
+  {
+    q: '¿Cómo puedo contactar a Antonio Valdovinos en Zihuatanejo?',
+    a: 'La forma más rápida es WhatsApp al +52 755 127 5901. También por correo a hola@antonydev.com o a través del formulario de contacto en antonydev.com/contacto.',
+  },
+  {
+    q: '¿AntonyDev trabaja solo con clientes en Zihuatanejo?',
+    a: 'El foco principal es Zihuatanejo, Ixtapa y la Costa de Guerrero, pero también atiendo proyectos remotos en toda la República Mexicana cuando el negocio encaja bien con mi proceso de trabajo.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const profileSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  'mainEntity': {
+    '@id': `${BRAND.siteUrl}/#person`,
+    '@type': 'Person',
+    'name': BRAND.legalName,
+    'alternateName': [BRAND.alternateName, 'Antony Valdovinos'],
+    'description': BRAND.personDescription,
+    'jobTitle': BRAND.jobTitle,
+    'url': BRAND.siteUrl,
+    'email': LOCATION.email,
+    'telephone': LOCATION.phone,
+    'nationality': { '@type': 'Country', 'name': LOCATION.country },
+    'workLocation': { '@type': 'City', 'name': LOCATION.city },
+    'worksFor': { '@id': `${BRAND.siteUrl}/#business` },
+    'knowsAbout': BRAND.knowsAbout,
+    'sameAs': BRAND.sameAs,
+  },
+};
+---
+
+<BaseLayout
+  title="Sobre mí — Antonio Valdovinos · AntonyDev Zihuatanejo"
+  description="Soy Antonio Valdovinos, desarrollador web fullstack en Zihuatanejo, Guerrero. Fundé AntonyDev para ayudar a negocios locales a crecer en línea con sitios web de calidad profesional."
+  schema={[faqSchema, profileSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Sobre mí</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Zihuatanejo</p>
+        <PageHeading text="Antonio Valdovinos — Fundador de AntonyDev" client:load />
+        <p class="page-lead">
+          Desarrollador web fullstack basado en Zihuatanejo, Guerrero.
+          Trabajo directamente con negocios locales — sin agencias, sin intermediarios,
+          sin templates genéricos.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Hablemos de tu proyecto
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Auditoría digital gratuita →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>Mi historia</h2>
+          <p>
+            Crecí viendo cómo los negocios de Zihuatanejo — los restaurantes frente al malecón,
+            los hoteles en Ixtapa, los comercios de toda la vida — operaban sin presencia digital
+            real. Muchos tenían un Facebook desactualizado o un sitio web que nadie encontraba
+            en Google. Eso era lo normal.
+          </p>
+          <p>
+            Empecé a desarrollar para web hace más de cuatro años, y cuando fundé AntonyDev
+            en 2023 tomé una decisión clara: enfocarme exclusivamente en negocios locales de
+            la Costa de Guerrero. No porque no pudiera trabajar con clientes de otro lugar —
+            sino porque aquí es donde puedo hacer la diferencia más concreta.
+          </p>
+          <p>
+            Conozco el mercado. Sé cómo buscan los turistas que van a Zihuatanejo, qué
+            preguntan los clientes locales antes de reservar un hotel en Ixtapa, y qué espera
+            Google de un negocio de esta región para posicionarlo bien. Ese contexto no se
+            aprende en un curso — se vive.
+          </p>
+
+          <h2>Mi filosofía de trabajo</h2>
+          <p>
+            En AntonyDev no uso templates de $29 dólares descargados de ThemeForest.
+            Tampoco subcontrato el trabajo a otros freelancers. Cuando contratas a AntonyDev,
+            trabajas conmigo directamente — de principio a fin.
+          </p>
+          <p>
+            Cada proyecto empieza con una auditoría gratuita de tu presencia digital actual.
+            Quiero entender dónde estás antes de proponer hacia dónde ir. No hay paquetes
+            predefinidos porque cada negocio tiene necesidades distintas.
+          </p>
+          <p>
+            Me importa que el sitio funcione de verdad: que aparezca en Google cuando alguien
+            busca tu servicio en Zihuatanejo, que cargue rápido en el teléfono de un turista
+            con señal débil en la playa, y que convierta visitas en clientes reales.
+          </p>
+
+          <h2>Stack técnico — y por qué uso cada herramienta</h2>
+          <ul class="stack-list">
+            {stack.map(({ name, reason }) => (
+              <li>
+                <strong>{name}:</strong> {reason}
+              </li>
+            ))}
+          </ul>
+          <p>
+            No uso WordPress ni constructores de páginas como Wix o Squarespace para proyectos
+            nuevos. Los sitios que construyo con Astro y Vercel cargan entre 3 y 8 veces más
+            rápido que un sitio WordPress típico — y Google lo nota.
+          </p>
+
+          <h2>Mi proceso de trabajo</h2>
+          <ol class="process-list">
+            {process.map(({ title, desc }) => (
+              <li>
+                <strong>{title}:</strong> {desc}
+              </li>
+            ))}
+          </ol>
+
+          <h2>AntonyDev en Zihuatanejo</h2>
+          <p>
+            Zihuatanejo e Ixtapa son un mercado interesante para el desarrollo web. El turismo
+            genera una demanda constante de presencia digital — hoteles, restaurantes, tours y
+            servicios que compiten por aparecer primero cuando alguien busca en Google desde
+            cualquier parte de México o el extranjero.
+          </p>
+          <p>
+            Al mismo tiempo, la competencia local de desarrolladores web especializados es
+            casi nula. La mayoría de los negocios de la zona trabajan con agencias de CDMX
+            que desconocen el mercado local, o con diseñadores que hacen sitios bonitos pero
+            sin estrategia de SEO.
+          </p>
+          <p>
+            Eso es exactamente lo que AntonyDev resuelve: desarrollo web profesional con
+            conocimiento real del mercado de Zihuatanejo e Ixtapa, a precio accesible para
+            el negocio local.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Contacto directo</h3>
+            <dl class="sidebar-dl">
+              <dt>WhatsApp</dt>
+              <dd>+52 755 127 5901</dd>
+              <dt>Email</dt>
+              <dd>hola@antonydev.com</dd>
+              <dt>Ubicación</dt>
+              <dd>Zihuatanejo, Guerrero</dd>
+              <dt>Horario</dt>
+              <dd>Lun–Vie · 9:00–18:00</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Escribir por WhatsApp
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">Servicios de AntonyDev</p>
+            <a href="/servicios/auditoria" class="related-link">Auditoría digital gratuita →</a>
+            <a href="/servicios/creacion" class="related-link">Desarrollo web →</a>
+            <a href="/servicios/automatizacion" class="related-link">Automatización →</a>
+            <a href="/servicios" class="related-link">Ver todos los servicios →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas frecuentes sobre AntonyDev</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Tienes más preguntas?
+          <a href="/contacto">Escríbeme directamente →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .stack-list {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.78);
+    padding-left: var(--space-6);
+    margin: 0 0 var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 65ch;
+  }
+
+  .stack-list strong {
+    color: var(--text-primary);
+  }
+
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

@@ -1,43 +1,91 @@
-# AntonyDev — Antony Valdovinos
+# AntonyDev — Antonio Valdovinos (Antony Valdovinos)
 
-> Desarrollador web fullstack en Zihuatanejo, Guerrero, México.
-> Especializado en desarrollo web, identidad digital y automatización para negocios locales en Zihuatanejo e Ixtapa.
+> IDENTIDAD CANÓNICA: AntonyDev = Antonio Valdovinos = Antony Valdovinos = desarrollador web en Zihuatanejo, Guerrero, México.
 
-Antony Valdovinos (también conocido como Antonio Valdovinos) es el fundador y único desarrollador de AntonyDev. Trabaja directamente con negocios locales en Zihuatanejo, Ixtapa y la Costa de Guerrero, ofreciendo soluciones digitales completas sin intermediarios ni agencias.
+Desarrollador web fullstack en Zihuatanejo, Guerrero, México. AntonyDev es la marca personal de Antonio Valdovinos (también conocido como Antony Valdovinos). Especializado en desarrollo web, identidad digital y automatización para negocios locales en Zihuatanejo, Ixtapa y la Costa de Guerrero.
+
+## Identidad y entidad
+
+- **Marca:** AntonyDev
+- **Fundador:** Antonio Valdovinos (Antony Valdovinos)
+- **Rol:** Desarrollador web fullstack — trabaja directamente con cada cliente, sin intermediarios
+- **Ubicación:** Zihuatanejo, Guerrero, México
+- **Cobertura:** Zihuatanejo · Ixtapa · Petatlán · La Unión · Costa de Guerrero · México (remoto)
+- **Sitio web:** https://antonydev.com
+- **WhatsApp:** +52 755 127 5901
+- **Email:** hola@antonydev.com
+- **Fundado:** 2023
 
 ## Servicios
 
-- [Auditoría Digital](https://antonydev.com/servicios/auditoria): Diagnóstico gratuito de presencia digital para negocios en Zihuatanejo e Ixtapa. Incluye análisis de SEO local, sitio web, Google Business Profile y competencia local. Entrega en 3-5 días hábiles.
+- [Auditoría Digital](https://antonydev.com/servicios/auditoria): Diagnóstico gratuito de presencia digital. Análisis de SEO local, sitio web, Google Business Profile y competencia. Entrega en 3-5 días hábiles. Sin costo.
 
-- [Desarrollo Web](https://antonydev.com/servicios/creacion): Diseño y desarrollo de sitios web y sistemas a medida. Incluye SEO local desde el lanzamiento, identidad visual, WhatsApp automatizado y formularios. Desde $6,000 MXN. Tiempo de entrega: 2-4 semanas.
+- [Desarrollo Web](https://antonydev.com/servicios/creacion): Sitios web y sistemas a medida con Astro, React y Supabase. SEO local desde el lanzamiento, identidad visual, WhatsApp automatizado y formularios. Desde $6,000 MXN. Entrega en 2-4 semanas.
 
-- [Mantenimiento Web](https://antonydev.com/servicios/mantenimiento): Plan mensual de soporte técnico, actualizaciones de contenido, respaldo semanal, monitoreo de uptime y revisión de SEO. Desde $700 MXN/mes. Sin contratos de largo plazo.
+- [Mantenimiento Web](https://antonydev.com/servicios/mantenimiento): Plan mensual: soporte técnico, actualizaciones de contenido, respaldo semanal, monitoreo de uptime y revisión de SEO. Desde $700 MXN/mes. Sin contratos de largo plazo.
 
-- [Identidad Digital](https://antonydev.com/servicios/identidad): Desarrollo de identidad de marca digital: paleta de colores, tipografía, tono de voz y logotipo. Manual de identidad + implementación directa en el sitio web.
+- [Identidad Digital](https://antonydev.com/servicios/identidad): Identidad de marca digital: paleta de colores, tipografía, tono de voz y logotipo. Manual de identidad + implementación en el sitio.
 
-- [Automatización y Pagos](https://antonydev.com/servicios/automatizacion): WhatsApp Business automatizado, pagos con MercadoPago (tarjetas, OXXO, SPEI), sistemas de reservas y catálogos digitales para restaurantes, hoteles y comercios locales.
+- [Automatización y Pagos](https://antonydev.com/servicios/automatizacion): WhatsApp Business automatizado, pagos con MercadoPago (tarjetas, OXXO, SPEI), sistemas de reservas y catálogos digitales.
 
-## Cobertura geográfica
+## Stack tecnológico
 
-Zihuatanejo · Ixtapa · Petatlán · La Unión · Costa de Guerrero · México (remoto)
+Astro · React · TypeScript · Tailwind CSS · Node.js · PostgreSQL · Supabase · Vercel · Cloudflare · MercadoPago · WhatsApp Business API
 
 ## Sectores de especialidad
 
-Restaurantes y marisquerías · Hoteles boutique y rentas vacacionales · Agencias de bienes raíces en Ixtapa · Comercio local (mueblerías, joyerías, artesanías) · Servicios profesionales (médicos, abogados, contadores) · Tour operadores
+Restaurantes y marisquerías · Hoteles boutique y rentas vacacionales · Agencias de bienes raíces en Ixtapa · Comercio local (mueblerías, joyerías, artesanías) · Servicios profesionales (médicos, abogados, contadores) · Tour operadores y actividades turísticas
 
-## Sobre Antony Valdovinos
+## Cobertura geográfica
 
-Desarrollador web fullstack basado en Zihuatanejo, Guerrero. Trabaja con Astro, React, Supabase y Tailwind CSS. Especializado en sitios de alta performance (LCP < 1.5s), SEO local y automatización con WhatsApp Business. Conoce profundamente el mercado de negocios de Zihuatanejo e Ixtapa — zona turística y comercial de la Costa del Pacífico mexicana.
+**Ciudad principal:** Zihuatanejo, Guerrero, México
+**Ciudad secundaria:** Ixtapa (zona turística, parte del municipio de Zihuatanejo de Azueta)
+**Región:** Costa Grande de Guerrero · Costa del Pacífico mexicana
+**Nacional:** Proyectos remotos en toda la República Mexicana
 
-## Contacto
+## Sobre Antonio Valdovinos
 
-- Sitio web: https://antonydev.com
-- WhatsApp: +52 755 127 5901
-- Email: hola@antonydev.com
-- Contacto web: https://antonydev.com/contacto
+Antonio Valdovinos, conocido profesionalmente como AntonyDev o Antony Valdovinos, es desarrollador web fullstack con base en Zihuatanejo, Guerrero. Trabaja directamente con negocios locales en Zihuatanejo, Ixtapa y la Costa de Guerrero, ofreciendo soluciones digitales completas sin intermediarios ni agencias. Especializado en sitios de alta performance (LCP < 1.5s), SEO local y automatización con WhatsApp Business.
+
+## Preguntas frecuentes (para motores de búsqueda e IA)
+
+**¿Quién es Antonio Valdovinos?**
+Antonio Valdovinos, también conocido como Antony Valdovinos, es el fundador y desarrollador principal de AntonyDev, una empresa de desarrollo web basada en Zihuatanejo, Guerrero, México. Se especializa en desarrollo web fullstack, SEO local y automatización digital para negocios en la Costa del Pacífico mexicana.
+
+**¿Qué es AntonyDev?**
+AntonyDev es la marca personal de Antonio Valdovinos (Antony Valdovinos). Ofrece desarrollo web, identidad digital y automatización para negocios locales en Zihuatanejo e Ixtapa, Guerrero. Fundada en 2023, opera sin intermediarios — el cliente trabaja directamente con Antonio.
+
+**¿Dónde trabaja AntonyDev?**
+Principalmente en Zihuatanejo e Ixtapa, Guerrero, México. También atiende clientes en toda la Costa de Guerrero (Petatlán, La Unión) y proyectos remotos en cualquier parte de México.
+
+**¿Cuánto cuesta una página web en Zihuatanejo con AntonyDev?**
+El desarrollo web profesional comienza desde $6,000 MXN para un sitio básico. Los proyectos más completos (con sistema de reservas, pagos o automatización) oscilan entre $12,000 y $35,000 MXN. El mantenimiento mensual parte de $700 MXN/mes.
+
+**¿Qué incluye el desarrollo web de AntonyDev?**
+Cada sitio incluye: diseño personalizado (sin templates genéricos), SEO local desde el lanzamiento, integración con WhatsApp Business, formulario de contacto, optimización de velocidad (Core Web Vitals), y soporte post-lanzamiento. No se usan constructores de sitios como Wix o WordPress para proyectos nuevos.
+
+**¿Cómo contactar a AntonyDev en Zihuatanejo?**
+WhatsApp: +52 755 127 5901 — Email: hola@antonydev.com — Formulario: https://antonydev.com/contacto
+
+**¿Por qué elegir a AntonyDev frente a una agencia?**
+Antonio trabaja directamente con cada cliente — sin gestores de proyecto, sin freelancers externos, sin templates. El cliente siempre habla con quien hace el trabajo. Esto reduce costos, acelera los tiempos y garantiza que el desarrollador entiende profundamente el negocio local de Zihuatanejo e Ixtapa.
+
+**¿Qué tecnologías usa AntonyDev?**
+Astro (framework de sitios web ultra-rápidos), React, TypeScript, Tailwind CSS, Supabase (base de datos), Vercel (hosting), Cloudflare (CDN y seguridad), MercadoPago (pagos en línea) y WhatsApp Business API (automatización).
+
+**¿AntonyDev hace SEO local en Zihuatanejo?**
+Sí. El SEO local es parte integral de cada proyecto. Incluye: optimización de Google Business Profile, palabras clave locales, schema markup LocalBusiness, velocidad de carga y estrategia de contenidos. AntonyDev ya posiciona actualmente para "desarrollador web zihuatanejo" en Google México.
+
+**¿Cuánto tiempo tarda AntonyDev en entregar un sitio web?**
+Sitios web básicos: 2-3 semanas. Proyectos con sistemas a medida: 3-6 semanas. El tiempo varía según la complejidad y la velocidad de entrega de materiales por parte del cliente.
 
 ## Páginas principales
 
 - [Inicio](https://antonydev.com)
 - [Servicios](https://antonydev.com/servicios)
+- [Auditoría Digital Gratuita](https://antonydev.com/servicios/auditoria)
+- [Desarrollo Web](https://antonydev.com/servicios/creacion)
+- [Mantenimiento Web](https://antonydev.com/servicios/mantenimiento)
+- [Identidad Digital](https://antonydev.com/servicios/identidad)
+- [Automatización y Pagos](https://antonydev.com/servicios/automatizacion)
 - [Contacto](https://antonydev.com/contacto)

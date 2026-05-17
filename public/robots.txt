@@ -16,5 +16,26 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
 Sitemap: https://antonydev.com/sitemap.xml
 LLMs: https://antonydev.com/llms.txt

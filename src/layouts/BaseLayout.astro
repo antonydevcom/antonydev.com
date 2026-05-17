@@ -39,10 +39,12 @@ const baseSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'ProfessionalService',
+      '@type': ['ProfessionalService', 'LocalBusiness'],
       '@id': `${SITE_URL}/#business`,
       'name': BRAND.name,
       'legalName': BRAND.legalName,
+      'foundingDate': String(BRAND.foundingYear),
+      'slogan': BRAND.tagline,
       'url': SITE_URL,
       'description': BRAND.description,
       'telephone': LOCATION.phone,
@@ -93,11 +95,14 @@ const baseSchema = {
       '@type': 'Person',
       '@id': `${SITE_URL}/#person`,
       'name': BRAND.legalName,
-      'alternateName': BRAND.alternateName,
+      'alternateName': [BRAND.alternateName, 'Antony Valdovinos'],
+      'description': BRAND.personDescription,
       'jobTitle': BRAND.jobTitle,
       'url': SITE_URL,
       'email': LOCATION.email,
       'telephone': LOCATION.phone,
+      'nationality': { '@type': 'Country', 'name': LOCATION.country },
+      'workLocation': { '@type': 'City', 'name': LOCATION.city },
       'address': {
         '@type': 'PostalAddress',
         'addressLocality': LOCATION.city,
@@ -105,6 +110,7 @@ const baseSchema = {
         'addressCountry': LOCATION.countryCode,
       },
       'worksFor': { '@id': `${SITE_URL}/#business` },
+      'brand': { '@id': `${SITE_URL}/#business` },
       'knowsAbout': BRAND.knowsAbout,
       'sameAs': BRAND.sameAs,
     },
@@ -115,6 +121,14 @@ const baseSchema = {
       'name': `${BRAND.name} — ${BRAND.legalName}`,
       'description': BRAND.description,
       'publisher': { '@id': `${SITE_URL}/#business` },
+      'potentialAction': {
+        '@type': 'SearchAction',
+        'target': {
+          '@type': 'EntryPoint',
+          'urlTemplate': `${SITE_URL}/?q={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
     },
   ],
 };

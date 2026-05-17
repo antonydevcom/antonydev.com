@@ -1,0 +1,340 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('paginas-web-zihuatanejo');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Páginas Web Zihuatanejo', url: '/paginas-web-zihuatanejo' },
+];
+
+const tipos = [
+  { tipo: 'Landing page de negocio', desc: 'Una página clara y directa que presenta tu servicio y convierte visitas en clientes. Ideal para negocios con un servicio principal.' },
+  { tipo: 'Sitio web institucional', desc: 'Varias secciones: inicio, servicios, sobre nosotros, galería, contacto. Perfecto para restaurantes, hoteles y comercios de Zihuatanejo.' },
+  { tipo: 'Catálogo digital', desc: 'Muestra tus productos con fotos, precios y descripción. Sin necesidad de tienda en línea completa — ideal para joyerías, mueblerías y artesanías.' },
+  { tipo: 'Sitio con reservas en línea', desc: 'Calendario de disponibilidad y formulario de reserva integrado. Para hoteles, tours, clínicas y cualquier negocio que trabaje con citas.' },
+  { tipo: 'Tienda en línea', desc: 'E-commerce completo con MercadoPago — tarjetas, OXXO, transferencias. Para negocios que venden productos físicos o digitales.' },
+];
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta una página web en Zihuatanejo?',
+    a: 'El costo varía según el tipo de proyecto. Una landing page profesional cuesta desde $6,000 MXN. Un sitio web completo con varias secciones y SEO local va desde $9,000 hasta $18,000 MXN. Proyectos con reservas en línea o e-commerce tienen cotización personalizada.',
+  },
+  {
+    q: '¿Es mejor una página web propia o una página de Facebook para mi negocio en Zihuatanejo?',
+    a: 'Ambas son útiles, pero cumplen funciones distintas. Facebook es para comunidad y alcance. Una página web propia es para Google — para que los turistas que buscan tu servicio antes de llegar a Zihuatanejo te encuentren. El SEO de Facebook no posiciona en Google; el de tu sitio web sí.',
+  },
+  {
+    q: '¿Qué hace AntonyDev diferente a otros que hacen páginas web en Zihuatanejo?',
+    a: 'Tres cosas: diseño personalizado (sin templates genéricos), SEO local incluido desde el lanzamiento, y atención directa con el desarrollador — sin intermediarios. Además, los sitios que construyo con Astro cargan entre 3 y 8 veces más rápido que un sitio WordPress típico.',
+  },
+  {
+    q: '¿Puedo actualizar mi página web de Zihuatanejo yo mismo?',
+    a: 'Sí. Puedo incluir un panel de administración sencillo para que actualices textos, fotos y precios sin necesidad de contratar a un programador cada vez. También puedes contratar el plan de mantenimiento mensual para que yo haga las actualizaciones por ti.',
+  },
+  {
+    q: '¿Mi página web aparecerá en Google si la hace AntonyDev?',
+    a: 'El SEO técnico va incluido en todos los proyectos — metadatos correctos, sitemap, schema markup, velocidad de carga optimizada. El posicionamiento en Google depende también del tiempo (los resultados tardan semanas o meses), la competencia local y la constancia con el contenido. Pero el sitio sale preparado para posicionar bien.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/paginas-web-zihuatanejo#service',
+  'name': 'Páginas Web en Zihuatanejo',
+  'description': 'Diseño y desarrollo de páginas web para negocios en Zihuatanejo, Guerrero. Desde landing pages hasta e-commerce. SEO local incluido. AntonyDev — Antonio Valdovinos.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'State', 'name': 'Guerrero' },
+  ],
+  'url': 'https://antonydev.com/paginas-web-zihuatanejo',
+  'serviceType': 'Diseño y Desarrollo Web',
+};
+---
+
+<BaseLayout
+  title="Páginas Web en Zihuatanejo — AntonyDev"
+  description="Diseño de páginas web profesionales en Zihuatanejo para negocios locales. Desde $6,000 MXN. SEO local incluido, rápidas y con WhatsApp integrado. AntonyDev."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Páginas Web Zihuatanejo</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Zihuatanejo, Guerrero</p>
+        <PageHeading text="Páginas Web en Zihuatanejo" client:load />
+        <p class="page-lead">
+          Diseño y desarrollo de páginas web para negocios en Zihuatanejo e Ixtapa.
+          Cada sitio se construye con SEO local incluido para que Google encuentre
+          tu negocio antes de que los turistas lleguen a la costa.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Cotizar mi página web
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Desde $6,000 MXN →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>¿Qué tipo de página web necesita tu negocio en Zihuatanejo?</h2>
+          <p>
+            No todos los negocios necesitan el mismo tipo de sitio web. Un restaurante
+            necesita fotos del menú y cómo llegar. Un hotel necesita disponibilidad y
+            sistema de reservas. Una joyería necesita catálogo digital con precios. Y
+            una clínica necesita agenda en línea.
+          </p>
+          <p>
+            En AntonyDev no vendo paquetes predefinidos. Cada proyecto empieza con
+            entender qué necesita específicamente tu negocio — y qué tipo de página
+            web tiene más sentido para tus clientes en Zihuatanejo o Ixtapa.
+          </p>
+          <div class="tipos-grid">
+            {tipos.map(({ tipo, desc }) => (
+              <div class="tipo-card">
+                <h3>{tipo}</h3>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2>Lo que incluye cada página web en Zihuatanejo</h2>
+          <ul class="includes-list">
+            <li>Diseño personalizado según la identidad de tu negocio — sin templates de $29 dólares</li>
+            <li>SEO local configurado desde el día uno (metadatos, schema markup, sitemap)</li>
+            <li>Velocidad optimizada — carga en menos de 1.5 segundos en teléfonos con señal débil</li>
+            <li>WhatsApp Business conectado para recibir consultas directamente</li>
+            <li>Certificado SSL (HTTPS) incluido y configurado</li>
+            <li>Diseño responsive — se ve bien en teléfono, tablet y computadora</li>
+            <li>Soporte técnico durante el primer mes post-lanzamiento</li>
+          </ul>
+
+          <h2>¿Por qué tu negocio en Zihuatanejo necesita una página web propia?</h2>
+          <p>
+            Muchos negocios de Zihuatanejo dependen de una página de Facebook o de
+            aparecer en aplicaciones de reseñas. El problema: no controlas ese tráfico.
+            Si Facebook cambia su algoritmo o disminuye tu alcance orgánico, pierdes
+            visibilidad sin poder hacer nada.
+          </p>
+          <p>
+            Una página web propia es diferente. Tú la controlas. Google la indexa y la
+            muestra en resultados de búsqueda cuando alguien busca tu servicio desde
+            Guadalajara, Ciudad de México, o desde el aeropuerto de Ixtapa antes de
+            llegar al hotel.
+          </p>
+          <p>
+            El turismo de Zihuatanejo e Ixtapa genera búsquedas constantes en Google.
+            Los negocios con un sitio web bien posicionado capturan esas búsquedas.
+            Los que no tienen sitio web o tienen uno mal configurado, no aparecen.
+          </p>
+
+          <h2>Hecho por <a href="/sobre-mi">Antonio Valdovinos</a> — AntonyDev</h2>
+          <p>
+            Soy desarrollador web fullstack basado en Zihuatanejo, Guerrero. No trabajo
+            en agencia — trabajo directamente con cada cliente. Cuando me contratas, eres
+            mi único interlocutor y yo construyo tu página de principio a fin.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Páginas web en Zihuatanejo</h3>
+            <dl class="sidebar-dl">
+              <dt>Landing page</dt>
+              <dd>Desde $6,000 MXN</dd>
+              <dt>Sitio completo</dt>
+              <dd>Desde $9,000 MXN</dd>
+              <dt>E-commerce</dt>
+              <dd>Cotización</dd>
+              <dt>Entrega</dt>
+              <dd>2-4 semanas</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Cotizar mi página
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">También puede interesarte</p>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/programador-zihuatanejo" class="related-link">Programador Zihuatanejo →</a>
+            <a href="/paginas-web-guerrero" class="related-link">Páginas web Guerrero →</a>
+            <a href="/servicios" class="related-link">Todos los servicios →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre páginas web en Zihuatanejo</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Tienes más dudas? <a href="/contacto">Escríbeme directamente →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tipos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  @media (min-width: 600px) {
+    .tipos-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .tipo-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .tipo-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .tipo-card p {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(42, 32, 27, 0.7);
+    margin: 0;
+  }
+
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

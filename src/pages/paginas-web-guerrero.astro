@@ -1,0 +1,338 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('paginas-web-guerrero');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Páginas Web Guerrero', url: '/paginas-web-guerrero' },
+];
+
+const zonas = [
+  { zona: 'Zihuatanejo e Ixtapa', desc: 'Zona turística principal. Hoteles, restaurantes, tours, bienes raíces y comercio local.' },
+  { zona: 'Costa Grande', desc: 'Petatlán, La Unión, Técpan de Galeana — comercios, servicios profesionales y agronegocios.' },
+  { zona: 'Acapulco', desc: 'Proyectos remotos para negocios del puerto que necesiten desarrollo web de calidad.' },
+  { zona: 'Interior de Guerrero', desc: 'Chilpancingo, Iguala y municipios del norte — servicios profesionales, gobierno y comercio.' },
+];
+
+const faqs = [
+  {
+    q: '¿Dónde está AntonyDev en Guerrero?',
+    a: 'AntonyDev está basado en Zihuatanejo, Guerrero. Atiendo presencialmente negocios de Zihuatanejo, Ixtapa, Petatlán y La Unión. Para otros municipios de Guerrero trabajo de forma remota con reuniones por videollamada.',
+  },
+  {
+    q: '¿Puede AntonyDev hacer páginas web para negocios en Chilpancingo o Acapulco?',
+    a: 'Sí. Trabajo de forma remota con negocios en toda la República Mexicana, incluyendo Chilpancingo, Acapulco e Iguala en Guerrero. El proceso completo se puede hacer por videollamada, WhatsApp y correo.',
+  },
+  {
+    q: '¿Hay desarrolladores web en Guerrero?',
+    a: 'AntonyDev es uno de los pocos desarrolladores web fullstack basados en Guerrero con enfoque en SEO local y sistemas a medida. La mayoría de las agencias que atienden a Guerrero operan desde Ciudad de México o Guadalajara sin conocimiento real del mercado local.',
+  },
+  {
+    q: '¿Qué tipo de páginas web hace AntonyDev para negocios de Guerrero?',
+    a: 'Desde landing pages sencillas (desde $6,000 MXN) hasta sistemas complejos con base de datos, pagos en línea y automatizaciones. Para negocios turísticos de Guerrero, también desarrollamos sitios bilingüe en español e inglés.',
+  },
+  {
+    q: '¿El SEO local funciona igual en toda la Costa de Guerrero?',
+    a: 'El SEO local tiene principios universales pero la estrategia varía por zona. Zihuatanejo e Ixtapa compiten por turismo nacional e internacional. La Costa Grande tiene más competencia comercial local. El enfoque de palabras clave y contenido se adapta a cada mercado.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/paginas-web-guerrero#service',
+  'name': 'Páginas Web en Guerrero',
+  'description': 'Diseño y desarrollo de páginas web para negocios en Guerrero, México. Zihuatanejo, Ixtapa, Costa Grande y trabajo remoto en todo el estado. AntonyDev — Antonio Valdovinos.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'State', 'name': 'Guerrero' },
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'Country', 'name': 'México' },
+  ],
+  'url': 'https://antonydev.com/paginas-web-guerrero',
+  'serviceType': 'Diseño y Desarrollo Web',
+};
+---
+
+<BaseLayout
+  title="Páginas Web en Guerrero — AntonyDev"
+  description="Páginas web profesionales para negocios en Guerrero. Zihuatanejo, Ixtapa y toda la Costa de Guerrero. Desarrollo local con SEO incluido. AntonyDev — Antonio Valdovinos."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Páginas Web Guerrero</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Guerrero, México</p>
+        <PageHeading text="Páginas Web en Guerrero" client:load />
+        <p class="page-lead">
+          Desarrollo web para negocios en todo el estado de Guerrero.
+          Con base en Zihuatanejo — atención presencial en la Costa de Guerrero
+          y trabajo remoto en cualquier municipio del estado.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Solicitar cotización
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Diagnóstico gratuito →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>Desarrollo web con base en Guerrero</h2>
+          <p>
+            AntonyDev es la única empresa de desarrollo web fullstack con base en
+            Zihuatanejo, Guerrero, que combina diseño profesional, SEO local y
+            sistemas a medida. No es una agencia de Ciudad de México con un comercial
+            en la costa — es un desarrollador local que conoce el mercado de Guerrero
+            desde adentro.
+          </p>
+          <p>
+            Atiendo presencialmente negocios de Zihuatanejo, Ixtapa y la Costa Grande.
+            Para el resto del estado de Guerrero trabajo de forma remota, con el mismo
+            proceso y calidad.
+          </p>
+
+          <h2>Zonas de Guerrero que atendemos</h2>
+          <div class="zonas-grid">
+            {zonas.map(({ zona, desc }) => (
+              <div class="zona-card">
+                <h3>{zona}</h3>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2>¿Por qué los negocios de Guerrero necesitan páginas web propias?</h2>
+          <p>
+            Guerrero tiene tres economías digitales distintas: el turismo costero de
+            Zihuatanejo e Ixtapa, el turismo de playa masivo de Acapulco, y la economía
+            comercial del interior (Chilpancingo, Iguala). En los tres casos, Google
+            es el canal donde los clientes nuevos llegan primero.
+          </p>
+          <p>
+            Los negocios de Guerrero que invierten en presencia digital propia — y no
+            solo en redes sociales o plataformas de terceros — acumulan un activo
+            permanente: tráfico orgánico que crece con el tiempo y no depende de
+            algoritmos cambiantes.
+          </p>
+
+          <h2>Lo que incluye cada proyecto en Guerrero</h2>
+          <ul class="includes-list">
+            <li>Diseño personalizado adaptado a la identidad y sector del negocio</li>
+            <li>SEO técnico configurado desde el lanzamiento</li>
+            <li>Velocidad optimizada — carga rápida en zonas con señal irregular</li>
+            <li>WhatsApp Business integrado para contacto inmediato</li>
+            <li>Hosting en Vercel + Cloudflare — infraestructura de nivel enterprise</li>
+            <li>Soporte y mantenimiento disponibles después del lanzamiento</li>
+          </ul>
+
+          <h2>Hecho por <a href="/sobre-mi">Antonio Valdovinos</a> — AntonyDev · Guerrero</h2>
+          <p>
+            Fundé AntonyDev en 2023 con un propósito: llevar desarrollo web de calidad
+            al mercado de Guerrero. Sin agencias intermediarias, sin templates genéricos,
+            sin subcontratistas. Si tu negocio está en Guerrero y necesita presencia
+            digital real, podemos trabajar juntos.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Páginas web en Guerrero</h3>
+            <dl class="sidebar-dl">
+              <dt>Presencial</dt>
+              <dd>Zihuatanejo + Costa</dd>
+              <dt>Remoto</dt>
+              <dd>Todo Guerrero + México</dd>
+              <dt>Desde</dt>
+              <dd>$6,000 MXN</dd>
+              <dt>Entrega</dt>
+              <dd>2-4 semanas</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Solicitar cotización
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">También puede interesarte</p>
+            <a href="/paginas-web-zihuatanejo" class="related-link">Páginas web Zihuatanejo →</a>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/desarrollo-web-ixtapa" class="related-link">Desarrollo web Ixtapa →</a>
+            <a href="/servicios" class="related-link">Todos los servicios →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre páginas web en Guerrero</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Más preguntas? <a href="/contacto">Escríbeme →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .zonas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  @media (min-width: 600px) {
+    .zonas-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .zona-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .zona-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .zona-card p {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(42, 32, 27, 0.7);
+    margin: 0;
+  }
+
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

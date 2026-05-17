@@ -1,0 +1,323 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('desarrollo-web-zihuatanejo');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Desarrollo Web Zihuatanejo', url: '/desarrollo-web-zihuatanejo' },
+];
+
+const beneficios = [
+  'SEO local desde el lanzamiento — Google indexa tu negocio desde el primer día',
+  'Diseño personalizado — no hay dos sitios iguales en Zihuatanejo',
+  'Velocidad de carga < 1.5s — optimizado para conexiones móviles en la costa',
+  'WhatsApp Business conectado para capturar clientes directamente',
+  'Responsive — funciona perfecto en teléfono, tablet y computadora',
+  'Analítica y seguimiento de resultados desde el lanzamiento',
+];
+
+const sectores = [
+  'Restaurantes y marisquerías de la bahía de Zihuatanejo',
+  'Hoteles boutique y rentas vacacionales en Ixtapa',
+  'Agencias de bienes raíces en la zona turística',
+  'Tour operadores y actividades acuáticas',
+  'Comercios locales: joyerías, mueblerías, artesanías',
+  'Servicios profesionales: médicos, abogados, contadores',
+];
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta el desarrollo web en Zihuatanejo?',
+    a: 'En AntonyDev el precio depende del proyecto. Un sitio landing profesional con SEO local empieza desde $6,000 MXN. Proyectos con sistema de reservas, pagos en línea o catálogo digital van desde $12,000 hasta $35,000 MXN. Siempre cotización personalizada, sin costos ocultos.',
+  },
+  {
+    q: '¿Cuánto tiempo tarda el desarrollo web en Zihuatanejo?',
+    a: 'Un sitio web básico de 4-6 secciones tarda entre 2 y 3 semanas. Proyectos más complejos con sistemas a medida pueden tomar 4-6 semanas. El tiempo varía según la complejidad y la velocidad de entrega de materiales (fotos, textos, logo).',
+  },
+  {
+    q: '¿Qué incluye el desarrollo web con AntonyDev en Zihuatanejo?',
+    a: 'Cada proyecto incluye: diseño personalizado, SEO técnico desde el lanzamiento, integración con WhatsApp Business, formulario de contacto, certificado SSL, hosting configurado y un mes de soporte post-lanzamiento. Sin templates genéricos.',
+  },
+  {
+    q: '¿Por qué elegir a un desarrollador web local en Zihuatanejo?',
+    a: 'Un desarrollador local conoce el mercado: sabe cómo buscan los turistas, qué esperan los clientes locales y cómo posicionar tu negocio específicamente para las búsquedas de la Costa de Guerrero. Eso no lo da una agencia de Ciudad de México.',
+  },
+  {
+    q: '¿AntonyDev hace tiendas en línea en Zihuatanejo?',
+    a: 'Sí. Desarrollo tiendas en línea con MercadoPago integrado (tarjetas, OXXO, transferencias bancarias). También catálogos digitales para restaurantes y comercios locales que necesitan mostrar productos sin necesidad de un e-commerce completo.',
+  },
+  {
+    q: '¿Puedo ver ejemplos de desarrollo web en Zihuatanejo de AntonyDev?',
+    a: 'Sí. En la sección de proyectos de antonydev.com puedes ver trabajos realizados para negocios de la Costa de Guerrero. También puedo mostrar más ejemplos directamente por WhatsApp.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/desarrollo-web-zihuatanejo#service',
+  'name': 'Desarrollo Web en Zihuatanejo',
+  'description': 'Diseño y desarrollo de sitios web y sistemas digitales para negocios en Zihuatanejo, Guerrero. Incluye SEO local, identidad visual, WhatsApp automatizado y formularios. Cotización personalizada — AntonyDev.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'State', 'name': 'Guerrero' },
+  ],
+  'url': 'https://antonydev.com/desarrollo-web-zihuatanejo',
+  'serviceType': 'Desarrollo Web',
+};
+---
+
+<BaseLayout
+  title="Desarrollo Web en Zihuatanejo — AntonyDev"
+  description="Desarrollo web profesional en Zihuatanejo para negocios locales. Sitios rápidos, SEO local desde el lanzamiento, WhatsApp integrado. AntonyDev — Antonio Valdovinos."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Desarrollo Web Zihuatanejo</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Zihuatanejo, Guerrero</p>
+        <PageHeading text="Desarrollo Web en Zihuatanejo" client:load />
+        <p class="page-lead">
+          Sitios web y sistemas digitales para negocios en Zihuatanejo e Ixtapa.
+          Diseño a medida, SEO local desde el primer día y WhatsApp conectado
+          para convertir visitas en clientes reales.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Cotizar mi sitio web
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Auditoría gratuita →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>Desarrollo web para negocios de Zihuatanejo</h2>
+          <p>
+            Zihuatanejo e Ixtapa reciben cientos de miles de turistas al año. La mayoría
+            busca restaurantes, hoteles y actividades en Google antes de llegar — o desde
+            el teléfono mientras están en la playa. Si tu negocio no aparece en esas búsquedas,
+            estás dejando clientes para la competencia.
+          </p>
+          <p>
+            En AntonyDev desarrollo sitios web para negocios locales de Zihuatanejo que
+            combinan tres cosas que pocas agencias logran juntas: diseño profesional,
+            velocidad de carga optimizada y SEO local bien estructurado desde el primer día.
+          </p>
+          <p>
+            No uso WordPress ni Wix. Construyo con Astro y React — tecnologías que producen
+            sitios entre 3 y 8 veces más rápidos que un sitio WordPress típico. Google
+            premia la velocidad. Los clientes que llegan al sitio desde el teléfono también.
+          </p>
+
+          <h2>¿Qué incluye el desarrollo web en Zihuatanejo?</h2>
+          <ul class="includes-list">
+            {beneficios.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <h2>Sectores en Zihuatanejo que atiendo</h2>
+          <p>
+            Trabajé con negocios de múltiples sectores de la economía local de Zihuatanejo
+            e Ixtapa. Cada industria tiene necesidades distintas en su sitio web:
+          </p>
+          <ul class="business-list">
+            {sectores.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <h2>¿Por qué el SEO local importa en Zihuatanejo?</h2>
+          <p>
+            Cuando alguien busca "restaurante en Zihuatanejo" o "hotel boutique Ixtapa" en
+            Google, los primeros 3-5 resultados se llevan el 80% de los clics. Si tu negocio
+            no está ahí, no existe para ese turista.
+          </p>
+          <p>
+            El SEO local en Zihuatanejo no es misterio: requiere metadatos correctos, schema
+            markup LocalBusiness, contenido relevante para las búsquedas locales, velocidad
+            de carga adecuada y un Google Business Profile bien configurado. Eso es exactamente
+            lo que incluye cada proyecto de AntonyDev.
+          </p>
+          <p>
+            La diferencia con una agencia de CDMX es que yo conozco el mercado. Sé qué
+            buscan los turistas que van a Zihuatanejo, qué preguntan antes de reservar,
+            y cómo estructura Google las búsquedas locales de la Costa de Guerrero.
+          </p>
+
+          <h2>AntonyDev — Desarrollo web hecho en Zihuatanejo</h2>
+          <p>
+            Soy <a href="/sobre-mi">Antonio Valdovinos</a>, desarrollador web fullstack
+            basado en Zihuatanejo, Guerrero. Fundé AntonyDev en 2023 con un objetivo claro:
+            llevar desarrollo web profesional al mercado local de la Costa de Guerrero,
+            a precios accesibles para el negocio local.
+          </p>
+          <p>
+            Trabajo directamente con cada cliente — sin intermediarios, sin gestores
+            de proyecto, sin subcontratistas. Cuando me contratas, hablas conmigo y yo
+            hago el trabajo. Eso se nota en el resultado.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Desarrollo web en Zihuatanejo</h3>
+            <dl class="sidebar-dl">
+              <dt>Precio desde</dt>
+              <dd>$6,000 MXN</dd>
+              <dt>Tiempo entrega</dt>
+              <dd>2-4 semanas</dd>
+              <dt>Incluye SEO</dt>
+              <dd>Sí, desde el lanzamiento</dd>
+              <dt>Soporte</dt>
+              <dd>1 mes post-lanzamiento</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Cotizar mi proyecto
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">Páginas relacionadas</p>
+            <a href="/programador-zihuatanejo" class="related-link">Programador en Zihuatanejo →</a>
+            <a href="/paginas-web-zihuatanejo" class="related-link">Páginas web Zihuatanejo →</a>
+            <a href="/desarrollo-web-ixtapa" class="related-link">Desarrollo web Ixtapa →</a>
+            <a href="/servicios/creacion" class="related-link">Ver servicio completo →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre desarrollo web en Zihuatanejo</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Más preguntas? <a href="/contacto">Escríbeme →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

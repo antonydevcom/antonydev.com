@@ -1,0 +1,316 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getCollection, render } from 'astro:content';
+import { BRAND } from '@/lib/location';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: post.data.title, url: `/blog/${post.id}` },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${BRAND.siteUrl}/blog/${post.id}#article`,
+  'headline': post.data.title,
+  'description': post.data.description,
+  'datePublished': post.data.publishedDate,
+  'dateModified': post.data.publishedDate,
+  'author': {
+    '@id': `${BRAND.siteUrl}/#person`,
+    '@type': 'Person',
+    'name': BRAND.legalName,
+  },
+  'publisher': {
+    '@id': `${BRAND.siteUrl}/#business`,
+    '@type': 'Organization',
+    'name': BRAND.name,
+  },
+  'url': `${BRAND.siteUrl}/blog/${post.id}`,
+  ...(post.data.image ? {
+    'image': {
+      '@type': 'ImageObject',
+      'url': `${BRAND.siteUrl}${post.data.image}`,
+    },
+  } : {}),
+  'inLanguage': 'es-MX',
+  'about': {
+    '@type': 'Thing',
+    'name': 'Desarrollo Web en Zihuatanejo',
+  },
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedDate={post.data.publishedDate}
+  image={post.data.image}
+  schema={articleSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <a href="/blog">Blog</a><span aria-hidden="true">/</span>
+          <span aria-current="page">{post.data.title}</span>
+        </nav>
+
+        <div class="article-meta">
+          <time class="article-date" datetime={post.data.publishedDate}>
+            {new Date(post.data.publishedDate).toLocaleDateString('es-MX', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+          <span class="article-author">por <a href="/sobre-mi">{post.data.author}</a></span>
+        </div>
+
+        <h1 class="article-title">{post.data.title}</h1>
+        <p class="page-lead">{post.data.description}</p>
+      </div>
+    </section>
+
+    {post.data.image && (
+      <div class="article-hero-img-wrap">
+        <div class="container">
+          <img
+            src={post.data.image}
+            alt={post.data.imageAlt ?? post.data.title}
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="article-hero-img"
+          />
+        </div>
+      </div>
+    )}
+
+    <section class="article-section">
+      <div class="container article-grid">
+        <article class="article-body">
+          <Content />
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Sobre el autor</h3>
+            <p class="author-bio">
+              <a href="/sobre-mi">Antonio Valdovinos</a> es desarrollador web fullstack
+              y fundador de AntonyDev, basado en Zihuatanejo, Guerrero.
+            </p>
+            <a href="/contacto" class="sidebar-cta">Trabajar con Antonio →</a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">Servicios de AntonyDev</p>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/servicios/auditoria" class="related-link">Auditoría gratuita →</a>
+            <a href="/servicios/creacion" class="related-link">Crear mi sitio web →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .article-date {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(42, 32, 27, 0.48);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .article-author {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: rgba(42, 32, 27, 0.6);
+  }
+
+  .article-author a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-6);
+    max-width: 25ch;
+  }
+
+  .article-hero-img-wrap {
+    padding: 0 0 var(--space-2);
+  }
+
+  .article-hero-img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    display: block;
+  }
+
+  .article-section {
+    padding: clamp(3rem, 8vw, 5rem) 0 clamp(4rem, 10vw, 7rem);
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .article-grid {
+      grid-template-columns: 1fr 280px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .article-grid {
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-16);
+    }
+  }
+
+  .article-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: var(--space-12) 0 var(--space-6);
+    letter-spacing: -0.02em;
+  }
+
+  .article-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: var(--space-10) 0 var(--space-4);
+    letter-spacing: -0.01em;
+  }
+
+  .article-body :global(p) {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    color: rgba(42, 32, 27, 0.78);
+    margin: 0 0 var(--space-6);
+    max-width: 70ch;
+  }
+
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.78);
+    padding-left: var(--space-6);
+    margin: 0 0 var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 65ch;
+  }
+
+  .article-body :global(strong) {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .article-body :global(a) {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-body :global(blockquote) {
+    border-left: 3px solid var(--color-taupe);
+    padding-left: var(--space-6);
+    margin: var(--space-8) 0;
+    font-style: italic;
+    color: rgba(42, 32, 27, 0.65);
+  }
+
+  .author-bio {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(42, 32, 27, 0.7);
+    margin: 0 0 var(--space-6) !important;
+  }
+
+  .author-bio a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

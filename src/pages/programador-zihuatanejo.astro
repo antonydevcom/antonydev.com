@@ -1,0 +1,312 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('programador-zihuatanejo');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Programador Zihuatanejo', url: '/programador-zihuatanejo' },
+];
+
+const servicios = [
+  'Sistemas de gestión a medida para negocios de Zihuatanejo',
+  'Automatización de WhatsApp Business para captura de clientes',
+  'Pasarelas de pago con MercadoPago (tarjetas, OXXO, transferencias)',
+  'Sistemas de reservas y agendamiento en línea',
+  'Catálogos digitales para restaurantes y comercios',
+  'Integración de APIs de terceros y automatizaciones',
+  'Aplicaciones web fullstack con React, TypeScript y Supabase',
+  'Auditorías técnicas de sitios web existentes',
+];
+
+const faqs = [
+  {
+    q: '¿Qué hace un programador web en Zihuatanejo?',
+    a: 'Un programador web en Zihuatanejo diseña, construye y mantiene sitios web y sistemas digitales para negocios locales. Puede crear desde una landing page sencilla hasta un sistema de gestión completo con pagos, reservas y automatizaciones.',
+  },
+  {
+    q: '¿Cuánto cobra un programador web en Zihuatanejo?',
+    a: 'Los precios varían según la complejidad del proyecto. En AntonyDev, los proyectos básicos empiezan desde $6,000 MXN. Sistemas a medida con automatizaciones y pasarelas de pago van desde $15,000 hasta $40,000 MXN dependiendo del alcance.',
+  },
+  {
+    q: '¿Qué diferencia a un programador local de una agencia de CDMX?',
+    a: 'Un programador local en Zihuatanejo conoce el mercado: entiende cómo buscan los turistas, qué necesitan los negocios de la costa y cómo estructurar un proyecto para el contexto local. Además, la comunicación es directa — sin capas de intermediarios.',
+  },
+  {
+    q: '¿Puede Antonio Valdovinos crear un sistema de reservas para mi hotel en Ixtapa?',
+    a: 'Sí. Desarrollo sistemas de reservas a medida para hoteles, rentas vacacionales y negocios turísticos en Ixtapa y Zihuatanejo. El sistema incluye calendario de disponibilidad, formulario de solicitud y notificaciones automáticas por WhatsApp y correo.',
+  },
+  {
+    q: '¿AntonyDev hace automatizaciones para negocios en Zihuatanejo?',
+    a: 'Sí. Implemento automatizaciones con WhatsApp Business API (respuestas automáticas, seguimiento de clientes), flujos de pago con MercadoPago, sistemas de reservas y notificaciones automáticas. Ideal para restaurantes, hoteles y servicios con alta demanda de atención.',
+  },
+  {
+    q: '¿Cómo contactar a un programador web en Zihuatanejo?',
+    a: 'Puedes escribirme directamente por WhatsApp al +52 755 127 5901 o por correo a hola@antonydev.com. También puedes usar el formulario de contacto en antonydev.com/contacto.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/programador-zihuatanejo#service',
+  'name': 'Programador Web en Zihuatanejo',
+  'description': 'Programador web fullstack en Zihuatanejo, Guerrero. Sistemas a medida, automatizaciones, pasarelas de pago, sistemas de reservas y aplicaciones web para negocios locales. AntonyDev — Antonio Valdovinos.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'State', 'name': 'Guerrero' },
+  ],
+  'url': 'https://antonydev.com/programador-zihuatanejo',
+  'serviceType': 'Desarrollo de Software',
+};
+---
+
+<BaseLayout
+  title="Programador en Zihuatanejo — AntonyDev · Antonio Valdovinos"
+  description="Programador web fullstack en Zihuatanejo. Sistemas a medida, automatizaciones, pagos en línea y aplicaciones web para negocios locales. AntonyDev — Antonio Valdovinos."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Programador Zihuatanejo</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Zihuatanejo, Guerrero</p>
+        <PageHeading text="Programador en Zihuatanejo" client:load />
+        <p class="page-lead">
+          Antonio Valdovinos — programador web fullstack en Zihuatanejo, Guerrero.
+          Sistemas a medida, automatizaciones y aplicaciones web para negocios
+          de la Costa de Guerrero que necesitan más que un sitio estático.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Consultar mi proyecto
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Diagnóstico gratuito →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>Programación web a medida en Zihuatanejo</h2>
+          <p>
+            Hay negocios en Zihuatanejo e Ixtapa que necesitan más que un sitio web de
+            presentación. Un hotel que gestiona reservas manualmente por WhatsApp. Un
+            restaurante que quiere recibir pedidos en línea. Una agencia de tours que
+            necesita un calendario de disponibilidad actualizado en tiempo real.
+          </p>
+          <p>
+            Eso es exactamente lo que hago. No soy un diseñador que usa WordPress —
+            soy programador fullstack. Construyo sistemas digitales a medida usando
+            Astro, React, TypeScript y Supabase, con integraciones reales: MercadoPago,
+            WhatsApp Business API, sistemas de reservas y automatizaciones.
+          </p>
+          <p>
+            Si tu negocio en Zihuatanejo o Ixtapa tiene un proceso que todavía se
+            hace a mano — cotizaciones, reservas, pagos, seguimiento de clientes —
+            probablemente haya una forma de automatizarlo.
+          </p>
+
+          <h2>¿Qué puede hacer un programador web por tu negocio en Zihuatanejo?</h2>
+          <ul class="includes-list">
+            {servicios.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <h2>Stack técnico que uso</h2>
+          <p>
+            Las herramientas que elijo no son al azar. Cada una tiene un rol específico
+            que impacta directamente el resultado:
+          </p>
+          <ul class="business-list">
+            <li><strong>Astro + React:</strong> Sitios ultra-rápidos con componentes interactivos solo donde se necesitan.</li>
+            <li><strong>TypeScript:</strong> Menos bugs en producción, más fácil de mantener con el tiempo.</li>
+            <li><strong>Supabase:</strong> Base de datos PostgreSQL en la nube, lista para escalar.</li>
+            <li><strong>MercadoPago:</strong> Pagos en línea para el mercado mexicano — tarjetas, OXXO, SPEI.</li>
+            <li><strong>WhatsApp Business API:</strong> Automatización de mensajes, seguimiento y atención al cliente.</li>
+            <li><strong>Vercel + Cloudflare:</strong> Hosting global con CDN, SSL gratuito y cero downtime.</li>
+          </ul>
+
+          <h2>¿Por qué contratar a un programador local en Zihuatanejo?</h2>
+          <p>
+            La mayoría de los negocios de Zihuatanejo que contratan programadores lo hacen
+            con agencias de Ciudad de México o plataformas de freelancers donde nadie
+            conoce el mercado local. El resultado: sistemas genéricos que no encajan con
+            cómo opera realmente un negocio de la costa.
+          </p>
+          <p>
+            Yo vivo y trabajo en Zihuatanejo. Conozco los negocios locales, las temporadas
+            altas, la lógica del turismo en Ixtapa y cómo compran los clientes de la región.
+            Eso cambia fundamentalmente cómo diseño y construyo cada sistema.
+          </p>
+
+          <h2>Antonio Valdovinos — AntonyDev</h2>
+          <p>
+            Soy el fundador de AntonyDev, <a href="/sobre-mi">desarrollador web fullstack</a>
+            con base en Zihuatanejo, Guerrero. Trabajo directamente con cada cliente —
+            sin agencias, sin subcontratistas. Si tienes un proyecto digital para tu
+            negocio en la Costa de Guerrero, hablemos.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Programador en Zihuatanejo</h3>
+            <dl class="sidebar-dl">
+              <dt>Sistemas desde</dt>
+              <dd>$6,000 MXN</dd>
+              <dt>Automatizaciones</dt>
+              <dd>Desde $4,000 MXN</dd>
+              <dt>Entrega típica</dt>
+              <dd>3-6 semanas</dd>
+              <dt>Ubicación</dt>
+              <dd>Zihuatanejo, Guerrero</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Hablar con Antonio
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">Páginas relacionadas</p>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/sistemas-gestion-zihuatanejo" class="related-link">Sistemas de gestión →</a>
+            <a href="/servicios/automatizacion" class="related-link">Automatización →</a>
+            <a href="/sobre-mi" class="related-link">Sobre Antonio Valdovinos →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre programación web en Zihuatanejo</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Tu pregunta no está aquí? <a href="/contacto">Escríbeme →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

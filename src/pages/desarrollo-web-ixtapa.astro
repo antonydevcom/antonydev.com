@@ -1,0 +1,307 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('desarrollo-web-ixtapa');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Desarrollo Web Ixtapa', url: '/desarrollo-web-ixtapa' },
+];
+
+const sectores = [
+  'Hoteles boutique e independientes en la zona hotelera de Ixtapa',
+  'Restaurantes y bares frente al mar y en la marina',
+  'Tiendas de artículos de playa, surf y buceo',
+  'Agencias de bienes raíces especializadas en propiedades en Ixtapa',
+  'Tour operadores: pesca deportiva, snorkel, parasailing, visitas a Isla Ixtapa',
+  'Spas, centros de estética y servicios de bienestar para el turismo',
+  'Rentadoras de autos y servicios de transporte turístico',
+];
+
+const diferenciadores = [
+  'Diseño pensado para el turismo: bilingüe si es necesario, con galería visual y mapa integrado',
+  'SEO enfocado en búsquedas de turistas: "hotel en Ixtapa", "restaurante en Ixtapa", "tour Ixtapa"',
+  'Integración con WhatsApp para contacto inmediato desde teléfonos con roaming',
+  'Velocidad de carga optimizada para conexiones móviles en zonas turísticas',
+  'Pasarelas de pago internacionales si el negocio atiende turismo extranjero',
+];
+
+const faqs = [
+  {
+    q: '¿Hay desarrolladores web en Ixtapa?',
+    a: 'AntonyDev ofrece desarrollo web profesional con base en Zihuatanejo (municipio de Zihuatanejo de Azueta, que incluye Ixtapa). Antonio Valdovinos trabaja presencialmente con negocios en Ixtapa y puede reunirse en persona para el proyecto.',
+  },
+  {
+    q: '¿Cuánto cuesta el desarrollo web para un hotel en Ixtapa?',
+    a: 'Los proyectos para hoteles en Ixtapa son cotizados a medida. Depende de si necesitan sistema de reservas, galería de habitaciones, integración con plataformas (Airbnb, Booking), soporte bilingüe y pasarelas de pago. Rango orientativo: $15,000 a $45,000 MXN.',
+  },
+  {
+    q: '¿Puedo tener mi sitio web en inglés y español si atiendo turismo extranjero en Ixtapa?',
+    a: 'Sí. Desarrollo sitios bilingües (español e inglés) para negocios de Ixtapa que reciben turismo extranjero. El sitio se construye con rutas independientes para cada idioma, lo que también mejora el posicionamiento en búsquedas en inglés.',
+  },
+  {
+    q: '¿AntonyDev puede integrar mi sitio con Booking o Airbnb?',
+    a: 'Puedo integrar un botón de reserva que vincule a tu perfil de Booking o Airbnb, y crear una sección de disponibilidad en tu sitio. Para integraciones más profundas con APIs de estas plataformas, hacemos una revisión técnica del alcance.',
+  },
+  {
+    q: '¿Por qué un negocio en Ixtapa necesita un sitio web propio si ya tiene perfil en TripAdvisor?',
+    a: 'TripAdvisor posiciona a TripAdvisor, no a tu negocio directamente. Tu sitio web propio aparece en Google con tu nombre, genera confianza antes de que el cliente reserve, y no depende de las reglas o comisiones de plataformas externas.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/desarrollo-web-ixtapa#service',
+  'name': 'Desarrollo Web en Ixtapa',
+  'description': 'Desarrollo web profesional para hoteles, restaurantes, tour operadores y negocios turísticos en Ixtapa, Guerrero. SEO local, sistemas de reservas y diseño personalizado. AntonyDev.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'State', 'name': 'Guerrero' },
+  ],
+  'url': 'https://antonydev.com/desarrollo-web-ixtapa',
+  'serviceType': 'Desarrollo Web Turístico',
+};
+---
+
+<BaseLayout
+  title="Desarrollo Web en Ixtapa — AntonyDev · Zihuatanejo"
+  description="Desarrollo web para hoteles, restaurantes y negocios turísticos en Ixtapa, Guerrero. SEO local, sistema de reservas, sitio bilingüe. AntonyDev — Antonio Valdovinos."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Desarrollo Web Ixtapa</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Ixtapa · Zihuatanejo</p>
+        <PageHeading text="Desarrollo Web en Ixtapa" client:load />
+        <p class="page-lead">
+          Sitios web para el sector turístico de Ixtapa — hoteles, restaurantes,
+          tour operadores y bienes raíces. Diseño orientado al turista y SEO
+          para búsquedas locales e internacionales.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Cotizar proyecto en Ixtapa
+          </a>
+          <a href="/servicios/auditoria" class="price-badge">Auditoría gratuita →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>Desarrollo web para la industria turística de Ixtapa</h2>
+          <p>
+            Ixtapa es uno de los destinos de playa más visitados del Pacífico mexicano.
+            Los hoteles, restaurantes y tour operadores de la zona reciben turistas
+            nacionales e internacionales que toman decisiones de compra basadas en lo
+            que encuentran en Google antes de llegar.
+          </p>
+          <p>
+            Un negocio turístico en Ixtapa sin sitio web propio — o con uno que carga
+            lento y no aparece en búsquedas — está perdiendo reservas frente a la
+            competencia que sí tiene presencia digital bien configurada.
+          </p>
+          <p>
+            En AntonyDev diseño sitios web pensados para el turismo en Ixtapa: visualmente
+            atractivos, rápidos en conexiones móviles, con sistema de reservas cuando se
+            necesita, y posicionados en Google para las búsquedas relevantes de la zona.
+          </p>
+
+          <h2>Sectores que atiendo en Ixtapa</h2>
+          <ul class="business-list">
+            {sectores.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <h2>Lo que hace diferente el desarrollo web para Ixtapa</h2>
+          <ul class="includes-list">
+            {diferenciadores.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <h2>¿Por qué AntonyDev en lugar de una agencia externa?</h2>
+          <p>
+            Las agencias de Ciudad de México o Guadalajara no conocen la dinámica de
+            Ixtapa. No saben que los turistas nacionales buscan en español pero muchos
+            extranjeros buscan en inglés. No conocen la temporada alta de diciembre-enero
+            ni la baja de septiembre-octubre. No entienden por qué un restaurante frente
+            al malecón tiene necesidades diferentes a uno en la marina.
+          </p>
+          <p>
+            Yo sí. Soy <a href="/sobre-mi">Antonio Valdovinos</a>, desarrollador web
+            fullstack basado en Zihuatanejo (municipio que incluye Ixtapa). Trabajo
+            presencialmente con negocios de ambas ciudades. El conocimiento local
+            se refleja en cada decisión de diseño y SEO.
+          </p>
+
+          <h2>Ixtapa + Zihuatanejo — el mismo desarrollador web</h2>
+          <p>
+            Ixtapa y Zihuatanejo son ciudades hermanas — separadas por 7 kilómetros
+            pero con mercados complementarios. Si tienes presencia en ambas zonas,
+            puedo desarrollar una estrategia digital que posicione tu negocio en las
+            búsquedas de ambas ciudades, con contenido diferenciado para cada una.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Web para negocios en Ixtapa</h3>
+            <dl class="sidebar-dl">
+              <dt>Tipo</dt>
+              <dd>Turístico / local</dd>
+              <dt>Bilingüe</dt>
+              <dd>Disponible</dd>
+              <dt>Reservas</dt>
+              <dd>Sistema incluible</dd>
+              <dt>Entrega</dt>
+              <dd>3-5 semanas</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Cotizar mi proyecto
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">También puede interesarte</p>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/paginas-web-zihuatanejo" class="related-link">Páginas web Zihuatanejo →</a>
+            <a href="/sistemas-gestion-zihuatanejo" class="related-link">Sistemas de gestión →</a>
+            <a href="/servicios" class="related-link">Todos los servicios →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre desarrollo web en Ixtapa</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Más preguntas? <a href="/contacto">Contáctame →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

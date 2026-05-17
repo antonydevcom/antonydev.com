@@ -1,0 +1,336 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+import { PageHeading } from '@/components/motion/PageHeading';
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon.astro';
+
+const waLink = getWhatsAppLink('sistemas-gestion-zihuatanejo');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Sistemas de Gestión Zihuatanejo', url: '/sistemas-gestion-zihuatanejo' },
+];
+
+const sistemas = [
+  { nombre: 'Sistema de reservas', desc: 'Calendario de disponibilidad en tiempo real, formulario de solicitud y confirmación automática por WhatsApp. Para hoteles, rentas vacacionales, tours y clínicas.' },
+  { nombre: 'Catálogo digital con pedidos', desc: 'Menú o catálogo de productos online con carrito o solicitud de pedido por WhatsApp. Para restaurantes, tiendas y negocios con entrega o pick-up.' },
+  { nombre: 'Sistema de cotizaciones', desc: 'Formulario inteligente que genera cotizaciones automáticas según las opciones que selecciona el cliente. Para mueblerías, constructoras y servicios.' },
+  { nombre: 'Panel de administración', desc: 'Panel propio para que el negocio gestione contenido, productos, reservas o clientes sin depender de un programador para cada cambio.' },
+  { nombre: 'Integración de pagos', desc: 'MercadoPago integrado — tarjetas de crédito y débito, OXXO, transferencias bancarias (SPEI). Para cualquier negocio que quiera cobrar en línea.' },
+  { nombre: 'Automatización con WhatsApp', desc: 'Respuestas automáticas, seguimiento de clientes, confirmaciones de reserva y notificaciones personalizadas vía WhatsApp Business API.' },
+];
+
+const faqs = [
+  {
+    q: '¿Qué es un sistema de gestión para negocios en Zihuatanejo?',
+    a: 'Un sistema de gestión es una aplicación web a medida que automatiza procesos de tu negocio: reservas, pedidos, cotizaciones, facturación, inventario o atención al cliente. Va más allá de un sitio web estático — permite que tu negocio opere de forma digital sin depender de hojas de cálculo o WhatsApp manual.',
+  },
+  {
+    q: '¿Cuánto cuesta un sistema de gestión en Zihuatanejo?',
+    a: 'Depende de la complejidad. Un sistema de reservas básico con panel de administración y WhatsApp automatizado puede costar entre $12,000 y $25,000 MXN. Sistemas más complejos con múltiples módulos, integraciones de pago y base de datos van desde $25,000 hasta $60,000 MXN.',
+  },
+  {
+    q: '¿AntonyDev hace sistemas de reservas para hoteles en Ixtapa?',
+    a: 'Sí. Desarrollo sistemas de reservas a medida para hoteles, rentas vacacionales y casas de playa en Ixtapa y Zihuatanejo. Incluyen calendario de disponibilidad, formulario de solicitud, confirmaciones automáticas por WhatsApp y correo, y panel de administración para el hotel.',
+  },
+  {
+    q: '¿Puedo integrar pagos en línea con mi sistema de gestión?',
+    a: 'Sí. Integro MercadoPago en cualquier sistema — acepta tarjetas de crédito y débito (Visa, Mastercard, American Express), OXXO, transferencias SPEI y pagos diferidos a meses sin intereses. Ideal para hoteles, tour operadores y comercios en Zihuatanejo e Ixtapa.',
+  },
+  {
+    q: '¿Cuánto tiempo tarda desarrollar un sistema de gestión para mi negocio en Zihuatanejo?',
+    a: 'Un sistema básico (reservas + panel + WhatsApp) tarda entre 3 y 5 semanas. Sistemas más complejos pueden tomar de 6 a 10 semanas. Antes de empezar hacemos un levantamiento de requerimientos completo para darte un tiempo de entrega exacto.',
+  },
+  {
+    q: '¿Necesito conocimientos técnicos para usar el sistema de gestión?',
+    a: 'No. El panel de administración se diseña para que cualquier persona del equipo lo pueda usar sin formación técnica. Se incluye capacitación en el uso del sistema y documentación básica al momento de la entrega.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    'name': q,
+    'acceptedAnswer': { '@type': 'Answer', 'text': a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://antonydev.com/sistemas-gestion-zihuatanejo#service',
+  'name': 'Sistemas de Gestión en Zihuatanejo',
+  'description': 'Desarrollo de sistemas de gestión a medida para negocios en Zihuatanejo e Ixtapa. Reservas en línea, pagos con MercadoPago, automatización con WhatsApp y paneles de administración. AntonyDev.',
+  'provider': { '@id': 'https://antonydev.com/#business' },
+  'areaServed': [
+    { '@type': 'City', 'name': 'Zihuatanejo' },
+    { '@type': 'City', 'name': 'Ixtapa' },
+    { '@type': 'State', 'name': 'Guerrero' },
+  ],
+  'url': 'https://antonydev.com/sistemas-gestion-zihuatanejo',
+  'serviceType': 'Desarrollo de Software a Medida',
+};
+---
+
+<BaseLayout
+  title="Sistemas de Gestión en Zihuatanejo — AntonyDev"
+  description="Sistemas de gestión a medida para negocios en Zihuatanejo e Ixtapa. Reservas en línea, pagos con MercadoPago, automatizaciones. AntonyDev — Antonio Valdovinos."
+  schema={[faqSchema, serviceSchema]}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Sistemas de Gestión Zihuatanejo</span>
+        </nav>
+        <p class="phase-badge">AntonyDev · Zihuatanejo, Guerrero</p>
+        <PageHeading text="Sistemas de Gestión en Zihuatanejo" client:load />
+        <p class="page-lead">
+          Aplicaciones web a medida para negocios en Zihuatanejo e Ixtapa que necesitan
+          más que un sitio de presentación. Reservas, pagos, catálogos, automatizaciones
+          y paneles de administración propios.
+        </p>
+        <div class="hero-cta-row">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="wa-btn">
+            <WhatsAppIcon />
+            Hablar de mi proyecto
+          </a>
+          <a href="/servicios/automatizacion" class="price-badge">Ver automatizaciones →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-grid">
+        <div class="content-body">
+
+          <h2>¿Cuándo tu negocio en Zihuatanejo necesita un sistema de gestión?</h2>
+          <p>
+            Si tu equipo sigue manejando reservas por WhatsApp, procesando pedidos en
+            papel, actualizando disponibilidad en una hoja de Excel o enviando cotizaciones
+            a mano — existe una forma más eficiente de hacerlo.
+          </p>
+          <p>
+            Un sistema de gestión no reemplaza a las personas. Las libera para que puedan
+            enfocarse en atender bien al cliente, en lugar de repetir tareas manuales.
+            Para negocios con alta temporada como los de Zihuatanejo e Ixtapa, la
+            diferencia es especialmente notable en diciembre-enero y Semana Santa.
+          </p>
+          <p>
+            No se trata de tecnología por la tecnología. Se trata de que tu negocio
+            opere mejor, cometa menos errores y atienda a más clientes con el mismo equipo.
+          </p>
+
+          <h2>Sistemas que desarrollo para negocios en Zihuatanejo</h2>
+          <div class="sistemas-grid">
+            {sistemas.map(({ nombre, desc }) => (
+              <div class="sistema-card">
+                <h3>{nombre}</h3>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2>Mi stack para sistemas de gestión</h2>
+          <ul class="business-list">
+            <li><strong>Astro + React:</strong> Frontend rápido con componentes interactivos solo donde se necesitan.</li>
+            <li><strong>Supabase:</strong> Base de datos PostgreSQL en la nube, con autenticación y permisos por usuario.</li>
+            <li><strong>TypeScript:</strong> Código más seguro y mantenible — importante en sistemas que crecen con el tiempo.</li>
+            <li><strong>MercadoPago API:</strong> Pagos en línea adaptados al mercado mexicano.</li>
+            <li><strong>WhatsApp Business API:</strong> Notificaciones y respuestas automáticas directamente en WhatsApp.</li>
+          </ul>
+
+          <h2>¿Por qué elegir a un <a href="/sobre-mi">desarrollador local</a> en Zihuatanejo?</h2>
+          <p>
+            Un sistema de gestión bien hecho requiere entender cómo opera el negocio.
+            Cómo llegan los clientes, en qué temporada, qué preguntan antes de reservar,
+            qué cuellos de botella tiene el equipo. Ese entendimiento no se transmite
+            bien por correo o en una videollamada con una agencia que no conoce la Costa.
+          </p>
+          <p>
+            Como desarrollador local en Zihuatanejo, puedo reunirme con el equipo,
+            recorrer las instalaciones y entender el negocio en su contexto real.
+            Eso se refleja en un sistema que funciona para este mercado específico.
+          </p>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Sistemas a medida</h3>
+            <dl class="sidebar-dl">
+              <dt>Sistema básico</dt>
+              <dd>Desde $12,000 MXN</dd>
+              <dt>Sistema completo</dt>
+              <dd>Desde $25,000 MXN</dd>
+              <dt>Entrega</dt>
+              <dd>3-8 semanas</dd>
+              <dt>Soporte</dt>
+              <dd>Incluido 1 mes</dd>
+            </dl>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+              Cotizar mi sistema
+            </a>
+          </div>
+          <div class="sidebar-related">
+            <p class="related-label">También puede interesarte</p>
+            <a href="/programador-zihuatanejo" class="related-link">Programador Zihuatanejo →</a>
+            <a href="/servicios/automatizacion" class="related-link">Automatización →</a>
+            <a href="/desarrollo-web-zihuatanejo" class="related-link">Desarrollo web Zihuatanejo →</a>
+            <a href="/servicios" class="related-link">Todos los servicios →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Preguntas sobre sistemas de gestión en Zihuatanejo</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">{q}</dt>
+              <dd class="faq-a">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="faq-cta">
+          ¿Tu caso es específico? <a href="/contacto">Platicamos →</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .sistemas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  @media (min-width: 600px) {
+    .sistemas-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .sistema-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .sistema-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .sistema-card p {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(42, 32, 27, 0.7);
+    margin: 0;
+  }
+
+  .faq-section {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 10vw, 7rem) 0;
+  }
+
+  .faq-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-10);
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 65ch;
+    margin: 0 0 var(--space-10);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-6) 0;
+  }
+
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+
+  .faq-a {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.72);
+    margin: 0;
+  }
+
+  .faq-cta {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(42, 32, 27, 0.6);
+    margin: 0;
+  }
+
+  .faq-cta a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .related-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.44);
+    margin: 0 0 var(--space-2);
+  }
+
+  .related-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .related-link:hover {
+    opacity: 0.7;
+  }
+</style>

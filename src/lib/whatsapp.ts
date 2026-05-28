@@ -10,6 +10,7 @@ type ContactContext =
   | 'contacto'
   | 'footer'
   | 'sobre-mi'
+  | 'portafolio'
   | 'desarrollo-web-zihuatanejo'
   | 'programador-zihuatanejo'
   | 'paginas-web-zihuatanejo'
@@ -29,6 +30,7 @@ const MESSAGES: Record<ContactContext, string> = {
   contacto:                      'Hola Antonio, vi tu página y me gustaría cotizar un proyecto.',
   footer:                        'Hola Antonio, vi tu página antonydev.com y quiero platicar.',
   'sobre-mi':                    'Hola Antonio, vi tu página y me gustaría saber más sobre tu trabajo.',
+  'portafolio':                  'Hola Antonio, vi tu portafolio y me interesa contactarte.',
   'desarrollo-web-zihuatanejo':  'Hola Antonio, me interesa desarrollar un sitio web para mi negocio en Zihuatanejo.',
   'programador-zihuatanejo':     'Hola Antonio, necesito un programador para un proyecto en Zihuatanejo.',
   'paginas-web-zihuatanejo':     'Hola Antonio, me interesa una página web para mi negocio en Zihuatanejo.',

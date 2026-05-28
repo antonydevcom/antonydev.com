@@ -1,0 +1,1259 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+import Container from '@/components/ui/Container.astro';
+import { LOCATION, BRAND } from '@/lib/location';
+import { getWhatsAppLink } from '@/lib/whatsapp';
+
+const waLink = getWhatsAppLink('portafolio');
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Portafolio', url: '/portafolio' },
+];
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${BRAND.siteUrl}/#person`,
+  'name': BRAND.legalName,
+  'alternateName': ['AntonyDev', 'Antony Valdovinos'],
+  'jobTitle': 'Desarrollador Web Fullstack',
+  'url': `${BRAND.siteUrl}/portafolio`,
+  'email': LOCATION.email,
+  'telephone': LOCATION.phone,
+  'sameAs': BRAND.sameAs,
+  'knowsAbout': BRAND.knowsAbout,
+  'workLocation': { '@type': 'City', 'name': LOCATION.city },
+};
+
+const experience = [
+  {
+    period: '2019 – 2022',
+    title: 'Industria de Servicios',
+    body: 'Aprendí a trabajar bajo presión, resolver problemas rápidamente y brindar un excelente servicio al cliente en todo tipo de situaciones.',
+    tag: 'Habilidades clave',
+    skills: ['Comunicación', 'Resolución de problemas', 'Liderazgo', 'Trabajo en equipo'],
+  },
+  {
+    period: '2022 – 2023',
+    title: 'Formación en Desarrollo de Software',
+    body: 'Comencé mi camino en la programación y el desarrollo web, construyendo proyectos personales y académicos con foco en lógica y estructuras sólidas.',
+    tag: 'Enfoque',
+    skills: ['Lógica', 'Algoritmos', 'Estructuras de datos', 'Desarrollo web', 'Bases sólidas'],
+  },
+  {
+    period: '2023 – Actualidad',
+    title: 'Desarrollador Fullstack',
+    body: 'Desarrollo aplicaciones y sistemas completos usando tecnologías modernas, siempre enfocado en la calidad y el usuario final.',
+    tag: 'Actualmente',
+    skills: ['Aplicaciones web', 'Sistemas a medida', 'Automatización', 'Integraciones'],
+  },
+];
+
+const projects = [
+  {
+    image: '/images/projects/blancariosestudio.webp',
+    title: 'Panel de Administración',
+    desc: 'Sistema completo para gestión de usuarios, roles y actividades con dashboard en tiempo real.',
+    stack: ['Next.js', 'TypeScript', 'TailwindCSS', 'Supabase'],
+    href: 'https://github.com/antonydevcom',
+  },
+  {
+    image: '/images/projects/marinozihua.webp',
+    title: 'Portal Inmobiliario',
+    desc: 'Catálogo de propiedades con filtrado avanzado y panel para agentes con carga de inmuebles.',
+    stack: ['Next.js', 'PostgreSQL', 'TailwindCSS', 'Mapbox'],
+    href: 'https://github.com/antonydevcom',
+  },
+  {
+    image: '/images/projects/suspirosdepapel.webp',
+    title: 'Plataforma Educativa',
+    desc: 'Plataforma de aprendizaje con cursos, progreso del estudiante y evaluaciones en línea.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Express'],
+    href: 'https://github.com/antonydevcom',
+  },
+];
+
+const techGroups = [
+  {
+    label: 'Frontend',
+    techs: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'TailwindCSS', 'Next.js', 'Astro'],
+  },
+  {
+    label: 'Backend',
+    techs: ['Node.js', 'Express', 'Laravel', 'PHP', 'REST APIs'],
+  },
+  {
+    label: 'Base de datos',
+    techs: ['PostgreSQL', 'MySQL', 'MongoDB', 'Supabase'],
+  },
+  {
+    label: 'Herramientas',
+    techs: ['Git', 'GitHub', 'Docker', 'VS Code'],
+  },
+];
+
+// Brand colors for cert icons — intentionally not design tokens (external brand representation)
+const certs = [
+  { bg: '#3D8B37', initials: 'SF', title: 'Java Spring Framework', subtitle: 'Spring Framework 6 & Spring Boot 3' },
+  { bg: '#3D8B37', initials: 'SS', title: 'Java Spring Security',   subtitle: 'Autenticación y Seguridad Web' },
+  { bg: '#DD0031', initials: 'NG', title: 'Angular',                 subtitle: 'Desarrollo de aplicaciones web' },
+  { bg: '#3D8B37', initials: 'JPA', title: 'Java Spring Data JPA',  subtitle: 'Bases de datos y JPA' },
+];
+---
+
+<BaseLayout
+  title="Portafolio de Antony Valdovinos | Fullstack Web Developer"
+  description="Portafolio profesional de Antony Valdovinos, desarrollador fullstack en Zihuatanejo enfocado en aplicaciones web, sistemas digitales y desarrollo frontend/backend."
+  schema={personSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <Header />
+  <main>
+
+    <!-- ── HERO ──────────────────────────────────────────── -->
+    <section class="pf-hero" aria-label="Presentación profesional">
+      <Container>
+        <nav class="breadcrumb" aria-label="Navegación de ubicación">
+          <a href="/">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Portafolio</span>
+        </nav>
+
+        <div class="pf-hero-grid">
+
+          <div class="pf-hero-text">
+            <p class="pf-eyebrow">Portafolio</p>
+            <h1 class="pf-name">Antony<br />Valdovinos</h1>
+            <p class="pf-role">Fullstack Web Developer</p>
+
+            <div class="pf-badges">
+              <span class="pf-badge pf-badge--location">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 13-8 13S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Zihuatanejo, Guerrero, México
+              </span>
+              <span class="pf-badge pf-badge--available">
+                <span class="pf-dot" aria-hidden="true"></span>
+                Disponible para oportunidades
+              </span>
+            </div>
+
+            <p class="pf-summary">
+              Desarrollo aplicaciones web y sistemas digitales que resuelven problemas reales y generan valor.
+            </p>
+
+            <div class="pf-cta-row">
+              <a href="/contacto" class="pf-btn pf-btn--primary">
+                Descargar CV
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
+              </a>
+              <a href="https://github.com/antonydevcom" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--secondary">
+                Ver GitHub
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+              <a href="/contacto" class="pf-btn pf-btn--ghost">
+                Contactar
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="pf-hero-media">
+            <div class="pf-hero-img-card">
+              <img
+                src="/images/branding/hero.png"
+                alt="Antony Valdovinos — Fullstack Web Developer en Zihuatanejo, Guerrero"
+                class="pf-hero-img"
+                width="800"
+                height="1000"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <div class="pf-float-card" aria-hidden="true">
+                <div class="pf-float-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <p class="pf-float-text">Construyendo soluciones digitales con código limpio y experiencias excepcionales.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── EXPERIENCE ─────────────────────────────────────── -->
+    <section class="pf-exp" aria-labelledby="exp-heading">
+      <Container>
+        <p class="pf-eyebrow pf-eyebrow--inv">Experiencia</p>
+        <h2 id="exp-heading" class="pf-heading pf-heading--inv">Mi trayectoria</h2>
+
+        <div class="pf-exp-grid">
+
+          <div class="pf-timeline" role="list">
+            {experience.map((item, i) => (
+              <div class="pf-tl-entry" role="listitem">
+                <div class="pf-tl-track" aria-hidden="true">
+                  <div class="pf-tl-dot"></div>
+                  {i < experience.length - 1 && <div class="pf-tl-line"></div>}
+                </div>
+                <div class="pf-tl-body">
+                  <span class="pf-tl-period">{item.period}</span>
+                  <h3 class="pf-tl-title">{item.title}</h3>
+                  <p class="pf-tl-text">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="pf-skill-cards">
+            {experience.map((item) => (
+              <div class="pf-skill-card">
+                <p class="pf-skill-label">{item.tag}</p>
+                <p class="pf-skill-body">{item.skills.join(' · ')}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── PROJECTS ───────────────────────────────────────── -->
+    <section class="pf-projects" aria-labelledby="projects-heading">
+      <Container>
+        <div class="pf-section-header">
+          <div>
+            <p class="pf-eyebrow">Proyectos Destacados</p>
+            <h2 id="projects-heading" class="pf-heading">Algunos proyectos recientes</h2>
+          </div>
+          <a
+            href="https://github.com/antonydevcom"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="pf-view-all"
+          >
+            Ver todos los proyectos →
+          </a>
+        </div>
+
+        <div class="pf-projects-grid">
+          {projects.map((proj) => (
+            <article class="pf-proj-card">
+              <div class="pf-proj-img-wrap">
+                <img
+                  src={proj.image}
+                  alt={`${proj.title} — proyecto de Antony Valdovinos`}
+                  class="pf-proj-img"
+                  width="600"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <a
+                  href={proj.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="pf-proj-ext"
+                  aria-label={`Ver proyecto: ${proj.title}`}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+                </a>
+              </div>
+              <div class="pf-proj-body">
+                <h3 class="pf-proj-title">{proj.title}</h3>
+                <p class="pf-proj-desc">{proj.desc}</p>
+                <div class="pf-proj-stack">
+                  {proj.stack.map((tech) => (
+                    <span class="pf-tech-badge">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── TECH STACK ─────────────────────────────────────── -->
+    <section class="pf-stack" aria-labelledby="stack-heading">
+      <Container>
+        <p class="pf-eyebrow">Stack Tecnológico</p>
+        <h2 id="stack-heading" class="pf-heading">Tecnologías que uso</h2>
+
+        <div class="pf-tech-grid">
+          {techGroups.map((group) => (
+            <div class="pf-tech-group">
+              <p class="pf-tech-group-label">{group.label}</p>
+              <ul class="pf-tech-list" role="list">
+                {group.techs.map((tech) => (
+                  <li class="pf-tech-item">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── CERTIFICATIONS ─────────────────────────────────── -->
+    <section class="pf-certs" aria-labelledby="certs-heading">
+      <Container>
+        <p class="pf-eyebrow">Certificaciones</p>
+        <h2 id="certs-heading" class="pf-heading">Certificaciones</h2>
+
+        <div class="pf-certs-grid">
+          {certs.map((cert) => (
+            <div class="pf-cert-card">
+              <div class="pf-cert-icon" style={`background-color:${cert.bg};`} aria-hidden="true">
+                <span class="pf-cert-init">{cert.initials}</span>
+              </div>
+              <div>
+                <p class="pf-cert-title">{cert.title}</p>
+                <p class="pf-cert-sub">{cert.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- ── ABOUT + CONTACT ────────────────────────────────── -->
+    <section class="pf-bottom" aria-labelledby="about-heading">
+      <Container>
+        <div class="pf-bottom-grid">
+
+          <div class="pf-about">
+            <p class="pf-eyebrow">Sobre mí</p>
+            <h2 id="about-heading" class="pf-heading pf-heading--sm">Más sobre mí</h2>
+            <p class="pf-about-body">
+              Soy Antony Valdovinos, desarrollador fullstack apasionado por crear soluciones
+              digitales que realmente hagan la diferencia. Actualmente estoy terminando mi
+              formación universitaria y continuamente aprendiendo nuevas tecnologías para
+              seguir creciendo profesionalmente.
+            </p>
+            <a href="/sobre-mi" class="pf-text-link">Conoce más sobre mi historia →</a>
+          </div>
+
+          <div class="pf-contact">
+            <p class="pf-eyebrow">Conectemos</p>
+            <p class="pf-contact-lead">
+              Estoy abierto a oportunidades laborales, residencias y proyectos interesantes.
+            </p>
+            <ul class="pf-contact-list" role="list">
+              <li>
+                <a href={`mailto:${LOCATION.email}`} class="pf-contact-item">
+                  <span class="pf-contact-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </span>
+                  {LOCATION.email}
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/antony-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-contact-item">
+                  <span class="pf-contact-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  </span>
+                  linkedin.com/in/antony-valdovinos
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/antonydevcom" target="_blank" rel="noopener noreferrer" class="pf-contact-item">
+                  <span class="pf-contact-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </span>
+                  github.com/antonydevcom
+                </a>
+              </li>
+            </ul>
+
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="pf-wa-btn wa-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Hablemos por WhatsApp
+            </a>
+
+            <p class="pf-biz-note">
+              ¿Buscas servicios digitales para tu negocio?
+              <a href="/">Visita AntonyDev.com →</a>
+            </p>
+          </div>
+
+        </div>
+      </Container>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ─── Hero ───────────────────────────────────────────────── */
+
+  .pf-hero {
+    background-color: var(--bg-page);
+    padding: clamp(2rem, 4vw, 3rem) 0 clamp(3rem, 7vw, 5.5rem);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pf-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: center;
+    margin-top: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .pf-hero-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ─── Shared eyebrow + heading ───────────────────────────── */
+
+  .pf-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.52);
+    margin: 0 0 var(--space-3);
+  }
+
+  .pf-eyebrow--inv {
+    color: rgba(238, 232, 223, 0.44);
+  }
+
+  .pf-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-cafe);
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .pf-heading--inv {
+    color: var(--color-marfil);
+  }
+
+  .pf-heading--sm {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: var(--space-6);
+  }
+
+  /* ─── Hero text column ───────────────────────────────────── */
+
+  .pf-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 7vw, 5rem);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    color: var(--color-cafe);
+    margin: 0 0 var(--space-4);
+    animation: pf-up 800ms var(--ease-premium) 80ms both;
+  }
+
+  .pf-role {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.52);
+    margin: 0 0 var(--space-6);
+    animation: pf-up 800ms var(--ease-premium) 200ms both;
+  }
+
+  .pf-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    animation: pf-up 800ms var(--ease-premium) 310ms both;
+  }
+
+  .pf-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(42, 32, 27, 0.72);
+    background-color: rgba(42, 32, 27, 0.05);
+    border: 1px solid rgba(42, 32, 27, 0.10);
+    border-radius: var(--radius-full);
+    padding: 0.35rem 0.75rem;
+  }
+
+  .pf-badge--available {
+    color: rgba(25, 105, 55, 0.9);
+    background-color: rgba(25, 105, 55, 0.07);
+    border-color: rgba(25, 105, 55, 0.18);
+  }
+
+  .pf-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgba(30, 140, 70, 0.9);
+    flex-shrink: 0;
+    animation: pf-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pf-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.38; }
+  }
+
+  .pf-summary {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(42, 32, 27, 0.70);
+    max-width: 42ch;
+    margin: 0 0 var(--space-8);
+    animation: pf-up 800ms var(--ease-premium) 410ms both;
+  }
+
+  .pf-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    animation: pf-up 800ms var(--ease-premium) 500ms both;
+  }
+
+  /* ─── Hero CTAs ──────────────────────────────────────────── */
+
+  .pf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: var(--radius-button);
+    padding: 0.75rem 1.2rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color     var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-btn:hover  { transform: translateY(-2px); }
+  .pf-btn:active { transform: translateY(1px);  transition-duration: 80ms; }
+
+  .pf-btn--primary {
+    background-color: var(--color-cafe);
+    color: var(--color-hueso);
+    border-color: var(--color-cafe);
+  }
+  .pf-btn--primary:hover {
+    background-color: var(--color-cafe-negro);
+    border-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+  }
+
+  .pf-btn--secondary {
+    background-color: transparent;
+    color: var(--color-cafe);
+    border-color: var(--border);
+  }
+  .pf-btn--secondary:hover {
+    background-color: var(--bg-surface);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .pf-btn--ghost {
+    background-color: transparent;
+    color: var(--color-cafe);
+    border-color: transparent;
+  }
+  .pf-btn--ghost:hover {
+    background-color: var(--fill-ghost);
+    border-color: var(--border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-btn:hover, .pf-btn:active { transform: none; }
+  }
+
+  /* ─── Hero media column ──────────────────────────────────── */
+
+  .pf-hero-media {
+    animation: pf-fade 1000ms var(--ease-premium) 160ms both;
+  }
+
+  .pf-hero-img-card {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 5;
+    background-color: var(--color-marfil);
+  }
+
+  .pf-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% 18%;
+    display: block;
+    transition: transform 600ms var(--ease-premium);
+  }
+
+  .pf-hero-img-card:hover .pf-hero-img {
+    transform: scale(1.025);
+  }
+
+  /* Floating code card — overlaid on image bottom-right */
+  .pf-float-card {
+    position: absolute;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    background-color: rgba(247, 244, 238, 0.92);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid rgba(42, 32, 27, 0.10);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+    box-shadow: var(--shadow-md);
+    max-width: 210px;
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    animation: pf-up 900ms var(--ease-premium) 680ms both;
+  }
+
+  .pf-float-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(42, 32, 27, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-cafe);
+  }
+
+  .pf-float-text {
+    font-family: var(--font-body);
+    font-size: 0.71875rem;
+    line-height: 1.55;
+    color: rgba(42, 32, 27, 0.74);
+    margin: 0;
+  }
+
+  @media (max-width: 400px) {
+    .pf-float-card { max-width: 180px; bottom: var(--space-4); right: var(--space-4); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-hero-img-card:hover .pf-hero-img { transform: none; }
+  }
+
+  /* ─── Experience (dark) ──────────────────────────────────── */
+
+  .pf-exp {
+    background-color: var(--color-cafe-negro);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+  }
+
+  .pf-exp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  @media (min-width: 900px) {
+    .pf-exp-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* Timeline */
+  .pf-timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pf-tl-entry {
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    gap: 0 var(--space-5);
+  }
+
+  .pf-tl-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .pf-tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-taupe);
+    border: 2px solid var(--color-cafe-negro);
+    outline: 1.5px solid var(--color-taupe);
+    flex-shrink: 0;
+  }
+
+  .pf-tl-line {
+    width: 1px;
+    flex: 1;
+    min-height: 2rem;
+    background: rgba(183, 167, 154, 0.25);
+    margin-top: 4px;
+  }
+
+  .pf-tl-body {
+    padding-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+  }
+
+  .pf-tl-period {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-taupe);
+    margin-bottom: var(--space-2);
+  }
+
+  .pf-tl-title {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-marfil);
+    margin: 0 0 var(--space-3);
+  }
+
+  .pf-tl-text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: rgba(238, 232, 223, 0.58);
+    margin: 0;
+    max-width: 50ch;
+  }
+
+  /* Skill cards on dark */
+  .pf-skill-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .pf-skill-card {
+    background-color: rgba(238, 232, 223, 0.055);
+    border: 1px solid rgba(238, 232, 223, 0.09);
+    border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6);
+    transition: background-color var(--dur-base) var(--ease-out);
+  }
+
+  .pf-skill-card:hover {
+    background-color: rgba(238, 232, 223, 0.085);
+  }
+
+  .pf-skill-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-taupe);
+    margin: 0 0 var(--space-3);
+  }
+
+  .pf-skill-body {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(238, 232, 223, 0.70);
+    margin: 0;
+  }
+
+  /* ─── Projects ───────────────────────────────────────────── */
+
+  .pf-projects {
+    background-color: var(--bg-page);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+  }
+
+  .pf-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .pf-section-header .pf-heading {
+    margin-bottom: 0;
+  }
+
+  .pf-view-all {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-cafe);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-button);
+    padding: 0.6rem 1.1rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color     var(--dur-base) var(--ease-out);
+  }
+
+  .pf-view-all:hover {
+    background-color: var(--bg-surface);
+    border-color: var(--border-hover);
+  }
+
+  .pf-projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 560px) {
+    .pf-projects-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pf-projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pf-proj-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
+      transform  var(--dur-base) var(--ease-out);
+  }
+
+  .pf-proj-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-proj-card:hover { transform: none; }
+  }
+
+  .pf-proj-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background-color: var(--color-marfil);
+  }
+
+  .pf-proj-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms var(--ease-premium);
+  }
+
+  .pf-proj-card:hover .pf-proj-img {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-proj-card:hover .pf-proj-img { transform: none; }
+  }
+
+  .pf-proj-ext {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(247, 244, 238, 0.88);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(42, 32, 27, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-cafe);
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-proj-ext:hover {
+    background-color: var(--bg-surface);
+    transform: scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-proj-ext:hover { transform: none; }
+  }
+
+  .pf-proj-body {
+    padding: var(--space-5) var(--space-5);
+  }
+
+  .pf-proj-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-cafe);
+    margin: 0 0 var(--space-2);
+  }
+
+  .pf-proj-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(42, 32, 27, 0.66);
+    margin: 0 0 var(--space-4);
+  }
+
+  .pf-proj-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .pf-tech-badge {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: rgba(42, 32, 27, 0.70);
+    background-color: rgba(42, 32, 27, 0.055);
+    border: 1px solid rgba(42, 32, 27, 0.09);
+    border-radius: var(--radius-full);
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* ─── Tech Stack ─────────────────────────────────────────── */
+
+  .pf-stack {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pf-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .pf-tech-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pf-tech-group {
+    background-color: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .pf-tech-group-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.52);
+    margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pf-tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pf-tech-item {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(42, 32, 27, 0.80);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid rgba(42, 32, 27, 0.05);
+  }
+
+  .pf-tech-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* ─── Certifications ─────────────────────────────────────── */
+
+  .pf-certs {
+    background-color: var(--bg-page);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+  }
+
+  .pf-certs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 480px) {
+    .pf-certs-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pf-certs-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pf-cert-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
+      transform  var(--dur-base) var(--ease-out);
+  }
+
+  .pf-cert-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-cert-card:hover { transform: none; }
+  }
+
+  .pf-cert-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pf-cert-init {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+  }
+
+  .pf-cert-title {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-cafe);
+    margin: 0 0 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pf-cert-sub {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(42, 32, 27, 0.56);
+    margin: 0;
+  }
+
+  /* ─── About + Contact ────────────────────────────────────── */
+
+  .pf-bottom {
+    background-color: var(--bg-surface);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .pf-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  @media (min-width: 768px) {
+    .pf-bottom-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .pf-about-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    color: rgba(42, 32, 27, 0.70);
+    margin: 0 0 var(--space-6);
+    max-width: 55ch;
+  }
+
+  .pf-text-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-cafe);
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-text-link:hover { opacity: 0.68; }
+
+  .pf-contact-lead {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(42, 32, 27, 0.66);
+    margin: 0 0 var(--space-5);
+    max-width: 40ch;
+  }
+
+  .pf-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .pf-contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: rgba(42, 32, 27, 0.76);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-contact-item:hover { color: var(--color-cafe); }
+
+  .pf-contact-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(42, 32, 27, 0.06);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-cafe);
+  }
+
+  /* WhatsApp CTA — reuses .wa-btn global class from global.css for the surface light effect */
+  .pf-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-hueso);
+    background-color: var(--color-cafe);
+    border-radius: var(--radius-button);
+    padding: 0.875rem 1.35rem;
+    text-decoration: none;
+    margin-bottom: var(--space-5);
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-slow) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-wa-btn:hover {
+    background-color: var(--color-cafe-negro);
+    box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-wa-btn:hover { transform: none; }
+  }
+
+  .pf-biz-note {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: rgba(42, 32, 27, 0.50);
+    margin: 0;
+  }
+
+  .pf-biz-note a {
+    color: var(--color-cafe);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-biz-note a:hover { opacity: 0.72; }
+
+  /* ─── Keyframes ──────────────────────────────────────────── */
+
+  @keyframes pf-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pf-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-name, .pf-role, .pf-badges,
+    .pf-summary, .pf-cta-row,
+    .pf-float-card, .pf-hero-media {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

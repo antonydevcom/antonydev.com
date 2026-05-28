@@ -18,14 +18,13 @@ const personSchema = {
   '@type': 'Person',
   '@id': `${BRAND.siteUrl}/#person`,
   'name': BRAND.legalName,
-  'alternateName': ['AntonyDev', 'Antony Valdovinos'],
+  'alternateName': 'AntonyDev',
   'jobTitle': 'Desarrollador Web Fullstack',
   'url': `${BRAND.siteUrl}/portafolio`,
   'email': LOCATION.email,
   'telephone': LOCATION.phone,
   'sameAs': BRAND.sameAs,
   'knowsAbout': BRAND.knowsAbout,
-  'workLocation': { '@type': 'City', 'name': LOCATION.city },
 };
 
 const experience = [
@@ -56,7 +55,7 @@ const projects = [
   {
     image: '/images/projects/blancariosestudio.webp',
     title: 'Blanca Ríos Estudio',
-    desc: 'Sitio web para estudio creativo en Zihuatanejo. Diseño editorial, identidad digital y presencia en línea.',
+    desc: 'Sitio web para estudio creativo. Diseño editorial, identidad digital y presencia en línea.',
     stack: ['Astro', 'TailwindCSS', 'Vercel'],
     href: 'https://github.com/antonydevcom',
   },
@@ -70,7 +69,7 @@ const projects = [
   {
     image: '/images/projects/suspirosdepapel.webp',
     title: 'Suspiros de Papel',
-    desc: 'Identidad digital y sitio web para tienda local en Zihuatanejo con catálogo de productos.',
+    desc: 'Identidad digital y sitio web para tienda local con catálogo de productos.',
     stack: ['Astro', 'TailwindCSS', 'Vercel'],
     href: 'https://github.com/antonydevcom',
   },
@@ -157,8 +156,8 @@ const certs = [
 ---
 
 <BaseLayout
-  title="Portafolio de Antony Valdovinos | Fullstack Web Developer"
-  description="Portafolio profesional de Antony Valdovinos, desarrollador fullstack en Zihuatanejo enfocado en aplicaciones web, sistemas digitales y desarrollo frontend/backend."
+  title="Portafolio de Antonio Valdovinos | Fullstack Web Developer"
+  description="Portafolio profesional de Antonio Valdovinos, desarrollador fullstack enfocado en aplicaciones web, sistemas digitales y desarrollo frontend/backend."
   schema={personSchema}
   breadcrumbs={breadcrumbs}
 >
@@ -184,19 +183,8 @@ const certs = [
 
           <div class="pf-hero-text">
             <p class="pf-eyebrow">Portafolio</p>
-            <h1 class="pf-name">Antony<br />Valdovinos</h1>
+            <h1 class="pf-name">Antonio<br />Valdovinos</h1>
             <p class="pf-role">Fullstack Web Developer</p>
-
-            <div class="pf-badges">
-              <span class="pf-badge pf-badge--location">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 13-8 13S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Zihuatanejo, Guerrero, México
-              </span>
-              <span class="pf-badge pf-badge--available">
-                <span class="pf-dot" aria-hidden="true"></span>
-                Disponible para oportunidades
-              </span>
-            </div>
 
             <p class="pf-summary">
               Desarrollo aplicaciones web y sistemas digitales que resuelven problemas reales y generan valor.
@@ -222,7 +210,7 @@ const certs = [
             <div class="pf-hero-img-card">
               <img
                 src="/images/branding/hero.png"
-                alt="Antony Valdovinos — Fullstack Web Developer en Zihuatanejo, Guerrero"
+                alt="Antonio Valdovinos — Fullstack Web Developer"
                 class="pf-hero-img"
                 width="800"
                 height="1000"
@@ -298,7 +286,7 @@ const certs = [
               <div class="pf-proj-img-wrap">
                 <img
                   src={proj.image}
-                  alt={`${proj.title} — proyecto de Antony Valdovinos`}
+                  alt={`${proj.title} — proyecto de Antonio Valdovinos`}
                   class="pf-proj-img"
                   width="600"
                   height="360"
@@ -381,7 +369,7 @@ const certs = [
             <p class="pf-eyebrow">Sobre mí</p>
             <h2 id="about-heading" class="pf-heading pf-heading--sm">Más sobre mí</h2>
             <p class="pf-about-body">
-              Soy Antony Valdovinos, desarrollador fullstack apasionado por crear soluciones
+              Soy Antonio Valdovinos, desarrollador fullstack apasionado por crear soluciones
               digitales que realmente hagan la diferencia. Actualmente estoy terminando mi
               formación universitaria y continuamente aprendiendo nuevas tecnologías para
               seguir creciendo profesionalmente.
@@ -392,7 +380,7 @@ const certs = [
           <div class="pf-contact">
             <p class="pf-eyebrow">Conectemos</p>
             <p class="pf-contact-lead">
-              Estoy abierto a oportunidades laborales, residencias y proyectos interesantes.
+              Estoy abierto a residencias profesionales, prácticas y proyectos interesantes.
             </p>
             <ul class="pf-contact-list" role="list">
               <li>
@@ -520,48 +508,6 @@ const certs = [
     color: rgba(42, 32, 27, 0.52);
     margin: 0 0 var(--space-6);
     animation: pf-up 800ms var(--ease-premium) 200ms both;
-  }
-
-  .pf-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-bottom: var(--space-6);
-    animation: pf-up 800ms var(--ease-premium) 310ms both;
-  }
-
-  .pf-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: rgba(42, 32, 27, 0.72);
-    background-color: rgba(42, 32, 27, 0.05);
-    border: 1px solid rgba(42, 32, 27, 0.10);
-    border-radius: var(--radius-full);
-    padding: 0.35rem 0.75rem;
-  }
-
-  .pf-badge--available {
-    color: rgba(25, 105, 55, 0.9);
-    background-color: rgba(25, 105, 55, 0.07);
-    border-color: rgba(25, 105, 55, 0.18);
-  }
-
-  .pf-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: rgba(30, 140, 70, 0.9);
-    flex-shrink: 0;
-    animation: pf-pulse 2.4s ease-in-out infinite;
-  }
-
-  @keyframes pf-pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.38; }
   }
 
   .pf-summary {
@@ -1303,7 +1249,7 @@ const certs = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pf-name, .pf-role, .pf-badges,
+    .pf-name, .pf-role,
     .pf-summary, .pf-cta-row,
     .pf-hero-media {
       animation: none;

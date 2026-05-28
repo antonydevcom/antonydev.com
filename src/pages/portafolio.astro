@@ -110,11 +110,22 @@ const certs = [
   schema={personSchema}
   breadcrumbs={breadcrumbs}
 >
-  <Header />
+  <Header
+    logoHref="/portafolio"
+    scrollSpySections={['inicio', 'trayectoria', 'proyectos', 'stack', 'certificaciones', 'contacto']}
+    navLinks={[
+      { label: 'Inicio',          href: '#inicio',          matchPath: '/portafolio', matchSection: 'inicio'          },
+      { label: 'Trayectoria',     href: '#trayectoria',     matchPath: '/portafolio', matchSection: 'trayectoria'     },
+      { label: 'Proyectos',       href: '#proyectos',       matchPath: '/portafolio', matchSection: 'proyectos'       },
+      { label: 'Stack',           href: '#stack',           matchPath: '/portafolio', matchSection: 'stack'           },
+      { label: 'Certificaciones', href: '#certificaciones', matchPath: '/portafolio', matchSection: 'certificaciones' },
+      { label: 'Contacto',        href: '#contacto',        matchPath: '/portafolio', matchSection: 'contacto'        },
+    ]}
+  />
   <main>
 
     <!-- ── HERO ──────────────────────────────────────────── -->
-    <section class="pf-hero" aria-label="Presentación profesional">
+    <section id="inicio" class="pf-hero" aria-label="Presentación profesional">
       <Container>
         <nav class="breadcrumb" aria-label="Navegación de ubicación">
           <a href="/">Inicio</a>
@@ -186,7 +197,7 @@ const certs = [
     </section>
 
     <!-- ── EXPERIENCE ─────────────────────────────────────── -->
-    <section class="pf-exp" aria-labelledby="exp-heading">
+    <section id="trayectoria" class="pf-exp" aria-labelledby="exp-heading">
       <Container>
         <p class="pf-eyebrow pf-eyebrow--inv">Experiencia</p>
         <h2 id="exp-heading" class="pf-heading pf-heading--inv">Mi trayectoria</h2>
@@ -223,7 +234,7 @@ const certs = [
     </section>
 
     <!-- ── PROJECTS ───────────────────────────────────────── -->
-    <section class="pf-projects" aria-labelledby="projects-heading">
+    <section id="proyectos" class="pf-projects" aria-labelledby="projects-heading">
       <Container>
         <div class="pf-section-header">
           <div>
@@ -279,7 +290,7 @@ const certs = [
     </section>
 
     <!-- ── TECH STACK ─────────────────────────────────────── -->
-    <section class="pf-stack" aria-labelledby="stack-heading">
+    <section id="stack" class="pf-stack" aria-labelledby="stack-heading">
       <Container>
         <p class="pf-eyebrow">Stack Tecnológico</p>
         <h2 id="stack-heading" class="pf-heading">Tecnologías que uso</h2>
@@ -300,7 +311,7 @@ const certs = [
     </section>
 
     <!-- ── CERTIFICATIONS ─────────────────────────────────── -->
-    <section class="pf-certs" aria-labelledby="certs-heading">
+    <section id="certificaciones" class="pf-certs" aria-labelledby="certs-heading">
       <Container>
         <p class="pf-eyebrow">Certificaciones</p>
         <h2 id="certs-heading" class="pf-heading">Certificaciones</h2>
@@ -322,7 +333,7 @@ const certs = [
     </section>
 
     <!-- ── ABOUT + CONTACT ────────────────────────────────── -->
-    <section class="pf-bottom" aria-labelledby="about-heading">
+    <section id="contacto" class="pf-bottom" aria-labelledby="about-heading">
       <Container>
         <div class="pf-bottom-grid">
 

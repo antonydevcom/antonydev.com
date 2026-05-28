@@ -2,33 +2,39 @@
 import Container from '@/components/ui/Container.astro';
 import Button from '@/components/ui/Button.astro';
 
+interface NavLink {
+  label: string;
+  href: string;
+  matchPath: string;
+  matchSection?: string;
+}
+
+interface Props {
+  navLinks?: NavLink[];
+  logoHref?: string;
+  scrollSpySections?: string[];
+}
+
+const { navLinks: navLinksProp, logoHref = '/', scrollSpySections } = Astro.props;
+
 const pathNormalized = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isHome = pathNormalized === '/';
 
-/*
- * Each link maps to:
- *  - matchPath:    pathname where this link is permanently active
- *                  (e.g. while the user is on /servicios).
- *  - matchSection: id of the corresponding section on the home page (/).
- *                  When the user is on /, the scroll-spy decides which link
- *                  is active using THIS field, regardless of matchPath.
- *
- * Result: clicking still routes wherever `href` says, but scrolling the
- * home page also lights up the right link as each section comes into view.
- */
-const navLinks = [
+const defaultNavLinks: NavLink[] = [
   { label: 'Inicio',    href: '/',             matchPath: '/',           matchSection: 'inicio'     },
   { label: 'Servicios', href: '/servicios',    matchPath: '/servicios',  matchSection: 'servicios'  },
-  { label: 'Proyectos', href: '/#portafolio', matchPath: '/',          matchSection: 'portafolio' },
-  { label: 'Contacto',  href: '/contacto',    matchPath: '/contacto',  matchSection: 'contacto'   },
+  { label: 'Proyectos', href: '/#portafolio',  matchPath: '/',           matchSection: 'portafolio' },
+  { label: 'Contacto',  href: '/contacto',     matchPath: '/contacto',   matchSection: 'contacto'   },
 ];
+
+const navLinks = navLinksProp ?? defaultNavLinks;
 ---
 
-<header class:list={['site-header', isHome && 'site-header--home-hero']}>
+<header class:list={['site-header', isHome && 'site-header--home-hero']} data-spy-sections={scrollSpySections ? scrollSpySections.join(',') : undefined}>
   <Container>
     <div class="header-inner">
 
-      <a href="/" class="logo" aria-label="AntonyDev — Inicio">
+      <a href={logoHref} class="logo" aria-label="AntonyDev — Inicio">
         <img
           src="/images/branding/logo.png"
           alt="AntonyDev — Antonio Valdovinos"
@@ -583,7 +589,10 @@ const navLinks = [
    *               /servicios). Section scroll-spy is irrelevant there.
    */
   (function () {
-    var order = ['inicio', 'servicios', 'proceso', 'portafolio', 'sobre-mi', 'contacto'];
+    var headerEl = document.querySelector('.site-header');
+    var spyAttr = headerEl && headerEl.getAttribute('data-spy-sections');
+    var customSections = spyAttr ? spyAttr.split(',') : null;
+    var order = customSections || ['inicio', 'servicios', 'proceso', 'portafolio', 'sobre-mi', 'contacto'];
 
     function normalizePath(p) {
       if (!p) return '/';
@@ -611,7 +620,7 @@ const navLinks = [
 
     function applyActive() {
       var path = normalizePath(window.location.pathname);
-      var onHome = path === '/';
+      var onHome = !!customSections || path === '/';
       var section = onHome ? currentSection() : null;
 
       document.querySelectorAll('.nav-link').forEach(function (link) {

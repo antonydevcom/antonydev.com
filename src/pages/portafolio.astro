@@ -78,20 +78,65 @@ const projects = [
 
 const techGroups = [
   {
+    label: 'Lenguajes',
+    items: [
+      { name: 'Java',        init: 'Jv', basic: false },
+      { name: 'Python',      init: 'Py', basic: false },
+      { name: 'JavaScript',  init: 'JS', basic: false },
+      { name: 'TypeScript',  init: 'TS', basic: true  },
+    ],
+  },
+  {
     label: 'Frontend',
-    techs: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'TailwindCSS', 'Next.js', 'Astro'],
+    items: [
+      { name: 'HTML5',       init: 'H5', basic: false },
+      { name: 'CSS3',        init: 'CS', basic: false },
+      { name: 'React',       init: 'Re', basic: true  },
+      { name: 'Responsivo',  init: 'RD', basic: false },
+      { name: 'SEO',         init: 'SE', basic: true  },
+    ],
   },
   {
-    label: 'Backend',
-    techs: ['Node.js', 'Express', 'Laravel', 'PHP', 'REST APIs'],
+    label: 'Frameworks',
+    items: [
+      { name: 'Astro',        init: 'As', basic: false },
+      { name: 'Next.js',      init: 'Nx', basic: true  },
+      { name: 'Tailwind CSS', init: 'Tw', basic: false },
+    ],
   },
   {
-    label: 'Base de datos',
-    techs: ['PostgreSQL', 'MySQL', 'MongoDB', 'Supabase'],
+    label: 'Backend / Nube',
+    items: [
+      { name: 'Node.js',     init: 'No', basic: true  },
+      { name: 'Express.js',  init: 'Ex', basic: true  },
+      { name: 'REST API',    init: 'RA', basic: true  },
+      { name: 'Supabase',    init: 'Sb', basic: false },
+      { name: 'Firebase',    init: 'Fb', basic: false },
+    ],
+  },
+  {
+    label: 'Bases de datos',
+    items: [
+      { name: 'MySQL',       init: 'My', basic: false },
+      { name: 'MongoDB',     init: 'Mg', basic: false },
+    ],
+  },
+  {
+    label: 'Sistemas operativos',
+    items: [
+      { name: 'Linux',       init: 'Li', basic: false },
+      { name: 'Windows',     init: 'Wi', basic: false },
+    ],
   },
   {
     label: 'Herramientas',
-    techs: ['Git', 'GitHub', 'Docker', 'VS Code'],
+    items: [
+      { name: 'Git',         init: 'Gi', basic: false },
+      { name: 'GitHub',      init: 'GH', basic: false },
+      { name: 'VS Code',     init: 'VS', basic: false },
+      { name: 'Docker',      init: 'Do', basic: true  },
+      { name: 'Figma',       init: 'Fi', basic: false },
+    ],
   },
 ];
 
@@ -293,17 +338,22 @@ const certs = [
     <section id="stack" class="pf-stack" aria-labelledby="stack-heading">
       <Container>
         <p class="pf-eyebrow">Stack Tecnológico</p>
-        <h2 id="stack-heading" class="pf-heading">Tecnologías que uso</h2>
+        <h2 id="stack-heading" class="pf-heading">Herramientas que uso para construir</h2>
+        <p class="pf-stack-desc">Tecnologías con las que construyo aplicaciones web, sistemas y automatizaciones.</p>
 
-        <div class="pf-tech-grid">
+        <div class="pf-stack-clusters">
           {techGroups.map((group) => (
-            <div class="pf-tech-group">
-              <p class="pf-tech-group-label">{group.label}</p>
-              <ul class="pf-tech-list" role="list">
-                {group.techs.map((tech) => (
-                  <li class="pf-tech-item">{tech}</li>
+            <div class="pf-cluster">
+              <p class="pf-cluster-label">{group.label}</p>
+              <div class="pf-tiles" role="list">
+                {group.items.map((item) => (
+                  <div class="pf-tile" role="listitem">
+                    <span class="pf-tile-init" aria-hidden="true">{item.init}</span>
+                    <span class="pf-tile-name">{item.name}</span>
+                    {item.basic && <span class="pf-tile-level" aria-label="nivel básico">básico</span>}
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -978,58 +1028,104 @@ const certs = [
     border-bottom: 1px solid var(--border);
   }
 
-  .pf-tech-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-5);
+  .pf-stack-desc {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(42, 32, 27, 0.58);
+    max-width: 54ch;
+    margin-top: calc(-1 * clamp(1rem, 2vw, 1.5rem));
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
 
-  @media (min-width: 768px) {
-    .pf-tech-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  .pf-stack-clusters {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 
-  .pf-tech-group {
-    background-color: var(--bg-page);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5) var(--space-6);
-  }
-
-  .pf-tech-group-label {
+  .pf-cluster-label {
     font-family: var(--font-body);
     font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.52);
-    margin: 0 0 var(--space-4);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--border);
+    color: rgba(42, 32, 27, 0.38);
+    margin: 0 0 var(--space-3);
   }
 
-  .pf-tech-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .pf-tiles {
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
 
-  .pf-tech-item {
+  .pf-tile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.4rem var(--space-4) 0.4rem 0.4rem;
+    cursor: default;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color     var(--dur-base) var(--ease-out),
+      box-shadow       var(--dur-base) var(--ease-out),
+      transform        var(--dur-fast) var(--ease-out);
+  }
+
+  .pf-tile:hover {
+    background-color: rgba(42, 32, 27, 0.035);
+    border-color: rgba(42, 32, 27, 0.16);
+    box-shadow:
+      0 2px 10px rgba(42, 32, 27, 0.06),
+      0 1px 2px  rgba(42, 32, 27, 0.04);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-tile:hover { transform: none; }
+  }
+
+  .pf-tile-init {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    background-color: rgba(42, 32, 27, 0.07);
+    border: 1px solid rgba(42, 32, 27, 0.07);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-cafe);
+  }
+
+  .pf-tile-name {
     font-family: var(--font-body);
     font-size: 0.8125rem;
     font-weight: 500;
     color: rgba(42, 32, 27, 0.80);
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid rgba(42, 32, 27, 0.05);
+    white-space: nowrap;
   }
 
-  .pf-tech-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+  .pf-tile-level {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(42, 32, 27, 0.34);
+    background-color: rgba(42, 32, 27, 0.045);
+    border: 1px solid rgba(42, 32, 27, 0.07);
+    border-radius: var(--radius-full);
+    padding: 0.15rem 0.4rem;
+    flex-shrink: 0;
   }
 
   /* ─── Certifications ─────────────────────────────────────── */

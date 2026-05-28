@@ -23,6 +23,9 @@ skills-lock.json
 # copy keyword strategy or business plans directly.
 docs/
 
+# ── Local knowledge base (Claude Code napkin) ────────────
+.Codex/napkin.md
+
 # ── Temporary work directories ───────────────────────────
 to/
 

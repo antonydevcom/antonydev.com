@@ -9,13 +9,21 @@ interface NavLink {
   matchSection?: string;
 }
 
+interface CtaConfig {
+  label: string;
+  href: string;
+}
+
 interface Props {
   navLinks?: NavLink[];
   logoHref?: string;
   scrollSpySections?: string[];
+  headerCta?: CtaConfig | null;
 }
 
-const { navLinks: navLinksProp, logoHref = '/', scrollSpySections } = Astro.props;
+const { navLinks: navLinksProp, logoHref = '/', scrollSpySections, headerCta } = Astro.props;
+const resolvedCta: CtaConfig | null =
+  headerCta === null ? null : (headerCta ?? { label: 'Hablemos', href: '/contacto' });
 
 const pathNormalized = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isHome = pathNormalized === '/';
@@ -62,9 +70,11 @@ const navLinks = navLinksProp ?? defaultNavLinks;
       </nav>
 
       <!-- CTA — visible from md -->
-      <div class="header-cta">
-        <Button href="/contacto" variant="primary" size="sm">Hablemos</Button>
-      </div>
+      {resolvedCta && (
+        <div class="header-cta">
+          <Button href={resolvedCta.href} variant="primary" size="sm">{resolvedCta.label}</Button>
+        </div>
+      )}
 
       <button
         class="menu-btn"

@@ -157,6 +157,7 @@ const certs = [
 >
   <Header
     logoHref="/portafolio"
+    headerCta={{ label: 'Contacto', href: '#contacto' }}
     scrollSpySections={['inicio', 'trayectoria', 'proyectos', 'stack', 'certificaciones', 'contacto']}
     navLinks={[
       { label: 'Inicio',          href: '#inicio',          matchPath: '/portafolio', matchSection: 'inicio'          },
@@ -172,12 +173,6 @@ const certs = [
     <!-- ── HERO ──────────────────────────────────────────── -->
     <section id="inicio" class="pf-hero" aria-label="Presentación profesional">
       <Container>
-        <nav class="breadcrumb" aria-label="Navegación de ubicación">
-          <a href="/">Inicio</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">Portafolio</span>
-        </nav>
-
         <div class="pf-hero-grid">
 
           <div class="pf-hero-text">
@@ -201,17 +196,17 @@ const certs = [
             </p>
 
             <div class="pf-cta-row">
-              <a href={waLink} target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--primary">
-                Solicitar CV
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+              <a href="/contacto" class="pf-btn pf-btn--primary">
+                Descargar CV
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               </a>
-              <a href="https://github.com/antonydevcom" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--secondary">
-                Ver GitHub
+              <a href="https://linkedin.com/in/antony-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--primary">
+                LinkedIn
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://github.com/antonydevcom" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--primary">
+                GitHub
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              </a>
-              <a href="/contacto" class="pf-btn pf-btn--ghost">
-                Contactar
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </a>
             </div>
           </div>
@@ -228,12 +223,6 @@ const certs = [
                 decoding="async"
                 fetchpriority="high"
               />
-              <div class="pf-float-card" aria-hidden="true">
-                <div class="pf-float-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                </div>
-                <p class="pf-float-text">Construyendo soluciones digitales con código limpio y experiencias excepcionales.</p>
-              </div>
             </div>
           </div>
 
@@ -338,24 +327,26 @@ const certs = [
     <section id="stack" class="pf-stack" aria-labelledby="stack-heading">
       <Container>
         <p class="pf-eyebrow">Stack Tecnológico</p>
-        <h2 id="stack-heading" class="pf-heading">Herramientas que uso para construir</h2>
+        <h2 id="stack-heading" class="pf-heading">Skills &amp; Technologies</h2>
         <p class="pf-stack-desc">Tecnologías con las que construyo aplicaciones web, sistemas y automatizaciones.</p>
 
-        <div class="pf-stack-clusters">
-          {techGroups.map((group) => (
-            <div class="pf-cluster">
-              <p class="pf-cluster-label">{group.label}</p>
-              <div class="pf-tiles" role="list">
-                {group.items.map((item) => (
-                  <div class="pf-tile" role="listitem">
-                    <span class="pf-tile-init" aria-hidden="true">{item.init}</span>
-                    <span class="pf-tile-name">{item.name}</span>
-                    {item.basic && <span class="pf-tile-level" aria-label="nivel básico">básico</span>}
-                  </div>
-                ))}
+        <div class="pf-stack-panel">
+          <div class="pf-stack-clusters">
+            {techGroups.map((group) => (
+              <div class="pf-cluster">
+                <p class="pf-cluster-label">{group.label}</p>
+                <div class="pf-tiles" role="list">
+                  {group.items.map((item) => (
+                    <div class="pf-tile" role="listitem">
+                      <span class="pf-tile-init" aria-hidden="true">{item.init}</span>
+                      <span class="pf-tile-name">{item.name}</span>
+                      {item.basic && <span class="pf-tile-level" aria-label="nivel básico">básico</span>}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>
@@ -679,49 +670,6 @@ const certs = [
     transform: scale(1.025);
   }
 
-  /* Floating code card — overlaid on image bottom-right */
-  .pf-float-card {
-    position: absolute;
-    bottom: var(--space-5);
-    right: var(--space-5);
-    background-color: rgba(247, 244, 238, 0.92);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
-    backdrop-filter: blur(16px) saturate(1.2);
-    border: 1px solid rgba(42, 32, 27, 0.10);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4) var(--space-5);
-    box-shadow: var(--shadow-md);
-    max-width: 210px;
-    display: flex;
-    gap: var(--space-3);
-    align-items: flex-start;
-    animation: pf-up 900ms var(--ease-premium) 680ms both;
-  }
-
-  .pf-float-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
-    background-color: rgba(42, 32, 27, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: var(--color-cafe);
-  }
-
-  .pf-float-text {
-    font-family: var(--font-body);
-    font-size: 0.71875rem;
-    line-height: 1.55;
-    color: rgba(42, 32, 27, 0.74);
-    margin: 0;
-  }
-
-  @media (max-width: 400px) {
-    .pf-float-card { max-width: 180px; bottom: var(--space-4); right: var(--space-4); }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .pf-hero-img-card:hover .pf-hero-img { transform: none; }
   }
@@ -1022,7 +970,7 @@ const certs = [
   /* ─── Tech Stack ─────────────────────────────────────────── */
 
   .pf-stack {
-    background-color: var(--bg-surface);
+    background-color: var(--bg-page);
     padding: clamp(4rem, 9vw, 7rem) 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -1038,69 +986,96 @@ const certs = [
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
 
+  /* Elevated warm panel — one card containing all clusters */
+  .pf-stack-panel {
+    background-color: var(--bg-surface);
+    border: 1px solid rgba(42, 32, 27, 0.09);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-shadow:
+      0 1px 0 rgba(255, 252, 248, 0.55) inset,
+      0 8px 32px rgba(42, 32, 27, 0.05),
+      0 2px 8px  rgba(42, 32, 27, 0.04);
+  }
+
   .pf-stack-clusters {
     display: flex;
     flex-direction: column;
-    gap: clamp(1.75rem, 3.5vw, 2.5rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
   }
 
   .pf-cluster-label {
     font-family: var(--font-body);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.38);
+    color: rgba(42, 32, 27, 0.35);
     margin: 0 0 var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid rgba(42, 32, 27, 0.07);
   }
 
   .pf-tiles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
   }
 
+  @media (min-width: 480px) {
+    .pf-tiles { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 768px) {
+    .pf-tiles { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .pf-tiles { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  /* Centered column card — taller than old pill, icon above name */
   .pf-tile {
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.45rem;
+    text-align: center;
+    gap: var(--space-2);
     background-color: var(--bg-page);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 0.4rem var(--space-4) 0.4rem 0.4rem;
+    border: 1px solid rgba(42, 32, 27, 0.07);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5) var(--space-3) var(--space-4);
     cursor: default;
     transition:
-      background-color var(--dur-base) var(--ease-out),
-      border-color     var(--dur-base) var(--ease-out),
-      box-shadow       var(--dur-base) var(--ease-out),
-      transform        var(--dur-fast) var(--ease-out);
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow   var(--dur-base) var(--ease-out),
+      transform    var(--dur-fast) var(--ease-out);
   }
 
   .pf-tile:hover {
-    background-color: rgba(42, 32, 27, 0.035);
-    border-color: rgba(42, 32, 27, 0.16);
+    border-color: rgba(42, 32, 27, 0.14);
     box-shadow:
-      0 2px 10px rgba(42, 32, 27, 0.06),
-      0 1px 2px  rgba(42, 32, 27, 0.04);
-    transform: translateY(-2px);
+      0 6px 20px rgba(42, 32, 27, 0.09),
+      0 2px 6px  rgba(42, 32, 27, 0.05);
+    transform: translateY(-3px);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pf-tile:hover { transform: none; }
+    .pf-tile:hover { transform: none; box-shadow: none; }
   }
 
   .pf-tile-init {
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-md);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
     background-color: rgba(42, 32, 27, 0.07);
     border: 1px solid rgba(42, 32, 27, 0.07);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     font-family: var(--font-body);
-    font-size: 0.5625rem;
+    font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.02em;
     color: var(--color-cafe);
@@ -1108,10 +1083,10 @@ const certs = [
 
   .pf-tile-name {
     font-family: var(--font-body);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: rgba(42, 32, 27, 0.80);
-    white-space: nowrap;
+    line-height: 1.3;
   }
 
   .pf-tile-level {
@@ -1120,11 +1095,11 @@ const certs = [
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: rgba(42, 32, 27, 0.34);
-    background-color: rgba(42, 32, 27, 0.045);
+    color: rgba(42, 32, 27, 0.32);
+    background-color: rgba(42, 32, 27, 0.04);
     border: 1px solid rgba(42, 32, 27, 0.07);
     border-radius: var(--radius-full);
-    padding: 0.15rem 0.4rem;
+    padding: 0.15rem 0.45rem;
     flex-shrink: 0;
   }
 
@@ -1357,7 +1332,7 @@ const certs = [
   @media (prefers-reduced-motion: reduce) {
     .pf-name, .pf-role, .pf-badges,
     .pf-summary, .pf-cta-row,
-    .pf-float-card, .pf-hero-media {
+    .pf-hero-media {
       animation: none;
       opacity: 1;
       transform: none;

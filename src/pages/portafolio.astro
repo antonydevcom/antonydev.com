@@ -63,8 +63,15 @@ const projects = [
     image: '/images/projects/blancariosestudio.webp',
     title: 'Blanca Ríos Estudio',
     desc: 'Aplicación web para barbería con servicios, horarios, disponibilidad, agendamiento de citas y panel administrativo para citas, clientes y servicios.',
-    stack: ['MERN Stack', 'React', 'Node.js', 'MongoDB'],
+    stack: ['React', 'Node.js', 'MongoDB'],
     href: 'https://blancariosestudio.com',
+  },
+  {
+    image: '/images/projects/suspirosdepapel.webp',
+    title: 'Suspiros de Papel',
+    desc: 'Sitio web y catálogo digital para tienda local, enfocado en presentación de productos, contacto y presencia digital.',
+    stack: ['Astro', 'TailwindCSS', 'Vercel'],
+    href: 'https://www.suspirosdepapel.net/',
   },
 ];
 
@@ -275,7 +282,13 @@ const certs = [
 
         <div class="pf-projects-grid">
           {projects.map((proj) => (
-            <article class="pf-proj-card">
+            <a
+              href={proj.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pf-proj-card"
+              aria-label={`Ver proyecto: ${proj.title}`}
+            >
               <div class="pf-proj-img-wrap">
                 <img
                   src={proj.image}
@@ -286,15 +299,6 @@ const certs = [
                   loading="lazy"
                   decoding="async"
                 />
-                <a
-                  href={proj.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="pf-proj-ext"
-                  aria-label={`Ver proyecto: ${proj.title}`}
-                >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
-                </a>
               </div>
               <div class="pf-proj-body">
                 <h3 class="pf-proj-title">{proj.title}</h3>
@@ -305,7 +309,7 @@ const certs = [
                   ))}
                 </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </Container>
@@ -315,7 +319,7 @@ const certs = [
     <section id="stack" class="pf-stack" aria-labelledby="stack-heading">
       <Container>
         <p class="pf-eyebrow">Stack Tecnológico</p>
-        <h2 id="stack-heading" class="pf-heading">Skills &amp; Technologies</h2>
+        <h2 id="stack-heading" class="pf-heading">Tecnologías principales</h2>
         <p class="pf-stack-desc">Tecnologías principales con las que construyo aplicaciones web, interfaces y sistemas digitales.</p>
 
         <div class="pf-stack-panel">
@@ -782,6 +786,7 @@ const certs = [
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8);
+    align-items: stretch;
   }
 
   @media (min-width: 560px) {
@@ -792,7 +797,7 @@ const certs = [
 
   @media (min-width: 1024px) {
     .pf-projects-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
@@ -801,6 +806,10 @@ const certs = [
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
     transition:
       box-shadow var(--dur-base) var(--ease-out),
       transform  var(--dur-base) var(--ease-out);
@@ -838,37 +847,11 @@ const certs = [
     .pf-proj-card:hover .pf-proj-img { transform: none; }
   }
 
-  .pf-proj-ext {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-3);
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
-    background-color: rgba(247, 244, 238, 0.88);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(42, 32, 27, 0.10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-cafe);
-    transition:
-      background-color var(--dur-fast) var(--ease-out),
-      transform        var(--dur-fast) var(--ease-out);
-  }
-
-  .pf-proj-ext:hover {
-    background-color: var(--bg-surface);
-    transform: scale(1.08);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pf-proj-ext:hover { transform: none; }
-  }
-
   .pf-proj-body {
     padding: var(--space-5) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .pf-proj-title {
@@ -885,12 +868,18 @@ const certs = [
     line-height: 1.65;
     color: rgba(42, 32, 27, 0.66);
     margin: 0 0 var(--space-4);
+    display: -webkit-box;
+    min-height: 6.9em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
 
   .pf-proj-stack {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+    margin-top: auto;
   }
 
   .pf-tech-badge {

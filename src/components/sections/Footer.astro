@@ -20,11 +20,7 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
     <div class="footer-inner">
       <div class="footer-bottom">
         <p class="footer-copy">
-          <span class="footer-copy-line">© {year} Antonio Valdovinos — AntonyDev · Zihuatanejo, Guerrero.</span>
-          <span class="footer-copy-line">
-            Diseñado y desarrollado por
-            <a href="https://antonydev.com/" class="footer-copy-brand">AntonyDev</a>.
-          </span>
+          <span class="footer-copy-line">© {year} Antonio Valdovinos — AntonyDev.</span>
         </p>
         <nav class="footer-nav" aria-label="Navegación de pie de página">
           {footerLinks.map((link) => (
@@ -132,20 +128,6 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
 
   .footer-copy-line + .footer-copy-line {
     margin-top: 0.15em;
-  }
-
-  .footer-copy-brand {
-    font-weight: 600;
-    color: rgba(42, 32, 27, 0.72);
-    text-decoration: none;
-    text-underline-offset: 2px;
-    transition: color var(--dur-fast) var(--ease-out);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .footer-copy-brand:hover {
-    color: var(--color-cafe);
-    text-decoration: underline;
   }
 
   .footer-nav {

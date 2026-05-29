@@ -19,7 +19,7 @@ const personSchema = {
   '@id': `${BRAND.siteUrl}/#person`,
   'name': BRAND.legalName,
   'alternateName': 'AntonyDev',
-  'jobTitle': 'Desarrollador Web Fullstack',
+  'jobTitle': 'Practicante de Desarrollo de Software',
   'url': `${BRAND.siteUrl}/portafolio`,
   'email': LOCATION.email,
   'telephone': LOCATION.phone,
@@ -29,49 +29,42 @@ const personSchema = {
 
 const experience = [
   {
-    period: '2019 – 2022',
-    title: 'Industria de Servicios',
-    body: 'Aprendí a trabajar bajo presión, resolver problemas rápidamente y brindar un excelente servicio al cliente en todo tipo de situaciones.',
-    tag: 'Habilidades clave',
-    skills: ['Comunicación', 'Resolución de problemas', 'Liderazgo', 'Trabajo en equipo'],
+    period: '2021 – Presente',
+    title: 'Ingeniería en Sistemas Computacionales',
+    body: 'Formación universitaria en programación, bases de datos, desarrollo web y fundamentos de ingeniería de software.',
+    tag: 'Formación',
+    skills: ['Programación', 'Bases de datos', 'Desarrollo web', 'Fundamentos de software'],
   },
   {
-    period: '2022 – 2023',
-    title: 'Formación en Desarrollo de Software',
-    body: 'Comencé mi camino en la programación y el desarrollo web, construyendo proyectos personales y académicos con foco en lógica y estructuras sólidas.',
-    tag: 'Enfoque',
-    skills: ['Lógica', 'Algoritmos', 'Estructuras de datos', 'Desarrollo web', 'Bases sólidas'],
+    period: '2023 – Presente',
+    title: 'Proyectos web freelance',
+    body: 'Desarrollo de sitios y aplicaciones web para negocios locales, incluyendo catálogos digitales, paneles administrativos, formularios y gestión de contenido.',
+    tag: 'Experiencia práctica',
+    skills: ['Sitios responsivos', 'Paneles administrativos', 'Catálogos digitales', 'Gestión de contenido'],
   },
   {
-    period: '2023 – Actualidad',
-    title: 'Desarrollador Fullstack',
-    body: 'Desarrollo aplicaciones y sistemas completos usando tecnologías modernas, siempre enfocado en la calidad y el usuario final.',
-    tag: 'Actualmente',
-    skills: ['Aplicaciones web', 'Sistemas a medida', 'Automatización', 'Integraciones'],
+    period: 'Actualidad',
+    title: 'Búsqueda de residencia profesional',
+    body: 'Busco integrarme a un equipo de desarrollo para fortalecer programación orientada a objetos, arquitectura de software, buenas prácticas y trabajo colaborativo.',
+    tag: 'Objetivo',
+    skills: ['Residencia profesional', 'Prácticas', 'Trabajo en equipo', 'Buenas prácticas'],
   },
 ];
 
 const projects = [
   {
-    image: '/images/projects/blancariosestudio.webp',
-    title: 'Blanca Ríos Estudio',
-    desc: 'Sitio web para estudio creativo. Diseño editorial, identidad digital y presencia en línea.',
-    stack: ['Astro', 'TailwindCSS', 'Vercel'],
-    href: 'https://github.com/antonydevcom',
-  },
-  {
     image: '/images/projects/marinozihua.webp',
     title: 'Marino Zihua',
-    desc: 'Presencia digital para negocio local en la Costa del Pacífico. Sitio web y optimización para búsqueda local.',
-    stack: ['Astro', 'TailwindCSS', 'Vercel'],
-    href: 'https://github.com/antonydevcom',
+    desc: 'Aplicación web y catálogo digital para decorador de interiores, con productos, proyectos realizados, showroom, contacto, cotización y panel administrativo.',
+    stack: ['Next.js', 'React', 'JavaScript', 'Stripe'],
+    href: 'https://marinozihua.net',
   },
   {
-    image: '/images/projects/suspirosdepapel.webp',
-    title: 'Suspiros de Papel',
-    desc: 'Identidad digital y sitio web para tienda local con catálogo de productos.',
-    stack: ['Astro', 'TailwindCSS', 'Vercel'],
-    href: 'https://github.com/antonydevcom',
+    image: '/images/projects/blancariosestudio.webp',
+    title: 'Blanca Ríos Estudio',
+    desc: 'Aplicación web para barbería con servicios, horarios, disponibilidad, agendamiento de citas y panel administrativo para citas, clientes y servicios.',
+    stack: ['MERN Stack', 'React', 'Node.js', 'MongoDB'],
+    href: 'https://blancariosestudio.com',
   },
 ];
 
@@ -156,8 +149,8 @@ const certs = [
 ---
 
 <BaseLayout
-  title="Portafolio de Antonio Valdovinos | Fullstack Web Developer"
-  description="Portafolio profesional de Antonio Valdovinos, desarrollador fullstack enfocado en aplicaciones web, sistemas digitales y desarrollo frontend/backend."
+  title="Portafolio de Antonio Valdovinos | Practicante de Desarrollo de Software"
+  description="Portafolio profesional de Antonio Valdovinos, estudiante de Ingeniería en Sistemas enfocado en aplicaciones web, sistemas digitales y residencia profesional."
   schema={personSchema}
   breadcrumbs={breadcrumbs}
 >
@@ -184,10 +177,10 @@ const certs = [
           <div class="pf-hero-text">
             <p class="pf-eyebrow">Portafolio</p>
             <h1 class="pf-name">Antonio<br />Valdovinos</h1>
-            <p class="pf-role">Fullstack Web Developer</p>
+            <p class="pf-role">Practicante de Desarrollo de Software</p>
 
             <p class="pf-summary">
-              Desarrollo aplicaciones web y sistemas digitales que resuelven problemas reales y generan valor.
+              Estudiante de Ingeniería en Sistemas Computacionales enfocado en aplicaciones web y desarrollo de sistemas. He construido proyectos reales para negocios locales, combinando frontend, fundamentos de backend, bases de datos y despliegue web.
             </p>
 
             <div class="pf-cta-row">
@@ -195,7 +188,7 @@ const certs = [
                 Descargar CV
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               </a>
-              <a href="https://linkedin.com/in/antony-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--primary">
+              <a href="https://linkedin.com/in/antonio-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-btn pf-btn--primary">
                 LinkedIn
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
@@ -210,7 +203,7 @@ const certs = [
             <div class="pf-hero-img-card">
               <img
                 src="/images/branding/hero.png"
-                alt="Antonio Valdovinos — Fullstack Web Developer"
+                alt="Antonio Valdovinos — Practicante de Desarrollo de Software"
                 class="pf-hero-img"
                 width="800"
                 height="1000"
@@ -268,7 +261,7 @@ const certs = [
         <div class="pf-section-header">
           <div>
             <p class="pf-eyebrow">Proyectos Destacados</p>
-            <h2 id="projects-heading" class="pf-heading">Algunos proyectos recientes</h2>
+            <h2 id="projects-heading" class="pf-heading">Proyectos con clientes reales</h2>
           </div>
           <a
             href="https://github.com/antonydevcom"
@@ -369,10 +362,10 @@ const certs = [
             <p class="pf-eyebrow">Sobre mí</p>
             <h2 id="about-heading" class="pf-heading pf-heading--sm">Más sobre mí</h2>
             <p class="pf-about-body">
-              Soy Antonio Valdovinos, desarrollador fullstack apasionado por crear soluciones
-              digitales que realmente hagan la diferencia. Actualmente estoy terminando mi
-              formación universitaria y continuamente aprendiendo nuevas tecnologías para
-              seguir creciendo profesionalmente.
+              Soy Antonio Valdovinos Méndez, estudiante de Ingeniería en Sistemas Computacionales en el último tramo de formación. Estoy buscando residencia profesional o prácticas en desarrollo de software, con interés en aplicaciones web, sistemas administrativos y desarrollo fullstack.
+            </p>
+            <p class="pf-about-body">
+              He trabajado por mi cuenta en proyectos web para negocios locales, creando sitios responsivos, catálogos digitales y paneles administrativos. Busco integrarme a un equipo donde pueda aprender, aportar y fortalecer mis bases técnicas con proyectos reales.
             </p>
             <a href="/sobre-mi" class="pf-text-link">Conoce más sobre mi historia →</a>
           </div>
@@ -392,11 +385,11 @@ const certs = [
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com/in/antony-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-contact-item">
+                <a href="https://linkedin.com/in/antonio-valdovinos" target="_blank" rel="noopener noreferrer" class="pf-contact-item">
                   <span class="pf-contact-icon" aria-hidden="true">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                   </span>
-                  linkedin.com/in/antony-valdovinos
+                  linkedin.com/in/antonio-valdovinos
                 </a>
               </li>
               <li>
@@ -799,7 +792,7 @@ const certs = [
 
   @media (min-width: 1024px) {
     .pf-projects-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 

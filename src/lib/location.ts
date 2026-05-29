@@ -52,7 +52,7 @@ export const BRAND = {
   ],
   sameAs: [
     'https://github.com/antonydevcom',
-    'https://linkedin.com/in/antony-valdovinos',
+    'https://linkedin.com/in/antonio-valdovinos',
     'https://antonydev.com',
   ],
 } as const;
